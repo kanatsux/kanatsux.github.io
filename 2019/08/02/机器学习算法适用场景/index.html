@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/%20kanatsux.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/%20kanatsux.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/%20kanatsux.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/%20kanatsux.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/%20kanatsux.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/%20kanatsux.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/%20kanatsux.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 随机森林决策树马尔可夫隐马尔可夫(HMM)三骰子问题 假设我手里有三个不同的骰子：   第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1&#x2F;6 第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1&#x2F;4 第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1&#x2F;8">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法适用场景">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;02&#x2F;%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="[toc] 随机森林决策树马尔可夫隐马尔可夫(HMM)三骰子问题 假设我手里有三个不同的骰子：   第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1&#x2F;6 第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1&#x2F;4 第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1&#x2F;8">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;note.youdao.com&#x2F;yws&#x2F;public&#x2F;resource&#x2F;3458288b01e265f07e21f25bcc1e4eea&#x2F;xmlnote&#x2F;9FC00B8814A346BBA3BF6AB3A2D27332&#x2F;19795">
+<meta property="og:image" content="https:&#x2F;&#x2F;note.youdao.com&#x2F;yws&#x2F;public&#x2F;resource&#x2F;3458288b01e265f07e21f25bcc1e4eea&#x2F;xmlnote&#x2F;00242A8930B54E39B1E239611FBECE2A&#x2F;19806">
+<meta property="og:updated_time" content="2019-08-02T06:12:46.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;note.youdao.com&#x2F;yws&#x2F;public&#x2F;resource&#x2F;3458288b01e265f07e21f25bcc1e4eea&#x2F;xmlnote&#x2F;9FC00B8814A346BBA3BF6AB3A2D27332&#x2F;19795">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/ kanatsux.github.io/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/机器学习算法适用场景/"/>
+
+
+
+
+
+  <title>机器学习算法适用场景 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/ kanatsux.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20kanatsux.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/%20kanatsux.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/%20kanatsux.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/%20kanatsux.github.io/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/%20kanatsux.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/%20kanatsux.github.io/2019/08/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/%20kanatsux.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习算法适用场景</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T14:10:41+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h1><h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h1 id="马尔可夫"><a href="#马尔可夫" class="headerlink" title="马尔可夫"></a>马尔可夫</h1><h1 id="隐马尔可夫-HMM"><a href="#隐马尔可夫-HMM" class="headerlink" title="隐马尔可夫(HMM)"></a>隐马尔可夫(HMM)</h1><h2 id="三骰子问题"><a href="#三骰子问题" class="headerlink" title="三骰子问题"></a>三骰子问题</h2><ul>
+<li>假设我手里有三个不同的骰子：</li>
+</ul>
+<ol>
+<li>第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1/6</li>
+<li>第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1/4</li>
+<li>第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1/8</li>
+</ol>
+<p><img src="https://note.youdao.com/yws/public/resource/3458288b01e265f07e21f25bcc1e4eea/xmlnote/9FC00B8814A346BBA3BF6AB3A2D27332/19795" alt="image"></p>
+<ul>
+<li>开始掷骰子10次，点数为 1 6 3 5 2 7 3 5 2 4，这串数字叫做==可见状态链==</li>
+<li>其中隐含状态链就是你用的骰子的序列，比如，隐含状态链有可能是：D6 D8 D8 D6 D4 D8 D6 D6 D4 D8，一般来说，HMM中说到的马尔可夫链其实是指==隐含状态链==</li>
+<li>==转换概率==（transition probability）：隐含状态直接的转换概率，如D6的下一个状态是D4，D6，D8的概率都是1/3，也可以定义，D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1</li>
+<li>==输出概率==（emission probability）：隐含状态和可见状态之间有一个概率，如六面骰（D6）产生1的输出概率是1/6，产生2，3，4，5，6的概率也都是1/6</li>
+</ul>
+<p><img src="https://note.youdao.com/yws/public/resource/3458288b01e265f07e21f25bcc1e4eea/xmlnote/00242A8930B54E39B1E239611FBECE2A/19806" alt="image"></p>
+<h2 id="五要素和三个基本问题"><a href="#五要素和三个基本问题" class="headerlink" title="五要素和三个基本问题"></a>五要素和三个基本问题</h2><h3 id="五要素"><a href="#五要素" class="headerlink" title="五要素"></a>五要素</h3><p>综上所述，我们可以得到隐马尔科夫的基本要素，即一个五元组{S,N,A,B,PI}；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">S：隐藏状态集合；</span><br><span class="line">N：观察状态集合；</span><br><span class="line">A：隐藏状态间的转移概率矩阵；</span><br><span class="line">B：输出矩阵（即隐藏状态到输出状态的概率）；</span><br><span class="line">PI：初始概率分布（隐藏状态的初始概率分布）；</span><br></pre></td></tr></table></figure>
+
+<h3 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h3><ul>
+<li>似然度问题：参数(N，PI，A，B)已知的情况下，求(PI，A，B)下观测序列N出现的概率。(Forward-backward算法)</li>
+<li>解码问题：参数(N，PI，A，B)已知的情况下，求解状态值序列S（最大概率）。(viterbi算法)</li>
+<li>学习问题：参数(N)已知的情况下，求解(PI，A，B)。(Baum-Welch算法)</li>
+</ul>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="学习问题"><a href="#学习问题" class="headerlink" title="学习问题"></a>学习问题</h3><h4 id="参数异常检测（以白找黑）"><a href="#参数异常检测（以白找黑）" class="headerlink" title="参数异常检测（以白找黑）"></a>参数异常检测（以白找黑）</h4><ul>
+<li>场景分析下面为正常用户请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/0_1/include/dialog/select_media.php?userid=admin123</span><br><span class="line">/0_1/include/dialog/select_media.php?userid=root</span><br><span class="line">/0_1/include/dialog/select_media.php?userid=maidou0806</span><br><span class="line">/0_1/include/dialog/select_media.php?userid=52maidou</span><br><span class="line">/0_1/include/dialog/select_media.php?userid=wjq_2014</span><br><span class="line">/0_1/include/dialog/select_media.php?userid=mzc-cxy</span><br></pre></td></tr></table></figure></li>
+<li>下面为异常用户请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/0_1/include/dialog/select_media.php?userid=%3Cscript%3Ealert(1)%3C/script%3E</span><br></pre></td></tr></table></figure></li>
+<li>以userid为例，我们将uid的值作为观察序列N，隐藏序列的状态只有四个， A、<br>N、 C、 T：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">·[a-zA-Z]范化为A；</span><br><span class="line">·[0-9]范化为N；</span><br><span class="line">·[\-_]范化为C；</span><br><span class="line">·其他字符范化为T。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>URL参数admin 123和root范化结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">·admin123范化为AAAAANNN</span><br><span class="line">·root范化为AAAA</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将url中以userid的参数值进行范化训练模型</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 –*-</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line">import urllib</span><br><span class="line">import urlparse</span><br><span class="line">import re</span><br><span class="line">from hmmlearn import hmm</span><br><span class="line">import numpy as np</span><br><span class="line">from sklearn.externals import joblib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#处理参数值的最小长度</span><br><span class="line">MIN_LEN=6</span><br><span class="line"></span><br><span class="line">#状态个数</span><br><span class="line">N=4</span><br><span class="line">#最大似然概率阈值</span><br><span class="line">T=-200</span><br><span class="line">SEN=[&apos;-&apos;, &apos;_&apos;, &apos;\\&apos;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def etl(str):</span><br><span class="line">    vers=[]</span><br><span class="line">    for i, c in enumerate(str):</span><br><span class="line">        c=c.lower()</span><br><span class="line">        if   ord(c) &gt;= ord(&apos;a&apos;) and  ord(c) &lt;= ord(&apos;z&apos;):</span><br><span class="line">            vers.append([1])</span><br><span class="line">        elif ord(c) &gt;= ord(&apos;0&apos;) and  ord(c) &lt;= ord(&apos;9&apos;):</span><br><span class="line">            vers.append([2])</span><br><span class="line">        elif c in SEN:</span><br><span class="line">            vers.append([3])</span><br><span class="line">        else:</span><br><span class="line">            vers.append([4])</span><br><span class="line"></span><br><span class="line">    #print vers</span><br><span class="line">    return np.array(vers)</span><br><span class="line"></span><br><span class="line">def main(filename):</span><br><span class="line">    X = []</span><br><span class="line">    X_lens = []</span><br><span class="line">    with open(filename) as f:</span><br><span class="line">        for line in f:</span><br><span class="line">            line=line.strip(&apos;\n&apos;)</span><br><span class="line">            # 切割参数</span><br><span class="line">            result = urlparse.urlparse(line)</span><br><span class="line">            # url解码</span><br><span class="line">            query = urllib.unquote(result.query)</span><br><span class="line">            params = urlparse.parse_qsl(query, True)</span><br><span class="line"></span><br><span class="line">            for k, v in params:</span><br><span class="line">                if len(v) &gt;= MIN_LEN:</span><br><span class="line">                    vers = etl(v)</span><br><span class="line">                    print vers</span><br><span class="line">                    for i in vers:</span><br><span class="line">                        X.append(i)</span><br><span class="line">                    #X=np.concatenate([X,vers])</span><br><span class="line">                    X_lens.append(len(vers))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    remodel = hmm.GaussianHMM(n_components=N, covariance_type=&quot;full&quot;, n_iter=100)</span><br><span class="line">    remodel.fit(X,X_lens)</span><br><span class="line">    #joblib.dump(remodel, &quot;xss-train.pkl&quot;)</span><br><span class="line"></span><br><span class="line">    return remodel</span><br><span class="line"></span><br><span class="line">def test(remodel,filename):</span><br><span class="line">    with open(filename) as f:</span><br><span class="line">        for line in f:</span><br><span class="line">            # 切割参数</span><br><span class="line">            result = urlparse.urlparse(line)</span><br><span class="line">            # url解码</span><br><span class="line">            query = urllib.unquote(result.query)</span><br><span class="line">            params = urlparse.parse_qsl(query, True)</span><br><span class="line"></span><br><span class="line">            for k, v in params:</span><br><span class="line">                if len(v) &gt;= MIN_LEN :</span><br><span class="line">                    vers = etl(v)</span><br><span class="line">                    pro = remodel.score(vers)</span><br><span class="line">                    if pro &gt;= T:</span><br><span class="line">                        print  &quot;SCORE:(%d) QUREY_PARAM:(%s) EX_URL:(%s) &quot; % (pro,v,line)</span><br><span class="line">                        #print line</span><br><span class="line">                    else:</span><br><span class="line">                        print  &quot;SCORE:(%d) QUREY_PARAM:(%s) NO_URL:(%s) &quot; % (pro,v,line)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    remodel=main(sys.argv[1])</span><br><span class="line">    test(remodel,sys.argv[2])</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="用户访问习惯（以白找黑）"><a href="#用户访问习惯（以白找黑）" class="headerlink" title="用户访问习惯（以白找黑）"></a>用户访问习惯（以白找黑）</h4><ul>
+<li>场景分析，下面为用户正常请求顺序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/api/login.php</span><br><span class="line">/api/userlist</span><br><span class="line">/api/msg</span><br><span class="line">/api/redpacket</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下面为异常用户请求顺序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/api/redpacket</span><br><span class="line">/api/redpacket</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="xss攻击识别（以黑找黑）"><a href="#xss攻击识别（以黑找黑）" class="headerlink" title="xss攻击识别（以黑找黑）"></a>xss攻击识别（以黑找黑）</h4><h3 id="解码问题"><a href="#解码问题" class="headerlink" title="解码问题"></a>解码问题</h3><h4 id="语音解码"><a href="#语音解码" class="headerlink" title="语音解码"></a>语音解码</h4><h4 id="词性标注"><a href="#词性标注" class="headerlink" title="词性标注"></a>词性标注</h4><h3 id="似然度问题"><a href="#似然度问题" class="headerlink" title="似然度问题"></a>似然度问题</h3><h4 id="搜索词猜想补齐"><a href="#搜索词猜想补齐" class="headerlink" title="搜索词猜想补齐"></a>搜索词猜想补齐</h4><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://github.com/duoergun0729/1book" target="_blank" rel="noopener">《Web安全之机器学习入门》</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/08/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF/" title="机器学习算法适用场景">http://yoursite.com/2019/08/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/%20kanatsux.github.io/2019/08/02/sklearn%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="sklearn库的使用">
+                sklearn库的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/%20kanatsux.github.io/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/%20kanatsux.github.io/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/%20kanatsux.github.io/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/%20kanatsux.github.io/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wowoohi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#随机森林"><span class="nav-number">1.</span> <span class="nav-text">随机森林</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">2.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#马尔可夫"><span class="nav-number">3.</span> <span class="nav-text">马尔可夫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐马尔可夫-HMM"><span class="nav-number">4.</span> <span class="nav-text">隐马尔可夫(HMM)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三骰子问题"><span class="nav-number">4.1.</span> <span class="nav-text">三骰子问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五要素和三个基本问题"><span class="nav-number">4.2.</span> <span class="nav-text">五要素和三个基本问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五要素"><span class="nav-number">4.2.1.</span> <span class="nav-text">五要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个基本问题"><span class="nav-number">4.2.2.</span> <span class="nav-text">三个基本问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">4.3.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习问题"><span class="nav-number">4.3.1.</span> <span class="nav-text">学习问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数异常检测（以白找黑）"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">参数异常检测（以白找黑）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户访问习惯（以白找黑）"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">用户访问习惯（以白找黑）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xss攻击识别（以黑找黑）"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">xss攻击识别（以黑找黑）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解码问题"><span class="nav-number">4.3.2.</span> <span class="nav-text">解码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语音解码"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">语音解码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#词性标注"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">词性标注</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#似然度问题"><span class="nav-number">4.3.3.</span> <span class="nav-text">似然度问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索词猜想补齐"><span class="nav-number">4.3.3.1.</span> <span class="nav-text">搜索词猜想补齐</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/%20kanatsux.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/%20kanatsux.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/%20kanatsux.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
