@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux的文件系统详解1. 目录组成 &#x2F;bin  这是存放常用的终端命令的目录，例如：ls、mount、rm 等等。 &#x2F;boot  存放系统启动所需的文件，包括 linux kernel，一个随机存储磁盘镜像和 Bootloader 的配置文件。 &#x2F;dev   这个目录存放所有的设备文件，这些不是常规文件，而是指系统上的各种硬件设备，包括硬盘驱动器。 &#x2F;etc    存放系统的全局配置文件，这里">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件系统详解">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2019&#x2F;10&#x2F;31&#x2F;Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="Linux的文件系统详解1. 目录组成 &#x2F;bin  这是存放常用的终端命令的目录，例如：ls、mount、rm 等等。 &#x2F;boot  存放系统启动所需的文件，包括 linux kernel，一个随机存储磁盘镜像和 Bootloader 的配置文件。 &#x2F;dev   这个目录存放所有的设备文件，这些不是常规文件，而是指系统上的各种硬件设备，包括硬盘驱动器。 &#x2F;etc    存放系统的全局配置文件，这里">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;50fd71816ba85d4045194a35b52cb5a1.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;26d6b073aad490ca248795e666d4dc75.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;01880d9390cad72ff03ffe8832a70dd7.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;38e40fb5989391794a6645dd9a4e1980.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;1aa16d1d58be4bf6f8dc2a1ffd23fe20.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;b4b06e09a7d1f482024ef03b10fdf1f9.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;763c16f4398443a5356d59088a45544f.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;a99981d4a4d099bd73f27e1ea38c3f91.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;bf23c48ea898a70bcbe51652e003764c.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;f7ef45076bc283f300e6674a6fc1f042.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;87a26e18b77385d9ff6e3ee5a5238666.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;9d975478b80a737812cdfba6f383a260.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;d1812e9c6a10687238ecc621a22190d0.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;c9e5c07850442200a133c1131b3b2af3.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;8c9e30e0f286b4c163a3a07c1f7e2800.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;f847b79d4ae6d1be25dc61124477b9c0.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;78e49050e293fff1b3c979407168e5cd.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;3b36e934bb3b4981183d58d3c14bcf24.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+<meta property="og:updated_time" content="2020-02-21T03:23:34.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;s1.51cto.com&#x2F;images&#x2F;blog&#x2F;201908&#x2F;28&#x2F;50fd71816ba85d4045194a35b52cb5a1.png?x-oss-process=image&#x2F;watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2019/10/31/Linux文件系统详解/"/>
+
+
+
+
+
+  <title>Linux文件系统详解 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2019/10/31/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux文件系统详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-31T16:30:20+08:00">
+                2019-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux的文件系统详解"><a href="#Linux的文件系统详解" class="headerlink" title="Linux的文件系统详解"></a>Linux的文件系统详解</h1><h2 id="1-目录组成"><a href="#1-目录组成" class="headerlink" title="1. 目录组成"></a>1. 目录组成</h2><ul>
+<li>/bin  这是存放常用的终端命令的目录，例如：ls、mount、rm 等等。</li>
+<li>/boot  存放系统启动所需的文件，包括 linux kernel，一个随机存储磁盘镜像和 Bootloader 的配置文件。</li>
+<li>/dev   这个目录存放所有的设备文件，这些不是常规文件，而是指系统上的各种硬件设备，包括硬盘驱动器。</li>
+<li>/etc    存放系统的全局配置文件，这里面的配置文件会影响系统所有用户的系统环境。</li>
+<li>/home    用户的家目录，每个用户都有自己的家目录。</li>
+<li>/lib    存放非常重要的动态库和内核模块。</li>
+<li>/media    作为外部设备的一个挂载点，比如硬盘或者可移动设备（U盘、DVD、CD）。</li>
+<li>/mnt    和 /media 一样，也是一个挂载点，但是专用于挂载临时的设备，例如网络文件系统。</li>
+<li>/opt    用于安装系统额外的软件，这里安装的软件是手动安装的，不受 Ubuntu 软件管理包的管理。</li>
+<li>/proc    一个虚拟文件系统，为内核提供向进程发送信息的机制。</li>
+<li>/root    root 用户的家目录，不在 /home/ 中，即使 /home/ 不可用，也允许引导系统。</li>
+<li>/run    在引导过程的早期可用的tmpfs（临时文件系统），其中存储了临时运行时数据。此目录下的文件将在引导过程开始时删除或截断。</li>
+<li>/sbin    包含通常只应由超级用户使用的重要管理命令。</li>
+<li>/srv    包含 HTTP（/srv/www/）或 FTP 等服务的数据目录。</li>
+<li>/sys    可以访问的虚拟文件系统，用于设置或获取有关内核系统视图的信息。</li>
+<li>/tmp    应用程序使用的临时文件的位置。</li>
+<li>/usr    包含大多数用户实用程序和应用程序，并部分复制根目录结构，包括例如 /usr/bin/ 和 /usr/lib。</li>
+<li>/var    致力于可变数据，例如日志，数据库，网站和临时脱机（电子邮件等）文件，这些文件从一次启动到下一次启动。它包含的一个值得注意的目录是 /var/log，其中保存了系统日志文件。</li>
+</ul>
+<h2 id="2-文件管理原理剖析"><a href="#2-文件管理原理剖析" class="headerlink" title="2. 文件管理原理剖析"></a>2. 文件管理原理剖析</h2><h3 id="2-1-inode与block详解"><a href="#2-1-inode与block详解" class="headerlink" title="2.1 inode与block详解"></a>2.1 inode与block详解</h3><p>一个完整的文件通常都是由元信息和实际数据组成，其中元信息包含了文件权限以及许多文件属性，而实际数据就是我们日常写入的信息。系统会把这两个分别存放在inode和block中。<br><img src="https://s1.51cto.com/images/blog/201908/28/50fd71816ba85d4045194a35b52cb5a1.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<p><strong>查询某个文件的inode信息——stat命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat install.log</span><br></pre></td></tr></table></figure>
+
+<p>这里的“install.log”可替换为任意文件。<br><img src="https://s1.51cto.com/images/blog/201908/28/26d6b073aad490ca248795e666d4dc75.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"><br>通过上面的示意图，可以看出一个对于一个文件来说记录的元信息包括以下几点：</p>
+<ul>
+<li>文件大小</li>
+<li>文件inode</li>
+<li>文件权限</li>
+<li>最近访问ctime（change time）：最后一次改变文件或属性的时间（例如执行了chmod等命令</li>
+<li>最近更改atime（access time）：最后一次访问文件或者目录的时间</li>
+<li>最近改动mtime（modify time）：最后一次修改文件或目录内容的时间 </li>
+<li>创建时间</li>
+</ul>
+<p><strong>查看某个文件的类型——file命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# file /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>这里的“/etc/profile”可替换为任意文件。<br><img src="https://s1.51cto.com/images/blog/201908/28/01880d9390cad72ff03ffe8832a70dd7.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="inode的内容"><a href="#inode的内容" class="headerlink" title="inode的内容"></a>inode的内容</h3><p>一般来说，无论是微软还是Linux系统我们都是通过文件名来查找文件，但在系统内部却是使用inode码来识别不同的文件，对于系统来说文件名只是indode号码便于识别的别称。<br>表面上，用户通过文件名来打开文件，实际上，在系统内部中这个过程分为三步：<br><img src="https://s1.51cto.com/images/blog/201908/28/38e40fb5989391794a6645dd9a4e1980.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="查看文件对应的inode号码"><a href="#查看文件对应的inode号码" class="headerlink" title="查看文件对应的inode号码"></a>查看文件对应的inode号码</h3><p><strong>ls -i命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i install.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.51cto.com/images/blog/201908/28/1aa16d1d58be4bf6f8dc2a1ffd23fe20.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"><br><strong>stat命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat install.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.51cto.com/images/blog/201908/28/b4b06e09a7d1f482024ef03b10fdf1f9.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="某个磁盘中inode的容量"><a href="#某个磁盘中inode的容量" class="headerlink" title="某个磁盘中inode的容量"></a>某个磁盘中inode的容量</h3><p><strong>使用df -i命令来查看每个硬盘inode总数和已使用数量</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# df -i /dev/sda1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.51cto.com/images/blog/201908/28/763c16f4398443a5356d59088a45544f.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="inode号码的特殊作用"><a href="#inode号码的特殊作用" class="headerlink" title="inode号码的特殊作用"></a>inode号码的特殊作用</h3><p>由于inode号与文件名分离，所以会出现一些在Linux系统特有的现象：</p>
+<blockquote>
+<p>文件名中包含特殊字符，无法通过“rm”命令删除。这时候就可以通过直接删除inode号码来达到直接删除的文件的作用。</p>
+</blockquote>
+<p><strong>直接删除文件相关inode号可以使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# find ./* -inum 50331717 -delete</span><br></pre></td></tr></table></figure>
+
+<p>其中“50331717”为文件的inode号码。<br><img src="https://s1.51cto.com/images/blog/201908/28/a99981d4a4d099bd73f27e1ea38c3f91.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h2 id="2-2-硬链接与软链接"><a href="#2-2-硬链接与软链接" class="headerlink" title="2.2 硬链接与软链接"></a>2.2 硬链接与软链接</h2><p>硬链接与软链接这两者都是Linux系统中的链接方式，不过两者有所不同：</p>
+<blockquote>
+<p>硬链接：通过Linux文件系统的inode链接来生成新的文件名<br>软链接：类似微软系统的快捷方式，能够进行快速的链接</p>
+</blockquote>
+<h3 id="1-硬链接"><a href="#1-硬链接" class="headerlink" title="(1) 硬链接"></a>(1) 硬链接</h3><p>使用ln命令创建，具体格式：</p>
+<blockquote>
+<p>ln 源文件 目标名</p>
+</blockquote>
+<p>执行该命令时，会在当前目录下生成一个同inode号但文件名不同的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost mnt]# ln aaa.txt test.txt</span><br></pre></td></tr></table></figure>
+
+<p>因为硬链接只能在同一目录下创建，所以这里可以使用相对路径。执行结束后可以看见硬链接与源文件名称不同，但inode号码完全一样。这时候即使删除源文件，后建立的硬链接依旧能够打开文件。<br><img src="https://s1.51cto.com/images/blog/201908/28/bf23c48ea898a70bcbe51652e003764c.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="2-软链接"><a href="#2-软链接" class="headerlink" title="(2) 软链接"></a>(2) 软链接</h3><p>使用“ln -s”命令创建，具体格式为：</p>
+<blockquote>
+<p>ln -s 源文件名 目标名称</p>
+</blockquote>
+<p>执行该命令时，会生成一个独立文件，指向源文件（inode不同）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost mnt]# ln -s aaa.txt test.txt</span><br></pre></td></tr></table></figure>
+
+<p>因为软链接可以在不同一目录下创建，所以这里如果要跨目录创建需用绝对路径。执行结束后可以看见软链接就类似于快捷方式，相当于一个全新的文件，源文件被删除，软链接随即不可用。<br><img src="https://s1.51cto.com/images/blog/201908/28/f7ef45076bc283f300e6674a6fc1f042.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h2 id="2-3-恢复误删文件（重要！！）"><a href="#2-3-恢复误删文件（重要！！）" class="headerlink" title="2.3 恢复误删文件（重要！！）"></a>2.3 恢复误删文件（重要！！）</h2><p>在日常工作中，经常会因为种种原因而导致文件数据丢失（就是误删~~）。不要担心，这里就教给各位在XFS格式中误删恢复的方法。</p>
+<h3 id="1-检查恢复用的工具"><a href="#1-检查恢复用的工具" class="headerlink" title="(1) 检查恢复用的工具"></a>(1) 检查恢复用的工具</h3><p>所谓工欲善其事必先利其器，没有以下的两个工具，数据恢复只不过是空谈</p>
+<blockquote>
+<p>xfsdump软件包<br>xfsrestore软件包</p>
+</blockquote>
+<p>使用rpm命令在已经安装的rpm包中对其进行筛选。如果没有则需要通过yum库进行安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -qa | grep xfsdump</span><br><span class="line">[root@localhost ~]# rpm -ql xfsdump | grep xfsrestore</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.51cto.com/images/blog/201908/28/87a26e18b77385d9ff6e3ee5a5238666.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="2-对磁盘文件系统进行备份"><a href="#2-对磁盘文件系统进行备份" class="headerlink" title="(2) 对磁盘文件系统进行备份"></a>(2) 对磁盘文件系统进行备份</h3><p>将目标磁盘使用xfsdump工具进行备份，格式：</p>
+<blockquote>
+<p>xfsdump -f 备份存放位置 要备份的文件或设备</p>
+</blockquote>
+<p>这里我们将目标磁盘sdb1里的所有文件备份到/opt/data_dump中；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost data]# xfsdump -f /opt/data_dump /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<p>回车进行交互界面后，先后输入备份地址以及备份文件或设备名称。<br><img src="https://s1.51cto.com/images/blog/201908/28/9d975478b80a737812cdfba6f383a260.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"><br><img src="https://s1.51cto.com/images/blog/201908/28/d1812e9c6a10687238ecc621a22190d0.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="3-模拟误删环境"><a href="#3-模拟误删环境" class="headerlink" title="(3) 模拟误删环境"></a>(3) 模拟误删环境</h3><p>新手将磁盘内文件全部删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rm -rf /data/*</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s1.51cto.com/images/blog/201908/28/c9e5c07850442200a133c1131b3b2af3.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="4-开始恢复作业"><a href="#4-开始恢复作业" class="headerlink" title="(4) 开始恢复作业"></a>(4) 开始恢复作业</h3><blockquote>
+<p><strong>在保证不会有新的文件写入的情况下（重要！！！）</strong></p>
+</blockquote>
+<p>使用xfsrestore命令，将备份的磁盘数据进行恢复</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost data]# xfsrestore -f /opt/data_dump /data/</span><br></pre></td></tr></table></figure>
+
+<p>其中，“/opt/data”为备份文件的位置，“/data”为存放恢复后文件的位置。<br><img src="https://s1.51cto.com/images/blog/201908/28/8c9e30e0f286b4c163a3a07c1f7e2800.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"><br><img src="https://s1.51cto.com/images/blog/201908/28/f847b79d4ae6d1be25dc61124477b9c0.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"><br><strong>但是，使用xfsdump工具进行备份也有很大的限制：</strong></p>
+<ol>
+<li>只能备份已挂载的文件系统</li>
+<li>必须使用root的权限才能操作</li>
+<li>只能备份XFS文件系统</li>
+<li>备份后的数据只能让xfsrestore解析</li>
+<li>不能备份两个具有相同UUID的文件系统</li>
+</ol>
+<h2 id="2-4-日志文件"><a href="#2-4-日志文件" class="headerlink" title="2.4 日志文件"></a>2.4 日志文件</h2><h3 id="日志文件概述"><a href="#日志文件概述" class="headerlink" title="日志文件概述"></a>日志文件概述</h3><p>功能：</p>
+<blockquote>
+<p>用于记录系统、程序运行中发生的事件<br>通过日志，有助于诊断和解决系统故障</p>
+</blockquote>
+<p>分类：</p>
+<blockquote>
+<p>内核及系统日志（系统装好自带）：<br>由系统服务syslog统一管理，格式基本相同<br>用户日志：<br>记录系统用户登录及退出系统的相关信息<br>程序日志<br>由各种应用独立管理，记录格式不统一</p>
+</blockquote>
+<h3 id="常用日志文件存放位置"><a href="#常用日志文件存放位置" class="headerlink" title="常用日志文件存放位置"></a>常用日志文件存放位置</h3><p>默认路径：</p>
+<blockquote>
+<p>/var/log目录下</p>
+</blockquote>
+<p>其它主要日志文件的存放地点：<br><img src="https://s1.51cto.com/images/blog/201908/28/78e49050e293fff1b3c979407168e5cd.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="日志消息级别"><a href="#日志消息级别" class="headerlink" title="日志消息级别"></a>日志消息级别</h3><p>日志消息从低到高，从轻微到严重分为0~7，总共8个级别</p>
+<blockquote>
+<p>0 EMERG （紧急）：会导致主机系统不可用的情况<br>1 ALERT  （警告）：必须马上采取措施解决的问题<br>2 CRIT   （严重）：比较严重的情况<br>3 ERR   （错误）：运行出现错误<br>4 WARNING（提醒）：可能会影响系统功能的事件<br>5 NOTICE  （注意）：不会影响系统但值得注意<br>6 INFO   （信息）：一般信息<br>7 DEBUG  （调试）：程序或系统调试信息等</p>
+</blockquote>
+<p>其中，<br>0<del>3为严重，必须采取措施否则会导致出现严重业务问题；<br>4</del>7为轻微，不处理也不会出现大的业务问题。</p>
+<h3 id="日志记录格式"><a href="#日志记录格式" class="headerlink" title="日志记录格式"></a>日志记录格式</h3><p><img src="https://s1.51cto.com/images/blog/201908/28/3b36e934bb3b4981183d58d3c14bcf24.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="Linux文件系统（深入剖析原理）"></p>
+<h3 id="用户日志与程序日志"><a href="#用户日志与程序日志" class="headerlink" title="用户日志与程序日志"></a>用户日志与程序日志</h3><p><strong>1、用户日志</strong><br>保存了用户登录、退出系统等相关操作</p>
+<blockquote>
+<p>/var/log/lastlog：最近的用户登录事件，<br>/var/log/wtmp：用户登录、注销及系统开、关机事件<br>/var/run/utmp：当前登录的每个用户的详细信息<br>/var/log/secure：与用户验证相关的安全性事件</p>
+</blockquote>
+<p><strong>2、程序日志</strong><br>由相应服务的应用程序独立管理</p>
+<blockquote>
+<p>Web服务：/var/log/httpd/access_log（error_log）<br>代理服务：/var/log/squid/access.log（cache.log）<br>FTP服务：/var/log/xferlog</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2019/10/31/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/" title="Linux文件系统详解">http://kanatsux.github.io/2019/10/31/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i>  linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/17/Linux%E7%B3%BB%E7%BB%9F%E4%B8%8BFIFO%E7%9A%84%E9%98%BB%E5%A1%9E%E6%9C%BA%E5%88%B6/" rel="next" title="Linux系统下FIFO的阻塞机制">
+                <i class="fa fa-chevron-left"></i> Linux系统下FIFO的阻塞机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/31/002-docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84kafka%E6%90%AD%E5%BB%BA/" rel="prev" title="docker搭建kafka">
+                docker搭建kafka <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux的文件系统详解"><span class="nav-number">1.</span> <span class="nav-text">Linux的文件系统详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-目录组成"><span class="nav-number">1.1.</span> <span class="nav-text">1. 目录组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件管理原理剖析"><span class="nav-number">1.2.</span> <span class="nav-text">2. 文件管理原理剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-inode与block详解"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 inode与block详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inode的内容"><span class="nav-number">1.2.2.</span> <span class="nav-text">inode的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件对应的inode号码"><span class="nav-number">1.2.3.</span> <span class="nav-text">查看文件对应的inode号码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#某个磁盘中inode的容量"><span class="nav-number">1.2.4.</span> <span class="nav-text">某个磁盘中inode的容量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inode号码的特殊作用"><span class="nav-number">1.2.5.</span> <span class="nav-text">inode号码的特殊作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-硬链接与软链接"><span class="nav-number">1.3.</span> <span class="nav-text">2.2 硬链接与软链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-硬链接"><span class="nav-number">1.3.1.</span> <span class="nav-text">(1) 硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-软链接"><span class="nav-number">1.3.2.</span> <span class="nav-text">(2) 软链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-恢复误删文件（重要！！）"><span class="nav-number">1.4.</span> <span class="nav-text">2.3 恢复误删文件（重要！！）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-检查恢复用的工具"><span class="nav-number">1.4.1.</span> <span class="nav-text">(1) 检查恢复用的工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对磁盘文件系统进行备份"><span class="nav-number">1.4.2.</span> <span class="nav-text">(2) 对磁盘文件系统进行备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-模拟误删环境"><span class="nav-number">1.4.3.</span> <span class="nav-text">(3) 模拟误删环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-开始恢复作业"><span class="nav-number">1.4.4.</span> <span class="nav-text">(4) 开始恢复作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-日志文件"><span class="nav-number">1.5.</span> <span class="nav-text">2.4 日志文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志文件概述"><span class="nav-number">1.5.1.</span> <span class="nav-text">日志文件概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用日志文件存放位置"><span class="nav-number">1.5.2.</span> <span class="nav-text">常用日志文件存放位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志消息级别"><span class="nav-number">1.5.3.</span> <span class="nav-text">日志消息级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志记录格式"><span class="nav-number">1.5.4.</span> <span class="nav-text">日志记录格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户日志与程序日志"><span class="nav-number">1.5.5.</span> <span class="nav-text">用户日志与程序日志</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">37.4k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
