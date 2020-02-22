@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="消息队列,linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="activemq参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;charlesblc&#x2F;p&#x2F;6045238.html 消息队列-推&#x2F;拉模式学习 &amp;amp; ActiveMQ及JMS学习消息中间件的主要功能是消息的路由(Routing)和缓存(Buffering)。在AMQP中提供类似功能的两种域模型：Exchange 和 Message queue。 AMQP的更多内容可以看这里： htt">
+<meta name="keywords" content="消息队列,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ActiveMQ消息机制_消费机制_确认机制">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2019&#x2F;06&#x2F;20&#x2F;ActiveMQ%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6_%E6%B6%88%E8%B4%B9%E6%9C%BA%E5%88%B6_%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="activemq参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;charlesblc&#x2F;p&#x2F;6045238.html 消息队列-推&#x2F;拉模式学习 &amp;amp; ActiveMQ及JMS学习消息中间件的主要功能是消息的路由(Routing)和缓存(Buffering)。在AMQP中提供类似功能的两种域模型：Exchange 和 Message queue。 AMQP的更多内容可以看这里： htt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220174742.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220174836.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220174915.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220174949.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175010.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175033.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175301.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175620.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175656.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220175725.png">
+<meta property="og:updated_time" content="2020-02-22T16:23:28.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200220174742.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2019/06/20/ActiveMQ消息机制_消费机制_确认机制/"/>
+
+
+
+
+
+  <title>ActiveMQ消息机制_消费机制_确认机制 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2019/06/20/ActiveMQ%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6_%E6%B6%88%E8%B4%B9%E6%9C%BA%E5%88%B6_%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ActiveMQ消息机制_消费机制_确认机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T16:49:22+08:00">
+                2019-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  25
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="activemq"><a href="#activemq" class="headerlink" title="activemq"></a>activemq</h1><p>参考链接：<a href="https://www.cnblogs.com/charlesblc/p/6045238.html" target="_blank" rel="noopener">https://www.cnblogs.com/charlesblc/p/6045238.html</a></p>
+<h1 id="消息队列-推-拉模式学习-amp-ActiveMQ及JMS学习"><a href="#消息队列-推-拉模式学习-amp-ActiveMQ及JMS学习" class="headerlink" title="消息队列-推/拉模式学习 &amp; ActiveMQ及JMS学习"></a><a href="https://www.cnblogs.com/charlesblc/p/6045238.html" target="_blank" rel="noopener">消息队列-推/拉模式学习 &amp; ActiveMQ及JMS学习</a></h1><p>消息中间件的主要功能是消息的路由(Routing)和缓存(Buffering)。在AMQP中提供类似功能的两种域模型：Exchange 和 Message queue。</p>
+<p>AMQP的更多内容可以看这里： <a href="http://www.cnblogs.com/charlesblc/p/6058799.html" target="_blank" rel="noopener">http://www.cnblogs.com/charlesblc/p/6058799.html</a></p>
+<p>一种分类是推和拉 。</p>
+<p>还有一种分类是 Queue 和 Pub/Sub 。</p>
+<p>先看的这一篇：<a href="http://blog.csdn.net/heyutao007/article/details/50131089" target="_blank" rel="noopener">http://blog.csdn.net/heyutao007/article/details/50131089</a></p>
+<p>先讲了JMS和遵守JMS的ActiveMQ。Java Message Service，JMS，指的是面向消息中间件（MOM），用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AMQP的原始用途只是为金融界提供一个可以彼此协作的消息协议，而现在的目标则是为通用消息队列架构提供通用构建工具。因此，面向消息的中间件（MOM）系统，例如发布/订阅队列，没有作为基本元素实现。反而通过发送简化的AMQ实体，用户被赋予了构建例如这些实体的能力。这些实体也是规范的一部分，形成了在线路层协议顶端的一个层级：AMQP模型。这个模型统一了消息模式，诸如之前提到的发布/订阅，队列，事务以及流数据，并且添加了额外的特性，例如更易于扩展，基于内容的路由。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>JMS中定义了两种消息模型：点对点（point to point， queue）和发布/订阅（publish/subscribe，topic）。主要区别就是是否能重复消费。</p>
+<h2 id="点对点：Queue，不可重复消费"><a href="#点对点：Queue，不可重复消费" class="headerlink" title="点对点：Queue，不可重复消费"></a>点对点：Queue，不可重复消费</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。</span><br><span class="line">消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。</span><br><span class="line">Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</span><br><span class="line">注：Kafka不遵守JMS协议，所以Kafka实际应用中，很可能会需要ack，然后多个消费者能够会同时消费。。需要具体看。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220174742.png" alt=""></p>
+<h2 id="发布-订阅：Topic，可以重复消费"><a href="#发布-订阅：Topic，可以重复消费" class="headerlink" title="发布/订阅：Topic，可以重复消费"></a>发布/订阅：Topic，可以重复消费</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。</span><br><span class="line">和点对点方式不同，发布到topic的消息会被所有订阅者消费。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220174836.png" alt=""></p>
+<p>支持订阅组的发布订阅模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">发布订阅模式下，当发布者消息量很大时，显然单个订阅者的处理能力是不足的。</span><br><span class="line">实际上现实场景中是多个订阅者节点组成一个订阅组负载均衡消费topic消息即分组订阅，这样订阅者很容易实现消费能力线性扩展。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220174915.png" alt=""></p>
+<p>注：queue和topic在ActiveMQ里面的实现和对比，可以参考：《<a href="http://blog.csdn.net/studyforir/article/details/48340619" target="_blank" rel="noopener">ActiveMQ的queue以及topic两种消息处理机制分析</a>》</p>
+<p>有完整queue和topic对比的代码可以看这里：<a href="http://blog.csdn.net/zmx729618/article/details/51082844" target="_blank" rel="noopener">http://blog.csdn.net/zmx729618/article/details/51082844</a></p>
+<p><strong>可以看出区别 topic 是 session.createTopic(“FirstTopic”); 而queue是 createQueue.</strong></p>
+<h1 id="流行模型比较"><a href="#流行模型比较" class="headerlink" title="流行模型比较"></a>流行模型比较</h1><p> 传统企业型消息队列ActiveMQ遵循了JMS规范，实现了点对点和发布订阅模型，但其他流行的消息队列RabbitMQ、Kafka并没有遵循JMS规范。</p>
+<h2 id="3-1、RabbitMQ"><a href="#3-1、RabbitMQ" class="headerlink" title="3.1、RabbitMQ"></a>3.1、RabbitMQ</h2><p>RabbitMQ实现了AMQP协议，AMQP协议定义了消息路由规则和方式。</p>
+<p>（更多AMQP内容，看这里：<a href="http://www.cnblogs.com/charlesblc/p/6058799.html" target="_blank" rel="noopener">http://www.cnblogs.com/charlesblc/p/6058799.html</a>）</p>
+<p>生产端通过路由规则发送消息到不同queue，消费端根据queue名称消费消息。</p>
+<p>RabbitMQ既支持内存队列也支持持久化队列，消费端为推模型，消费状态和订阅关系由服务端负责维护，消息消费完后立即删除，不保留历史消息。</p>
+<p>（1）点对点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产端发送一条消息通过路由投递到Queue，只有一个消费者能消费到。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220174949.png" alt=""></p>
+<p>（2）多订阅</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当RabbitMQ需要支持多订阅时，发布者发送的消息通过路由同时写到多个Queue，不同订阅组消费不同的Queue。</span><br><span class="line">所以支持多订阅时，消息会多个拷贝。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175010.png" alt=""></p>
+<h2 id="3-2、Kafka"><a href="#3-2、Kafka" class="headerlink" title="3.2、Kafka"></a>3.2、Kafka</h2><p>Kafka只支持消息持久化，消费端为拉模型，消费状态和订阅关系由客户端端负责维护，消息消费完后不会立即删除，会保留历史消息。</p>
+<p>因此支持多订阅时，消息只会存储一份就可以了。但是可能产生重复消费的情况。</p>
+<p>（1）点对点&amp;多订阅（因为不删消息，所以这两种就不区分了） </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">发布者生产一条消息到topic中，不同订阅组消费此消息。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175033.png" alt=""></p>
+<p>上面是三种最流行MQ的比较（ActiveMQ, RabbitMQ, Kafka，没有涉及C++的zeorq）。</p>
+<p>下面这篇文章针对ActiveMQ的推拉模型进行介绍。</p>
+<p><a href="http://www.cnblogs.com/hapjin/p/5683648.html" target="_blank" rel="noopener">http://www.cnblogs.com/hapjin/p/5683648.html</a></p>
+<p>对于消费者而言有两种方式从消息中间件获取消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">①Push方式：由消息中间件主动地将消息推送给消费者；</span><br><span class="line">②Pull方式：由消费者主动向消息中间件拉取消息。</span><br></pre></td></tr></table></figure>
+
+<p>看一段官网对Push方式的解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">To be able to achieve high performance it is important to stream messages to consumers as fast as possible </span><br><span class="line">so that the consumer always has a buffer of messages, in RAM, ready to process </span><br><span class="line">- rather than have them explicitly pull messages from the server which adds significant latency per message.</span><br></pre></td></tr></table></figure>
+
+<p>比较：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">采用Push方式，可以尽可能快地将消息发送给消费者(stream messages to consumers as fast as possible)</span><br><span class="line"></span><br><span class="line">而采用Pull方式，会增加消息的延迟，即消息到达消费者的时间有点长(adds significant latency per message)。</span><br></pre></td></tr></table></figure>
+
+<p>但是，Push方式会有一个坏处：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果消费者的处理消息的能力很弱(一条消息需要很长的时间处理)，而消息中间件不断地向消费者Push消息，消费者的缓冲区可能会溢出。</span><br></pre></td></tr></table></figure>
+
+<p>ActiveMQ是怎么解决这个问题的呢？那就是 <a href="http://activemq.apache.org/what-is-the-prefetch-limit-for.html" target="_blank" rel="noopener"> <strong>prefetch limit</strong></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">prefetch limit 规定了一次可以向消费者Push(推送)多少条消息。</span><br><span class="line"></span><br><span class="line">Once the prefetch limit is reached, no more messages are dispatched to the consumer </span><br><span class="line">until the consumer starts sending back acknowledgements of messages (to indicate that the message has been processed)</span><br><span class="line"></span><br><span class="line">当推送消息的数量到达了perfetch limit规定的数值时，消费者还没有向消息中间件返回ACK，消息中间件将不再继续向消费者推送消息。</span><br></pre></td></tr></table></figure>
+
+<p>prefetch limit设置的大小根据场景而定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">那prefetch limit的值设置为多少合适？视具体的应用场景而定。</span><br><span class="line"></span><br><span class="line">If you have very few messages and each message takes a very long time to process </span><br><span class="line">you might want to set the prefetch value to 1 so that a consumer is given one message at a time. </span><br><span class="line"></span><br><span class="line">如果消息的数量很少(生产者生产消息的速率不快)，但是每条消息 消费者需要很长的时间处理，那么prefetch limit设置为1比较合适。</span><br><span class="line">这样，消费者每次只会收到一条消息，当它处理完这条消息之后，向消息中间件发送ACK，此时消息中间件再向消费者推送下一条消息。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>prefetch limit 设置成0意味着什么？意味着变成 拉pull模式。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Specifying a prefetch limit of zero means the consumer will poll for more messages, one at a time, </span><br><span class="line">instead of the message being pushed to the consumer.</span><br><span class="line">意味着此时，消费者去轮询消息中间件获取消息。不再是Push方式了，而是Pull方式了。即消费者主动去消息中间件拉取消息。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>prefetch Limit&gt;0即为prefetch，=0为Pull，看起来没有不prefetch的push，push都要设置prefetch。</p>
+<p>另外，对于prefetch模式（，那么消费需要进行响应ACK。因为服务器需要知道consumer消费的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">perfetch limit是“消息预取”的值，这是针对消息中间件如何向消费者发消息 而设置的。</span><br><span class="line">与之相关的还有针对 消费者以何种方式向消息中间件返回确认ACK(响应)：</span><br><span class="line">比如消费者是每次消费一条消息之后就向消息中间件确认呢？还是采用“延迟确认”---即采用批量确认的方式(消费了若干条消息之后，统一再发ACK)。</span><br></pre></td></tr></table></figure>
+
+<p>这就是 <a href="http://activemq.apache.org/performance-tuning.html" target="_blank" rel="noopener">Optimized Acknowledge</a></p>
+<p><a href="http://shift-alt-ctrl.iteye.com/blog/2020182" target="_blank" rel="noopener">引用 一段话</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果prefetchACK为true，那么prefetch必须大于0；当prefetchACK为false时，你可以指定prefetch为0以及任意大小的正数。</span><br><span class="line"></span><br><span class="line">不过，当prefetch=0是，表示consumer将使用PULL(拉取)的方式从broker端获取消息，</span><br><span class="line">broker端将不会主动push消息给client端，直到client端发送PullCommand时；</span><br><span class="line">当prefetch&gt;0时，就开启了broker push模式，此后只要当client端消费且ACK了一定的消息之后，会立即push给client端多条消息。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>在程序中如何采用Push方式或者Pull方式呢？</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">从是否阻塞来看，消费者有两种方式获取消息。同步方式和异步方式。</span><br><span class="line"></span><br><span class="line">同步方式使用的是ActiveMQMessageConsumer的receive()方法。而异步方式则是采用消费者实现MessageListener接口，监听消息。</span><br></pre></td></tr></table></figure>
+
+<p>同步方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">使用同步方式receive()方法获取消息时，prefetch limit即可以设置为0，也可以设置为大于0</span><br><span class="line"></span><br><span class="line">prefetch limit为零 意味着：</span><br><span class="line">“receive()方法将会首先发送一个PULL指令并阻塞，直到broker端返回消息为止，这也意味着消息只能逐个获取(类似于Request&lt;-&gt;Response)”</span><br><span class="line"></span><br><span class="line">prefetch limit 大于零 意味着：</span><br><span class="line">“broker端将会批量push给client一定数量的消息(&lt;= prefetch)，client端会把这些消息(unconsumed Message)放入到本地的队列中，</span><br><span class="line">只要此队列有消息，那么receive方法将会立即返回（并消费），</span><br><span class="line">当一定量的消息ACK之后，broker端会继续批量push消息给client端。”</span><br></pre></td></tr></table></figure>
+
+
+
+<p>异步方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当使用MessageListener异步获取消息时，prefetch limit必须大于零了。</span><br><span class="line">因为，prefetch limit 等于零 意味着消息中间件不会主动给消费者Push消息，而此时消费者又用MessageListener被动获取消息(不会主动去轮询消息)。</span><br><span class="line">这二者是矛盾的。</span><br></pre></td></tr></table></figure>
+
+<p><strong>此外，还有一个要注意的地方，即消费者采用同步获取消息(receive方法) 与 异步获取消息的方法(MessageListener) ，对消息的确认时机是不同的。</strong></p>
+<p><strong>这里提到了这篇文章：</strong><a href="http://shift-alt-ctrl.iteye.com/blog/2020182" target="_blank" rel="noopener">http://shift-alt-ctrl.iteye.com/blog/2020182</a> 文章名《<a href="http://shift-alt-ctrl.iteye.com/blog/2020182" target="_blank" rel="noopener">ActiveMQ消息传送机制以及ACK机制详解</a>》</p>
+<p><strong>ActiveMQ消息传送机制</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Producer客户端使用来发送消息的， Consumer客户端用来消费消息；</span><br><span class="line">它们的协同中心就是ActiveMQ broker,broker也是让producer和consumer调用过程解耦的工具，最终实现了异步RPC/数据交换的功能。</span><br><span class="line"></span><br><span class="line">随着ActiveMQ的不断发展，支持了越来越多的特性，也解决开发者在各种场景下使用ActiveMQ的需求。</span><br><span class="line">比如producer支持异步调用；</span><br><span class="line">使用flow control机制让broker协同consumer的消费速率；</span><br><span class="line">consumer端可以使用prefetchACK来最大化消息消费的速率；</span><br><span class="line">提供&quot;重发策略&quot;等来提高消息的安全性等。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>一条消息的生命周期如下:</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175301.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一条消息从producer端发出之后，一旦被broker正确保存，那么它将会被consumer消费，然后ACK，broker端才会删除；</span><br><span class="line">不过当消息过期或者存储设备溢出时，也会终结它。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175620.png" alt=""></p>
+<p>上面的图里面写的很清晰。</p>
+<p>上半部分是producer的流程，下半部分consumer的流程分为两块，同步的consumer.receive和异步的MessageListener。从图中可以看出异步的MessageLister也是一条一条处理的，由delivered队列控制的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这张图片中简单的描述了:1)producer端如何发送消息 2) consumer端如何消费消息 3) broker端如何调度。</span><br><span class="line">如果用文字来描述图示中的概念，恐怕一言难尽。</span><br><span class="line">图示中，提及到prefetchAck，以及消息同步、异步发送的基本逻辑；这对你了解下文中的ACK机制将有很大的帮助。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Prefetch和optimizeACK</strong> </p>
+<p>我们需要在brokerUrl指定optimizeACK选项，在destinationUri中指定prefetchSize(预获取)选项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">其中brokerUrl参数选项是全局的，即当前factory下所有的connection/session/consumer都会默认使用这些值；</span><br><span class="line">而destinationUri中的选项，只会在使用此destination的consumer实例中有效；</span><br><span class="line">如果同时指定，brokerUrl中的参数选项值将会被覆盖。</span><br><span class="line">optimizeAck表示是否开启“优化ACK”，只有在为true的情况下，</span><br><span class="line">prefetchSize(下文中将会简写成prefetch)以及optimizeAcknowledgeTimeout参数才会有意义。（prefetch依赖于optimizeAck？看起来是笔误）</span><br><span class="line">此处需要注意&quot;optimizeAcknowledgeTimeout&quot;选项只能在brokerUrl中配置。</span><br><span class="line"></span><br><span class="line">prefetch值建议在destinationUri中指定，因为在brokerUrl中指定比较繁琐；</span><br><span class="line">在brokerUrl中，queuePrefetchSize和topicPrefetchSize都需要单独设定：</span><br><span class="line">&quot;&amp;jms.prefetchPolicy.queuePrefetch=12&amp;jms.prefetchPolicy.topicPrefetch=12&quot;等来逐个指定。</span><br><span class="line"></span><br><span class="line">1) 在brokerUrl中增加如下查询字符串： </span><br><span class="line">String brokerUrl = &quot;tcp://localhost:61616?&quot; +   </span><br><span class="line">                   &quot;jms.optimizeAcknowledge=true&quot; +   </span><br><span class="line">                   &quot;&amp;jms.optimizeAcknowledgeTimeOut=30000&quot; +   </span><br><span class="line">                   &quot;&amp;jms.redeliveryPolicy.maximumRedeliveries=6&quot;;  </span><br><span class="line">ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(brokerUrl);  </span><br><span class="line"> </span><br><span class="line">2) 在destinationUri中，增加如下查询字符串：</span><br><span class="line">String queueName = &quot;test-queue?customer.prefetchSize=100&quot;;  </span><br><span class="line">Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);  </span><br><span class="line">Destination queue = session.createQueue(queueName);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>关于prefetchAck、同步、异步api（上面讲过了，温习一下）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">如果prefetchACK为true，那么prefetch必须大于0；</span><br><span class="line">当prefetchACK为false时，你可以指定prefetch为0以及任意大小的正数。</span><br><span class="line">不过，当prefetch=0是，表示consumer将使用PULL(拉取)的方式从broker端获取消息，</span><br><span class="line">broker端将不会主动push消息给client端，直到client端发送PullCommand时；</span><br><span class="line">当prefetch&gt;0时，就开启了broker push模式，此后只要当client端消费且ACK了一定的消息之后，会立即push给client端多条消息。</span><br><span class="line"> </span><br><span class="line">当consumer端使用receive()方法同步获取消息时，prefetch可以为0和任意正值；</span><br><span class="line">当prefetch=0时，那么receive()方法将会首先发送一个PULL指令并阻塞，</span><br><span class="line">直到broker端返回消息为止，这也意味着消息只能逐个获取(类似于Request&lt;-&gt;Response)，这也是Activemq中PULL消息模式；</span><br><span class="line">当prefetch &gt; 0时，broker端将会批量push给client 一定数量的消息(&lt;= prefetch),client端会把这些消息(unconsumedMessage)放入到本地的队列中，</span><br><span class="line">只要此队列有消息，那么receive方法将会立即返回，当一定量的消息ACK之后，broker端会继续批量push消息给client端。</span><br><span class="line"> </span><br><span class="line">当consumer端使用MessageListener异步获取消息时，这就需要开发设定的prefetch值必须 &gt;=1,即至少为1；</span><br><span class="line">在异步消费消息模式中，设定prefetch=0,是相悖的，也将获得一个Exception。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重发选项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我们还可以brokerUrl中配置“redelivery”策略，比如当一条消息处理异常时，broker端可以重发的最大次数；</span><br><span class="line">和下文中提到REDELIVERED_ACK_TYPE互相协同。当消息需要broker端重发时，</span><br><span class="line">consumer会首先在本地的“deliveredMessage队列”(Consumer已经接收但还未确认的消息队列)删除它，</span><br><span class="line">然后向broker发送“REDELIVERED_ACK_TYPE”类型的确认指令，</span><br><span class="line">broker将会把指令中指定的消息重新添加到pendingQueue(亟待发送给consumer的消息队列)中，直到合适的时机，再次push给client。</span><br></pre></td></tr></table></figure>
+
+<p>consumer消费快慢，决定了架构和设计如何处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">按照良好的设计准则，</span><br><span class="line">当consumer消费速度很慢时，我们通常会部署多个consumer客户端，并使用较小的prefetch，同时关闭optimizeACK，</span><br><span class="line">可以让消息在多个consumer间“负载均衡”(即均匀的发送给每个consumer)；</span><br><span class="line">如果较大的prefetchSize，将会导致broker一次性push给client大量的消息，但是这些消息需要很久才能ACK(消息积压)，</span><br><span class="line">而且在client故障时，还会导致这些消息的重发。</span><br></pre></td></tr></table></figure>
+
+<p>其他情景：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果consumer端消费速度很快，但是producer端生成消息的速率较慢，而且我们还部署了多个consumer，</span><br><span class="line">这种场景下，建议开启optimizeACK，但是需要设置的prefetchSize不能过大；</span><br><span class="line">这样可以保证每个consumer都能有&quot;活干&quot;，否则将会出现一个consumer非常忙碌，但是其他consumer几乎收不到消息。</span><br><span class="line"> </span><br><span class="line">如果消息很重要，特别是不愿意接收到”redelivery“的消息，那么我们需要将optimizeACK=false，prefetchSize=1</span><br></pre></td></tr></table></figure>
+
+<p>错误处理与重发：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">既然optimizeACK是”延迟“确认，那么就引入一种潜在的风险：</span><br><span class="line">在消息被消费之后还没有来得及确认时，client端发生故障，</span><br><span class="line">那么这些消息就有可能会被重新发送给其他consumer，那么这种风险就需要client端能够容忍“重复”消息。</span><br></pre></td></tr></table></figure>
+
+<p>从上面的图可以看出，没有ACK的情况下，队列是blocking的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无论如何设定此值，client持有的消息条数最大为：prefetch + “DELIVERED_ACK_TYPE消息条数”(DELIVERED_ACK_TYPE参见下文)</span><br></pre></td></tr></table></figure>
+
+<p><strong>optimizeACK其他注意：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">即使当optimizeACK为true，也只会当session的ACK模式为AUTO_ACKNOWLEDGE时才会生效，即在其他类型的ACK模式时consumer端仍然不会“延迟确认”，即:</span><br><span class="line">consumer.optimizeAck = connection.optimizeACK &amp;&amp; session.isAutoAcknowledge()  </span><br><span class="line"> </span><br><span class="line">当consumer.optimizeACK有效时，如果客户端已经消费但尚未确认的消息(deliveredMessage)达到prefetch * 0.65，consumer端将会自动进行ACK；</span><br><span class="line">同时如果离上一次ACK的时间间隔，已经超过&quot;optimizeAcknowledgeTimout&quot;毫秒，也会导致自动进行ACK。</span><br><span class="line"> </span><br><span class="line">此外简单的补充一下，批量确认消息时，只需要在ACK指令中指明“firstMessageId”和“lastMessageId”即可，即消息区间，</span><br><span class="line">那么broker端就知道此consumer(根据consumerId识别)需要确认哪些消息。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>ACK模式与类型介绍</strong></p>
+<p>JMS API中约定了Client端可以使用四种ACK模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在javax.jms.Session接口中:</span><br><span class="line"> </span><br><span class="line">AUTO_ACKNOWLEDGE = 1    自动确认</span><br><span class="line">CLIENT_ACKNOWLEDGE = 2    客户端手动确认   </span><br><span class="line">DUPS_OK_ACKNOWLEDGE = 3    自动批量确认</span><br><span class="line">SESSION_TRANSACTED = 0    事务提交并确认</span><br><span class="line"></span><br><span class="line">此外AcitveMQ补充了一个自定义的ACK模式:</span><br><span class="line">INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于broker而言，只有接收到ACK指令,才会认为消息被正确的接收或者处理成功了,通过ACK，可以在consumer（/producer）与Broker之间建立一种简单的“担保”机制. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Client端指定了ACK模式,但是在Client与broker在交换ACK指令的时候,还需要告知ACK_TYPE,ACK_TYPE表示此确认指令的类型，</span><br><span class="line">不同的ACK_TYPE将传递着消息的状态，broker可以根据不同的ACK_TYPE对消息进行不同的操作。</span><br><span class="line"> </span><br><span class="line">比如Consumer消费消息时出现异常,就需要向broker发送ACK指令,ACK_TYPE为&quot;REDELIVERED_ACK_TYPE&quot;,那么broker就会重新发送此消息。</span><br><span class="line">在JMS API中并没有定义ACT_TYPE,因为它通常是一种内部机制,并不会面向开发者。ActiveMQ中定义了如下几种ACK_TYPE(参看MessageAck类):</span><br><span class="line"> </span><br><span class="line">DELIVERED_ACK_TYPE = 0    消息&quot;已接收&quot;，但尚未处理结束</span><br><span class="line">STANDARD_ACK_TYPE = 2    &quot;标准&quot;类型,通常表示为消息&quot;处理成功&quot;，broker端可以删除消息了</span><br><span class="line">POSION_ACK_TYPE = 1    消息&quot;错误&quot;,通常表示&quot;抛弃&quot;此消息，比如消息重发多次后，都无法正确处理时，消息将会被删除或者DLQ(死信队列)</span><br><span class="line">REDELIVERED_ACK_TYPE = 3    消息需&quot;重发&quot;，比如consumer处理消息时抛出了异常，broker稍后会重新发送此消息</span><br><span class="line">INDIVIDUAL_ACK_TYPE = 4    表示只确认&quot;单条消息&quot;,无论在任何ACK_MODE下    </span><br><span class="line">UNMATCHED_ACK_TYPE = 5    在Topic中，如果一条消息在转发给“订阅者”时，发现此消息不符合Selector过滤条件，那么此消息将 不会转发给订阅者，</span><br><span class="line">消息将会被存储引擎删除(相当于在Broker上确认了消息)。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>ACK的基本流程见下图：</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175656.png" alt=""></p>
+<p>Consumer消费消息的风格有2种: 同步/异步. 使用consumer.receive()就是同步，使用messageListener就是异步。</p>
+<p>在同一个consumer中，我们不能同时使用这2种风格，比如在使用listener的情况下，当调用receive()方法将会获得一个Exception。</p>
+<p>两种风格下，消息确认时机有所不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&quot;同步&quot;伪代码：</span><br><span class="line"></span><br><span class="line">//receive伪代码---过程  </span><br><span class="line">Message message = sessionMessageQueue.dequeue();  </span><br><span class="line">if(message != null)&#123;  </span><br><span class="line">    ack(message);  </span><br><span class="line">&#125;  </span><br><span class="line">return message  </span><br><span class="line"> </span><br><span class="line">同步调用时，在消息从receive方法返回之前，就已经调用了ACK；因此如果Client端没有处理成功，此消息将丢失(可能重发，与ACK模式有关)。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&quot;异步&quot;伪代码：</span><br><span class="line"> </span><br><span class="line">//基于listener  </span><br><span class="line">Session session = connection.getSession(consumerId);  </span><br><span class="line">sessionQueueBuffer.enqueue(message);  </span><br><span class="line">Runnable runnable = new Ruannale()&#123;  </span><br><span class="line">    run()&#123;  </span><br><span class="line">        Consumer consumer = session.getConsumer(consumerId);  </span><br><span class="line">        Message md = sessionQueueBuffer.dequeue();  </span><br><span class="line">        try&#123;  </span><br><span class="line">            consumer.messageListener.onMessage(md);  </span><br><span class="line">            ack(md);//  </span><br><span class="line">        &#125;catch(Exception e)&#123;  </span><br><span class="line">            redelivery();//sometime，not all the time;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">//session中将采取线程池的方式，分发异步消息  </span><br><span class="line">//因此同一个session中多个consumer可以并行消费  </span><br><span class="line">threadPool.execute(runnable);  </span><br><span class="line"> </span><br><span class="line">基于异步调用时，消息的确认是在onMessage方法返回之后，如果onMessage方法异常，会导致消息不能被ACK，会触发重发。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>ACK模式详解</strong></p>
+<p><strong>AUTO_ACKNOWLEDGE :</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">自动确认,这就意味着消息的确认时机将有consumer择机确认.</span><br><span class="line">&quot;择机确认&quot;似乎充满了不确定性,这也意味着,开发者必须明确知道&quot;择机确认&quot;的具体时机,否则将有可能导致消息的丢失,或者消息的重复接收.</span><br><span class="line">那么在ActiveMQ中,AUTO_ACKNOWLEDGE是如何运作的呢?</span><br><span class="line"></span><br><span class="line">1) 对于consumer而言，optimizeAcknowledge属性只会在AUTO_ACK模式下有效。</span><br><span class="line"> </span><br><span class="line">2) 其中DUPS_ACKNOWLEGE也是一种潜在的AUTO_ACK,只是确认消息的条数和时间上有所不同。</span><br><span class="line"> </span><br><span class="line">3) 在“同步”(receive)方法返回message之前,会检测optimizeACK选项是否开启，如果没有开启，此单条消息将立即确认，</span><br><span class="line">所以在这种情况下，message返回之后，如果开发者在处理message过程中出现异常，会导致此消息也不会redelivery,即&quot;潜在的消息丢失&quot;；</span><br><span class="line">如果开启了optimizeACK，则会在unAck数量达到prefetch * 0.65时确认，当然我们可以指定prefetchSize = 1来实现逐条消息确认。</span><br><span class="line"> </span><br><span class="line">4) 在&quot;异步&quot;(messageListener)方式中,将会首先调用listener.onMessage(message),此后再ACK,</span><br><span class="line">如果onMessage方法异常,将导致client端补充发送一个ACK_TYPE为REDELIVERED_ACK_TYPE确认指令；</span><br><span class="line">如果onMessage方法正常,消息将会正常确认(STANDARD_ACK_TYPE)。</span><br><span class="line">此外需要注意，消息的重发次数是有限制的，每条消息中都会包含“redeliveryCounter”计数器，用来表示此消息已经被重发的次数，</span><br><span class="line">如果重发次数达到阀值，将会导致发送一个ACK_TYPE为POSION_ACK_TYPE确认指令,这就导致broker端认为此消息无法消费,</span><br><span class="line">此消息将会被删除或者迁移到&quot;dead letter&quot;通道中。</span><br><span class="line">    </span><br><span class="line">因此当我们使用messageListener方式消费消息时，通常建议在onMessage方法中使用try-catch,这样可以在处理消息出错时记录一些信息，</span><br><span class="line">而不是让consumer不断去重发消息；</span><br><span class="line">如果你没有使用try-catch,就有可能会因为异常而导致消息重复接收的问题,需要注意你的onMessage方法中逻辑是否能够兼容对重复消息的判断。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200220175725.png" alt=""></p>
+<p><strong>CLIENT_ACKNOWLEDGE :</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">客户端手动确认，这就意味着AcitveMQ将不会“自作主张”的为你ACK任何消息，开发者需要自己择机确认。</span><br><span class="line"></span><br><span class="line">无论是“同步”/“异步”，ActiveMQ都不会发送STANDARD_ACK_TYPE，直到message.acknowledge()调用。</span><br><span class="line">如果在client端未确认的消息个数达到prefetchSize * 0.5时，会补充发送一个ACK_TYPE为DELIVERED_ACK_TYPE的确认指令，</span><br><span class="line">这会触发broker端可以继续push消息到client端。</span><br></pre></td></tr></table></figure>
+
+<p>注意防止不ack而hang住：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果client端因为某种原因导致acknowledge方法未被执行，将导致大量消息不能被确认，</span><br><span class="line">broker端将不会push消息，事实上client端将处于“假死”状态，而无法继续消费消息。</span><br><span class="line"></span><br><span class="line">我们要求client端在消费1.5*prefetchSize个消息之前，必须acknowledge()一次；</span><br><span class="line">通常我们总是每消费一个消息调用一次，这是一种良好的设计。</span><br></pre></td></tr></table></figure>
+
+<p>broker依据ack速率进行负载平衡：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在CLIET_ACK模式下，消息在交付给listener之前，都会首先创建一个DELIVERED_ACK_TYPE的ACK指令，</span><br><span class="line">直到client端未确认的消息达到&quot;prefetchSize * 0.5&quot;时才会发送此ACK指令，如</span><br><span class="line">果在此之前，开发者调用了acknowledge()方法，会导致消息直接被确认(STANDARD_ACK_TYPE)。</span><br><span class="line"></span><br><span class="line">broker端通常会认为“DELIVERED_ACK_TYPE”确认指令是一种“slow consumer”信号，</span><br><span class="line">如果consumer不能及时的对消息进行acknowledge而导致broker端阻塞，那么此consumer将会被标记为“slow”，</span><br><span class="line">此后queue中的消息将会转发给其他Consumer。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>DUPS_OK_ACKNOWLEDGE :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;消息可重复&quot;确认，意思是此模式下，可能会出现重复消息，并不是一条消息需要发送多次ACK才行。</span><br><span class="line">它是一种潜在的&quot;AUTO_ACK&quot;确认机制，为批量确认而生，而且具有“延迟”确认的特点。</span><br><span class="line"></span><br><span class="line">对于开发者而言，这种模式下的代码结构和AUTO_ACKNOWLEDGE一样，不需要像CLIENT_ACKNOWLEDGE那样调用acknowledge()方法来确认消息。</span><br></pre></td></tr></table></figure>
+
+<p>发生作用的时机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1) 在ActiveMQ中，如果在Destination是Queue通道，我们真的可以认为DUPS_OK_ACK就是“AUTO_ACK + optimizeACK + (prefetch &gt; 0)”</span><br><span class="line">这种情况，在确认时机上几乎完全一致；</span><br><span class="line">此外在此模式下，如果prefetchSize =1 或者没有开启optimizeACK，也会导致消息逐条确认，从而失去批量确认的特性。</span><br><span class="line"> </span><br><span class="line">2) 如果Destination为Topic，DUPS_OK_ACKNOWLEDGE才会产生JMS规范中诠释的意义，</span><br><span class="line">即无论optimizeACK是否开启，都会在消费的消息个数&gt;=prefetch * 0.5时，批量确认(STANDARD_ACK_TYPE),</span><br><span class="line">在此过程中，不会发送DELIVERED_ACK_TYPE的确认指令,这是DUPS和AUTO_ACK的最大的区别。</span><br><span class="line"></span><br><span class="line">这也意味着，当consumer故障重启后，那些尚未ACK的消息会重新发送过来。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>SESSION_TRANSACTED :</strong></p>
+<p>当session使用事务时，就是使用此模式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在事务开启之后，和session.commit()之前，所有消费的消息，要么全部正常确认，要么全部redelivery。</span><br><span class="line">这种严谨性，通常在基于GROUP(消息分组)或者其他场景下特别适合。</span><br><span class="line"></span><br><span class="line">在SESSION_TRANSACTED模式下，optimizeACK并不能发挥任何效果,因为在此模式下，optimizeACK会被强制设定为false，</span><br><span class="line">不过prefetch仍然可以决定DELIVERED_ACK_TYPE的发送时机。</span><br><span class="line"> </span><br><span class="line">因为Session非线程安全，那么当前session下所有的consumer都会共享同一个transactionContext；</span><br><span class="line">同时建议，一个事务类型的Session中只有一个Consumer，以避免rollback()或者commit()方法被多个consumer调用而造成的消息混乱。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>确认过程，以及确认ACK的发送时机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">事务的确认过程中，首先把本地的deliveredMessage队列中尚未确认的消息全部确认(STANDARD_ACK_TYPE)；</span><br><span class="line">此后向broker发送transaction提交指令并等待broker反馈，</span><br><span class="line"></span><br><span class="line">如果broker端事务操作成功，那么将会把本地deliveredMessage队列清空，新的事务开始；</span><br><span class="line">如果broker端事务操作失败(此时broker已经rollback)，那么对于session而言，将执行inner-rollback，</span><br><span class="line">这个rollback所做的事情，就是将当前事务中的消息清空并要求broker重发(REDELIVERED_ACK_TYPE),同时commit方法将抛出异常。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>INDIVIDUAL_ACKNOWLEDGE :</strong></p>
+<p>很少使用，它的确认时机和CLIENT_ACKNOWLEDGE几乎一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">当消息消费成功之后，需要调用message.acknowledege来确认此消息(单条)，</span><br><span class="line">而CLIENT_ACKNOWLEDGE模式先message.acknowledge()方法将导致整个session中所有消息被确认(批量确认)。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2019/06/20/ActiveMQ%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6_%E6%B6%88%E8%B4%B9%E6%9C%BA%E5%88%B6_%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6/" title="ActiveMQ消息机制_消费机制_确认机制">http://kanatsux.github.io/2019/06/20/ActiveMQ%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6_%E6%B6%88%E8%B4%B9%E6%9C%BA%E5%88%B6_%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag"><i class="fa fa-tag"></i>  消息队列</a>
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i>  linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF/" rel="prev" title="机器学习算法适用场景">
+                机器学习算法适用场景 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#activemq"><span class="nav-number">1.</span> <span class="nav-text">activemq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息队列-推-拉模式学习-amp-ActiveMQ及JMS学习"><span class="nav-number">2.</span> <span class="nav-text">消息队列-推/拉模式学习 &amp; ActiveMQ及JMS学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#点对点：Queue，不可重复消费"><span class="nav-number">2.1.</span> <span class="nav-text">点对点：Queue，不可重复消费</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-订阅：Topic，可以重复消费"><span class="nav-number">2.2.</span> <span class="nav-text">发布/订阅：Topic，可以重复消费</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流行模型比较"><span class="nav-number">3.</span> <span class="nav-text">流行模型比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、RabbitMQ"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、RabbitMQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、Kafka"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、Kafka</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">38.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

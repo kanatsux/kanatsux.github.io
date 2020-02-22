@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,nginx,haproxy," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="haproxy+nginx+tproxy实现透明代理1.tproxy的原理内核实现的一个透明代理，该模块允许监听一个非本机ip的socket（listen阶段），并可以send到远端服务器。 1.haproxy与nginx通信haproxy与nginx同时对proxy protocol进行了支持，所以两者之间可以透传真实的用户ip（非tcp报文直接透传） proxy protocol代理协议的原理">
+<meta name="keywords" content="linux,nginx,haproxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Haproxy+Nginx+Tproxy实现流量透明代理">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;01&#x2F;03&#x2F;Haproxy+Nginx+Tproxy%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="haproxy+nginx+tproxy实现透明代理1.tproxy的原理内核实现的一个透明代理，该模块允许监听一个非本机ip的socket（listen阶段），并可以send到远端服务器。 1.haproxy与nginx通信haproxy与nginx同时对proxy protocol进行了支持，所以两者之间可以透传真实的用户ip（非tcp报文直接透传） proxy protocol代理协议的原理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-22T16:27:08.221Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2020/01/03/Haproxy+Nginx+Tproxy实现流量透明代理/"/>
+
+
+
+
+
+  <title>Haproxy+Nginx+Tproxy实现流量透明代理 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2020/01/03/Haproxy+Nginx+Tproxy%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Haproxy+Nginx+Tproxy实现流量透明代理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-03T16:30:20+08:00">
+                2020-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  809
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="haproxy-nginx-tproxy实现透明代理"><a href="#haproxy-nginx-tproxy实现透明代理" class="headerlink" title="haproxy+nginx+tproxy实现透明代理"></a>haproxy+nginx+tproxy实现透明代理</h1><h2 id="1-tproxy的原理"><a href="#1-tproxy的原理" class="headerlink" title="1.tproxy的原理"></a>1.tproxy的原理</h2><p>内核实现的一个透明代理，该模块允许监听一个非本机ip的socket（listen阶段），并可以send到远端服务器。</p>
+<h2 id="1-haproxy与nginx通信"><a href="#1-haproxy与nginx通信" class="headerlink" title="1.haproxy与nginx通信"></a>1.haproxy与nginx通信</h2><p>haproxy与nginx同时对proxy protocol进行了支持，所以两者之间可以透传真实的用户ip（非tcp报文直接透传）</p>
+<p><strong>proxy protocol代理协议的原理：</strong></p>
+<p>该协议的本质是在三次握手结束后由代理在连接中插入了一个携带了原始连接四元组信息的数据包。携带的数据包示例内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PROXY TCP4 202.112.144.236 10.210.12.10 5678 80\r\nPROXY TCP6 2001:da8:205::100 2400:89c0:2110:1::21 6324 80\r\n</span><br></pre></td></tr></table></figure>
+
+<p>proxy protocol的接收端必须在接收到完整有效的 proxy protocol 头部后才能开始处理连接数据。如果服务器接收到的第一个数据包不符合proxy protocol的格式，那么服务器会直接终止连接。</p>
+<p>haproxy代理节点的示例配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    log 127.0.0.1    local0</span><br><span class="line">    # log /dev/log    local1 notice</span><br><span class="line">    # chroot          /var/lib/haproxy</span><br><span class="line">    # pidfile         /var/run/haproxy.pid </span><br><span class="line">    daemon</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">    log global</span><br><span class="line">    mode    tcp</span><br><span class="line">    option  tcplog  </span><br><span class="line">    option  dontlognull</span><br><span class="line">    maxconn 2000</span><br><span class="line">    timeout connect  5000</span><br><span class="line">    timeout client 500000</span><br><span class="line">    timeout server 500000</span><br><span class="line"></span><br><span class="line">frontend 3389_srv</span><br><span class="line">    mode tcp</span><br><span class="line">    bind 0.0.0.0:3389</span><br><span class="line">    default_backend nginx-3389</span><br><span class="line"></span><br><span class="line">backend nginx-3389</span><br><span class="line">    mode tcp</span><br><span class="line">    server ngxserver 10.0.0.99:3389 send-proxy    #send-proxy参数实现真实ip的传递</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-nginx与后端服务通信的"><a href="#2-nginx与后端服务通信的" class="headerlink" title="2.nginx与后端服务通信的"></a>2.nginx与后端服务通信的</h2><p>nginx对proxy protocol的支持，可以从haproxy处拿到的真实用户ip，高版本（暂未确定具体版本）nginx自身就支持tproxy，因此可以通过配置，将源ip通过指令bind绑定为源ip（tproxy服务的本质就是绑定一个非本机ip），并向后端服务转发封装好的tcp包。</p>
+<p>nginx实现代理协议支持及透明代理的示例配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">    log_format proxy &apos;$proxy_protocol_addr [$time_local] &apos;</span><br><span class="line">                &apos;$protocol $status $bytes_sent $bytes_received &apos;</span><br><span class="line">                &apos;$session_time &quot;$upstream_addr&quot; &apos;</span><br><span class="line">                &apos;&quot;$upstream_bytes_sent&quot; &quot;$upstream_bytes_received&quot; &quot;$upstream_connect_time&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    upstream up_server1 &#123;</span><br><span class="line">        server 10.0.0.75:3389;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        error_log    logs/error.log;</span><br><span class="line">        access_log    logs/access.log proxy;</span><br><span class="line">        proxy_bind    $proxy_protocol_addr    transparent;    #实现代理与真实来源ip的绑定</span><br><span class="line"></span><br><span class="line">        listen 3389 proxy_protocol;    #proxy_protocol参数用于解析haproxy的代理协议，获取传递的真实ip</span><br><span class="line">        proxy_connect_timeout 10s;</span><br><span class="line">        proxy_timeout 30s;</span><br><span class="line">        proxy_pass up_server1;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，还需要设置tproxy相关的路由规则以正常回报给haproxy，设置命令示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t mangle -A PREROUTING -p tcp -s 10.0.0.100 -m multiport --sport 3389,80 -j MARK --set-xmark 0x1/0xffffffff #将来源ip为10.0.0.100（上游服务器），且来源端口为3389或80的流量在路由前设置一个标记值1</span><br><span class="line">ip rule add fwmark 1 lookup 100    #监控标记值为1的数据包</span><br><span class="line">ip route add local 0.0.0.0/0 dev lo table 100    #将标记数据转发至本地回环端口</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-后端（上游）服务器响应回包"><a href="#4-后端（上游）服务器响应回包" class="headerlink" title="4.后端（上游）服务器响应回包"></a>4.后端（上游）服务器响应回包</h2><p>在上游服务器上也须设置网关，将所有相关的响应包发送至nginx服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t mangle -A OUTPUT -p tcp -m multiport --sport 3389,80 -j MARK --set-xmark 0x1/0xffffffff #将来源ip为10.0.0.100（上游服务器），且来源端口为3389的流量在OUTPUT链设置一个标记值1</span><br><span class="line">ip rule add fwmark 1 lookup 100    #监控标记值为1的数据包</span><br><span class="line">ip route add 0.0.0.0/0 10.0.0.99 dev eth0 table 100 # 10.0.0.99为nginx的ip</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2020/01/03/Haproxy+Nginx+Tproxy%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/" title="Haproxy+Nginx+Tproxy实现流量透明代理">http://kanatsux.github.io/2020/01/03/Haproxy+Nginx+Tproxy%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i>  linux</a>
+          
+            <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i>  nginx</a>
+          
+            <a href="/tags/haproxy/" rel="tag"><i class="fa fa-tag"></i>  haproxy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/20/Linux%E7%B3%BB%E7%BB%9F%E4%B8%8BFIFO%E7%9A%84%E9%98%BB%E5%A1%9E%E6%9C%BA%E5%88%B6/" rel="next" title="Linux系统下FIFO的阻塞机制">
+                <i class="fa fa-chevron-left"></i> Linux系统下FIFO的阻塞机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/16/Python%20linux%E8%BF%9B%E7%A8%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B/" rel="prev" title="Python linux进程及线程">
+                Python linux进程及线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#haproxy-nginx-tproxy实现透明代理"><span class="nav-number">1.</span> <span class="nav-text">haproxy+nginx+tproxy实现透明代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tproxy的原理"><span class="nav-number">1.1.</span> <span class="nav-text">1.tproxy的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-haproxy与nginx通信"><span class="nav-number">1.2.</span> <span class="nav-text">1.haproxy与nginx通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-nginx与后端服务通信的"><span class="nav-number">1.3.</span> <span class="nav-text">2.nginx与后端服务通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-后端（上游）服务器响应回包"><span class="nav-number">1.4.</span> <span class="nav-text">4.后端（上游）服务器响应回包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">38.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
