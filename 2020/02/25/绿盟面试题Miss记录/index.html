@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面试题记录1. 负载均衡的常见算法12我的回答：轮询正确答案：轮询、随机、加权轮询、加权随机、源地址hash、最小连接数  2. nginx代理https123我的回答：当时是用了一个一个配置生成工具，后来查看配置文件知道了是监听了一个443端口，然后配置了一些ssl证书认证相关的参数。正确答案：  3. 既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？123我的回答">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="绿盟面试题Miss记录">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;02&#x2F;25&#x2F;%E7%BB%BF%E7%9B%9F%E9%9D%A2%E8%AF%95%E9%A2%98Miss%E8%AE%B0%E5%BD%95&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="面试题记录1. 负载均衡的常见算法12我的回答：轮询正确答案：轮询、随机、加权轮询、加权随机、源地址hash、最小连接数  2. nginx代理https123我的回答：当时是用了一个一个配置生成工具，后来查看配置文件知道了是监听了一个443端口，然后配置了一些ssl证书认证相关的参数。正确答案：  3. 既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？123我的回答">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-01T07:00:07.914Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2020/02/25/绿盟面试题Miss记录/"/>
+
+
+
+
+
+  <title>绿盟面试题Miss记录 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2020/02/25/%E7%BB%BF%E7%9B%9F%E9%9D%A2%E8%AF%95%E9%A2%98Miss%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">绿盟面试题Miss记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-25T15:31:51+08:00">
+                2020-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="面试题记录"><a href="#面试题记录" class="headerlink" title="面试题记录"></a>面试题记录</h1><h2 id="1-负载均衡的常见算法"><a href="#1-负载均衡的常见算法" class="headerlink" title="1. 负载均衡的常见算法"></a>1. 负载均衡的常见算法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">我的回答：轮询</span><br><span class="line">正确答案：轮询、随机、加权轮询、加权随机、源地址hash、最小连接数</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-nginx代理https"><a href="#2-nginx代理https" class="headerlink" title="2. nginx代理https"></a>2. nginx代理https</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我的回答：当时是用了一个一个配置生成工具，后来查看配置文件知道了是监听了一个443端口，然后配置了一些ssl证书认证相关的参数。</span><br><span class="line"></span><br><span class="line">正确答案：</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？"><a href="#3-既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？" class="headerlink" title="3. 既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？"></a>3. 既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我的回答：私钥加密公钥解密进行身份验证，然后传输数据，然后解密数据（瞎答）</span><br><span class="line"></span><br><span class="line">正确答案：</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-那再说说浏览器对百度进行https请求是怎么进行身份验证的？"><a href="#4-那再说说浏览器对百度进行https请求是怎么进行身份验证的？" class="headerlink" title="4. 那再说说浏览器对百度进行https请求是怎么进行身份验证的？"></a>4. 那再说说浏览器对百度进行https请求是怎么进行身份验证的？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">我的回答：CA证书。。。。。（面试官说:具体说说呢，我：不知道了（尬笑）。。。。。。）</span><br><span class="line"></span><br><span class="line">正确答案：（1）浏览器（客户端）发起请求，并将自己支持的加密算法发送到服务端</span><br><span class="line">（2）服务端接收到请求，从加密算法中选择一种加密方式和一种HASH方式，生成公钥与私钥，并将公钥与支持的加密算法以CA证书的形式发回给客户端</span><br><span class="line">（3）客户端收到服务端证书后，验证证书合法性（办证机构、有效时间、证书包含的网址）</span><br><span class="line">（4）证书验证合法之后（以上为服务器身份验证阶段），客户端生成一个随机数，并将随机数以证书加密形成握手信息，并将握手信息以协商一直的方式进行的HASH, 并将握手消息+握手消息HASH值(签名)用随机数加密后发送到服务端（握手信息hash是为了防止握手信息被篡改）</span><br><span class="line">（5）服务端接收到客户端的加密数据后，以私钥解密握手消息（公钥加密的随机数）（私钥加密公钥解密身份验证，公钥加密私钥解密数据传输），获得随机数，然后用随机数解密加密后的握手消息+握手消息HASH值(签名)内容，获取hash值，比对当前收到的握手消息与解密获得的hash值是否一致，一致则用随机密码加密一段握手消息(握手消息+握手消息的HASH值 )给客户端</span><br><span class="line">（7）客户端以随机数解密，校验握手信息一直，则握手成功</span><br><span class="line">（8）之后的服务器与客户端通信数据然后就用随机数进行数据加密传输</span><br></pre></td></tr></table></figure>
+
+<h1 id="CA证书的校验"><a href="#CA证书的校验" class="headerlink" title="CA证书的校验"></a>CA证书的校验</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">2.2  客户端如何验证 证书的合法性？</span><br><span class="line"></span><br><span class="line">1. 验证证书是否在有效期内。</span><br><span class="line">　　在服务端面返回的证书中会包含证书的有效期，可以通过失效日期来验证 证书是否过期</span><br><span class="line"></span><br><span class="line">2. 验证证书是否被吊销了。</span><br><span class="line">　　被吊销后的证书是无效的。验证吊销有CRL(证书吊销列表)和OCSP(在线证书检查)两种方法。</span><br><span class="line">证书被吊销后会被记录在CRL中，CA会定期发布CRL。应用程序可以依靠CRL来检查证书是否被吊销了。</span><br><span class="line">CRL有两个缺点，一是有可能会很大，下载很麻烦。针对这种情况有增量CRL这种方案。二是有滞后性，就算证书被吊销了，应用也只能等到发布最新的CRL后才能知道。</span><br><span class="line">增量CRL也能解决一部分问题，但没有彻底解决。OCSP是在线证书状态检查协议。应用按照标准发送一个请求，对某张证书进行查询，之后服务器返回证书状态。</span><br><span class="line">OCSP可以认为是即时的（实际实现中可能会有一定延迟），所以没有CRL的缺点。</span><br><span class="line"> </span><br><span class="line">3. 验证证书是否是上级CA签发的。</span><br><span class="line">windows中保留了所有受信任的根证书，浏览器可以查看信任的根证书，自然可以验证web服务器的证书，</span><br><span class="line">是不是由这些受信任根证书颁发的或者受信任根证书的二级证书机构颁发的（根证书机构可能会受权给底下的中级证书机构，然后由中级证书机构颁发中级证书）</span><br><span class="line">在验证证书的时候，浏览器会调用系统的证书管理器接口对证书路径中的所有证书一级一级的进行验证，只有路径中所有的证书都是受信的，整个验证的结果才是受信</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-漏扫的原理，扫描的方式"><a href="#5-漏扫的原理，扫描的方式" class="headerlink" title="5. 漏扫的原理，扫描的方式"></a>5. 漏扫的原理，扫描的方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">我的回答：爬取站点的url，然后对页面进行poc验证。。。。</span><br><span class="line">正确回答：</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-装饰器是什么，平时用装饰器干什么"><a href="#6-装饰器是什么，平时用装饰器干什么" class="headerlink" title="6. 装饰器是什么，平时用装饰器干什么"></a>6. 装饰器是什么，平时用装饰器干什么</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-python代码的调试（Django）"><a href="#7-python代码的调试（Django）" class="headerlink" title="7. python代码的调试（Django）"></a>7. python代码的调试（Django）</h2><h2 id="8-waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型"><a href="#8-waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型" class="headerlink" title="8. waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型"></a>8. waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">waf的原理:</span><br><span class="line">nginx的11个http请求阶段：</span><br><span class="line">post_read -&gt; server_rewrite -&gt; find_config -&gt; rewrite -&gt; rewrite_post -&gt; preaccess -&gt; access -&gt; access_post -&gt; try_file -&gt; content -&gt; log</span><br><span class="line">不能使用ngx_http_handle_py的阶段有四个：find_config，rewrite_post，access_post，try_file，这四个阶段属于http框架自身实现，不能进行额外操作处理用户请求。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-TCP协议序列号的作用"><a href="#9-TCP协议序列号的作用" class="headerlink" title="9. TCP协议序列号的作用"></a>9. TCP协议序列号的作用</h2><h2 id="10-docker的原理，docker和虚拟机的区别，docker的网络是什么原理"><a href="#10-docker的原理，docker和虚拟机的区别，docker的网络是什么原理" class="headerlink" title="10. docker的原理，docker和虚拟机的区别，docker的网络是什么原理"></a>10. docker的原理，docker和虚拟机的区别，docker的网络是什么原理</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2020/02/25/%E7%BB%BF%E7%9B%9F%E9%9D%A2%E8%AF%95%E9%A2%98Miss%E8%AE%B0%E5%BD%95/" title="绿盟面试题Miss记录">http://kanatsux.github.io/2020/02/25/%E7%BB%BF%E7%9B%9F%E9%9D%A2%E8%AF%95%E9%A2%98Miss%E8%AE%B0%E5%BD%95/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/20/%E4%B8%AA%E4%BA%BA%E5%A3%B0%E6%98%8E/" rel="next" title="个人声明">
+                <i class="fa fa-chevron-left"></i> 个人声明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/06/web%E6%BC%8F%E6%B4%9E%E5%90%8E%E5%8F%B0%E9%9C%80%E6%B1%82/" rel="prev" title="web漏洞后台需求">
+                web漏洞后台需求 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题记录"><span class="nav-number">1.</span> <span class="nav-text">面试题记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-负载均衡的常见算法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 负载均衡的常见算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-nginx代理https"><span class="nav-number">1.2.</span> <span class="nav-text">2. nginx代理https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？"><span class="nav-number">1.3.</span> <span class="nav-text">3. 既然你刚刚提到了ssl证书认证，那你就讲讲ssl的认证过吧？？？？？？？？？？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-那再说说浏览器对百度进行https请求是怎么进行身份验证的？"><span class="nav-number">1.4.</span> <span class="nav-text">4. 那再说说浏览器对百度进行https请求是怎么进行身份验证的？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CA证书的校验"><span class="nav-number">2.</span> <span class="nav-text">CA证书的校验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-漏扫的原理，扫描的方式"><span class="nav-number">2.1.</span> <span class="nav-text">5. 漏扫的原理，扫描的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-装饰器是什么，平时用装饰器干什么"><span class="nav-number">2.2.</span> <span class="nav-text">6. 装饰器是什么，平时用装饰器干什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-python代码的调试（Django）"><span class="nav-number">2.3.</span> <span class="nav-text">7. python代码的调试（Django）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型"><span class="nav-number">2.4.</span> <span class="nav-text">8. waf的原理，nginx的HTTP请求阶段，可以防护的攻击类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-TCP协议序列号的作用"><span class="nav-number">2.5.</span> <span class="nav-text">9. TCP协议序列号的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-docker的原理，docker和虚拟机的区别，docker的网络是什么原理"><span class="nav-number">2.6.</span> <span class="nav-text">10. docker的原理，docker和虚拟机的区别，docker的网络是什么原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">41.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

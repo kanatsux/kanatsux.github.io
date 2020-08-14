@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MongoDB," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="集群方式有三种：Replica Set、Sharding、Master-Slaver三种方式常用的主要是副本集和主从模式，主从模式比较好理解，即一个master和一个slave节点，master节点负责读写，slave在master宕机的时候可以提供读服务，当然也可以通过配置参数实现在访问量高的时候让slave节点也提供读服务； 而副本集模式比较特殊，但这种模式也是比较稳定，可靠，同时在一定的情况">
+<meta name="keywords" content="MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB集群搭建之Replica Set">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2019&#x2F;12&#x2F;20&#x2F;MongoDB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B9%8BReplica%20Set&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="集群方式有三种：Replica Set、Sharding、Master-Slaver三种方式常用的主要是副本集和主从模式，主从模式比较好理解，即一个master和一个slave节点，master节点负责读写，slave在master宕机的时候可以提供读服务，当然也可以通过配置参数实现在访问量高的时候让slave节点也提供读服务； 而副本集模式比较特殊，但这种模式也是比较稳定，可靠，同时在一定的情况">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617221536107.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617222212696.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617222631272.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617223353183.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617223629338.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617223849955.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617224013306.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-08-14T09:33:22.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190617221536107.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2019/12/20/MongoDB集群搭建之Replica Set/"/>
+
+
+
+
+
+  <title>MongoDB集群搭建之Replica Set | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2019/12/20/MongoDB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B9%8BReplica%20Set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MongoDB集群搭建之Replica Set</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-20T16:30:20+08:00">
+                2019-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="集群方式有三种：Replica-Set、Sharding、Master-Slaver三种方式"><a href="#集群方式有三种：Replica-Set、Sharding、Master-Slaver三种方式" class="headerlink" title="集群方式有三种：Replica Set、Sharding、Master-Slaver三种方式"></a>集群方式有三种：Replica Set、Sharding、Master-Slaver三种方式</h2><p>常用的主要是副本集和主从模式，主从模式比较好理解，即一个master和一个slave节点，master节点负责读写，slave在master宕机的时候可以提供读服务，当然也可以通过配置参数实现在访问量高的时候让slave节点也提供读服务；</p>
+<p>而副本集模式比较特殊，但这种模式也是比较稳定，可靠，同时在一定的情况下能够实现自动容错的机制，它主要包括如下几部分，<br> <img src="https://img-blog.csdnimg.cn/20190617221536107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>Mongodb(M)表示主节点，Mongodb(S)表示备节点，Mongodb(A)表示仲裁节点。主备节点存储数据，仲裁节点不存储数据。客户端同时连接主节点与备节点，不连接仲裁节点。</p>
+<p>默认设置下，主节点提供所有增删查改服务，备节点不提供任何服务。但是可以通过设置使备节点提供查询服务，这样就可以减少主节点的压力，当客户端进行数据查询时，请求自动转到备节点上。这个设置叫做Read Preference Modes，同时Java客户端提供了简单的配置方式，可以不必直接对数据库进行操作。</p>
+<p>仲裁节点是一种特殊的节点，它本身并不存储数据，主要的作用是决定哪一个备节点在主节点挂掉之后提升为主节点，所以客户端不需要连接此节点。这里虽然只有一个备节点，但是仍然需要一个仲裁节点来提升备节点级别。</p>
+<p><strong>相信大家看到这里是不是可以联想到redis的一种集群模式，即哨兵模式跟这个原理很像，确实如此，仲裁节点就像是一个哨兵，当监听到其它的某个节点挂了，会重新选择某个节点提升为主节点继续对外提供读写服务，从而保障集群的高可用性，减少人工干预；</strong></p>
+<p>下面我们在三台虚拟机上模式搭建一下mongodb的这种副本集模式的集群；</p>
+<p><strong>1、环境准备，我这里提前准备好了三台虚拟机，</strong></p>
+<p>192.168.111.134<br> 192.168.9.147<br> 192.168.111.133</p>
+<p><strong>2、上传mongodb的安装包</strong><br> 我这里放在  /usr/local 目录下， <strong>tar -zxvf  mongodb-linux-x86_64-4.0.9.tgz</strong><br> <img src="https://img-blog.csdnimg.cn/20190617222212696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>3、为使用方便，将解压后的文件命名为mongodb</strong><br> <strong>mv mongodb-linux-x86_64-4.0.9 mongodb</strong></p>
+<p><strong>4、创建相关目录</strong></p>
+<blockquote>
+<p>mkdir data<br> mkdir logs<br> mkdir conf<br> cd logs<br> touch master.log<br> cd conf<br> touch mongodb.conf</p>
+</blockquote>
+<p><strong>5、创建配置文件</strong><br> 进入conf目录，创建mongodb.conf，并编辑，<br> <img src="https://img-blog.csdnimg.cn/20190617222631272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>6、以上是在主节点做的操作，在另外的两个节点上做同样的配置即可，只需要修改端口号和相应的目录文件地址，下面帖上配置文件，</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#master配置</span><br><span class="line">dbpath=/usr/local/mongodb/data</span><br><span class="line">logpath=/usr/local/mongodb/logs/master.log</span><br><span class="line">logappend=true</span><br><span class="line">bind_ip=192.168.111.133</span><br><span class="line">port=27017</span><br><span class="line">fork=true</span><br><span class="line">noprealloc=true</span><br><span class="line">replSet=test</span><br><span class="line"></span><br><span class="line">#slave配置</span><br><span class="line">dbpath=/usr/local/mongodb/data</span><br><span class="line">logpath=/usr/local/mongodb/logs/slave.log</span><br><span class="line">logappend=true</span><br><span class="line">bind_ip=192.168.9.147</span><br><span class="line">port=27017</span><br><span class="line">fork=true</span><br><span class="line">noprealloc=true</span><br><span class="line">replSet=test</span><br><span class="line"></span><br><span class="line">#仲裁节点配置</span><br><span class="line">dbpath=/usr/local/mongodb/data</span><br><span class="line">logpath=/usr/local/mongodb/logs/arbite.log</span><br><span class="line">logappend=true</span><br><span class="line">bind_ip=192.168.111.134</span><br><span class="line">port=27018</span><br><span class="line">fork=true</span><br><span class="line">noprealloc=true</span><br><span class="line">replSet=test</span><br><span class="line"></span><br><span class="line">123456789101112131415161718192021222324252627282930</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其实里面的配置还有很多，大家可以参考相关资料完善其中的配置，这里是基本的配置保证集群能够正常启动</p>
+</blockquote>
+<p><strong>7、做完了上述的配置基本上就可以了，下面我们就来启动集群，</strong><br> 进入三个节点的bin目录下，执行，看到如下信息就表示启动成功了，三个节点做同样的启动操作，</p>
+<p><strong>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/conf/mongodb.conf</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190617223353183.png" alt="在这里插入图片描述"><br> <strong>8.配置主、备、仲裁节点</strong><br> #连接到节点<br> <strong>./mongo 192.168.111.133:27017</strong><br> <img src="https://img-blog.csdnimg.cn/20190617223629338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 忽略启动的警告信息，没有报错就是连接上了客户端，</p>
+<p><strong>初始化并建立三个节点之间的信息，使用如下命令，大家修改为自己机器的IP</strong><br> cfg={ _id:“test”, members:[  {_id:0,host:‘192.168.111.133:27017’,priority:2},  {_id:1,host:‘192.168.9.147:27017’,priority:1},  {_id:2,host:‘192.168.111.134:27018’,arbiterOnly:true}] };<br> <img src="https://img-blog.csdnimg.cn/20190617223849955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看到，各个节点的基本信息已经展示出来了，接着执行，<br> rs.initiate(cfg);<br> <img src="https://img-blog.csdnimg.cn/20190617224013306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5nY29uZ3lpNDIw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>最后，执行rs.status();查看集群的状态，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;set&quot; : &quot;test&quot;,</span><br><span class="line">	&quot;date&quot; : ISODate(&quot;2019-06-17T01:34:05.135Z&quot;),</span><br><span class="line">	&quot;myState&quot; : 2,</span><br><span class="line">	&quot;term&quot; : NumberLong(0),</span><br><span class="line">	&quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">	&quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">	&quot;syncSourceId&quot; : -1,</span><br><span class="line">	&quot;heartbeatIntervalMillis&quot; : NumberLong(2000),</span><br><span class="line">	&quot;optimes&quot; : &#123;</span><br><span class="line">		&quot;lastCommittedOpTime&quot; : &#123;</span><br><span class="line">			&quot;ts&quot; : Timestamp(0, 0),</span><br><span class="line">			&quot;t&quot; : NumberLong(-1)</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;appliedOpTime&quot; : &#123;</span><br><span class="line">			&quot;ts&quot; : Timestamp(1560735223, 1),</span><br><span class="line">			&quot;t&quot; : NumberLong(-1)</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;durableOpTime&quot; : &#123;</span><br><span class="line">			&quot;ts&quot; : Timestamp(1560735223, 1),</span><br><span class="line">			&quot;t&quot; : NumberLong(-1)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;lastStableCheckpointTimestamp&quot; : Timestamp(0, 0),</span><br><span class="line">	&quot;members&quot; : [</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 0,</span><br><span class="line">			&quot;name&quot; : &quot;192.168.111.133:27017&quot;,</span><br><span class="line">			&quot;health&quot; : 1,</span><br><span class="line">			&quot;state&quot; : 2,</span><br><span class="line">			&quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">			&quot;uptime&quot; : 169,</span><br><span class="line">			&quot;optime&quot; : &#123;</span><br><span class="line">				&quot;ts&quot; : Timestamp(1560735223, 1),</span><br><span class="line">				&quot;t&quot; : NumberLong(-1)</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;optimeDate&quot; : ISODate(&quot;2019-06-17T01:33:43Z&quot;),</span><br><span class="line">			&quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceId&quot; : -1,</span><br><span class="line">			&quot;infoMessage&quot; : &quot;could not find member to sync from&quot;,</span><br><span class="line">			&quot;configVersion&quot; : 1,</span><br><span class="line">			&quot;self&quot; : true,</span><br><span class="line">			&quot;lastHeartbeatMessage&quot; : &quot;&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 1,</span><br><span class="line">			&quot;name&quot; : &quot;192.168.9.147:27017&quot;,</span><br><span class="line">			&quot;health&quot; : 1,</span><br><span class="line">			&quot;state&quot; : 0,</span><br><span class="line">			&quot;stateStr&quot; : &quot;STARTUP&quot;,</span><br><span class="line">			&quot;uptime&quot; : 21,</span><br><span class="line">			&quot;optime&quot; : &#123;</span><br><span class="line">				&quot;ts&quot; : Timestamp(0, 0),</span><br><span class="line">				&quot;t&quot; : NumberLong(-1)</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;optimeDurable&quot; : &#123;</span><br><span class="line">				&quot;ts&quot; : Timestamp(0, 0),</span><br><span class="line">				&quot;t&quot; : NumberLong(-1)</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;optimeDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">			&quot;optimeDurableDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">			&quot;lastHeartbeat&quot; : ISODate(&quot;2019-06-17T01:34:04.957Z&quot;),</span><br><span class="line">			&quot;lastHeartbeatRecv&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">			&quot;pingMs&quot; : NumberLong(5),</span><br><span class="line">			&quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceId&quot; : -1,</span><br><span class="line">			&quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">			&quot;configVersion&quot; : -2</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 2,</span><br><span class="line">			&quot;name&quot; : &quot;192.168.111.134:27018&quot;,</span><br><span class="line">			&quot;health&quot; : 1,</span><br><span class="line">			&quot;state&quot; : 0,</span><br><span class="line">			&quot;stateStr&quot; : &quot;STARTUP&quot;,</span><br><span class="line">			&quot;uptime&quot; : 21,</span><br><span class="line">			&quot;lastHeartbeat&quot; : ISODate(&quot;2019-06-17T01:34:04.794Z&quot;),</span><br><span class="line">			&quot;lastHeartbeatRecv&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),</span><br><span class="line">			&quot;pingMs&quot; : NumberLong(4),</span><br><span class="line">			&quot;lastHeartbeatMessage&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncingTo&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceHost&quot; : &quot;&quot;,</span><br><span class="line">			&quot;syncSourceId&quot; : -1,</span><br><span class="line">			&quot;infoMessage&quot; : &quot;&quot;,</span><br><span class="line">			&quot;configVersion&quot; : -2</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	&quot;ok&quot; : 1,</span><br><span class="line">	&quot;operationTime&quot; : Timestamp(1560735223, 1),</span><br><span class="line">	&quot;$clusterTime&quot; : &#123;</span><br><span class="line">		&quot;clusterTime&quot; : Timestamp(1560735223, 1),</span><br><span class="line">		&quot;signature&quot; : &#123;</span><br><span class="line">			&quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),</span><br><span class="line">			&quot;keyId&quot; : NumberLong(0)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101</span><br></pre></td></tr></table></figure>
+
+<p>各个节点的状态比如节点的健康状况，是否主节点等都可以清楚的看出来</p>
+<p><strong>到这里，mongodb的分片集群模式就搭建完毕，最后谢谢观看！</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2019/12/20/MongoDB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B9%8BReplica%20Set/" title="MongoDB集群搭建之Replica Set">http://kanatsux.github.io/2019/12/20/MongoDB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E4%B9%8BReplica%20Set/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i>  MongoDB</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/20/Linux%E7%B3%BB%E7%BB%9F%E4%B8%8BFIFO%E7%9A%84%E9%98%BB%E5%A1%9E%E6%9C%BA%E5%88%B6/" rel="next" title="Linux系统下FIFO的阻塞机制">
+                <i class="fa fa-chevron-left"></i> Linux系统下FIFO的阻塞机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/16/Python%20linux%E8%BF%9B%E7%A8%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B/" rel="prev" title="Python linux进程及线程">
+                Python linux进程及线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#集群方式有三种：Replica-Set、Sharding、Master-Slaver三种方式"><span class="nav-number">1.</span> <span class="nav-text">集群方式有三种：Replica Set、Sharding、Master-Slaver三种方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">41.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
