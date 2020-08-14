@@ -82,13 +82,13 @@
 <meta name="description" content="一、更改日志输出级别  config&#x2F;log4j.properties中日志的级别设置的是TRACE，在长时间运行过程中产生的日志大小吓人，所以如果没有特殊需求，强烈建议将其更改成INFO级别。具体修改方法如下所示，将config&#x2F;log4j.properties文件中最后的几行中的TRACE改成INFO，修改前如下所示： 1234567891011log4j.logger.kafka.netwo">
 <meta name="keywords" content="kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker搭建kafka">
+<meta property="og:title" content="kafka配置之日志清除策略">
 <meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;kafka%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B9%8Bkafka%E7%9A%84%E6%97%A5%E5%BF%97%E6%B8%85%E9%99%A4%E7%AD%96%E7%95%A5&#x2F;index.html">
 <meta property="og:site_name" content="打怪升级的司图">
 <meta property="og:description" content="一、更改日志输出级别  config&#x2F;log4j.properties中日志的级别设置的是TRACE，在长时间运行过程中产生的日志大小吓人，所以如果没有特殊需求，强烈建议将其更改成INFO级别。具体修改方法如下所示，将config&#x2F;log4j.properties文件中最后的几行中的TRACE改成INFO，修改前如下所示： 1234567891011log4j.logger.kafka.netwo">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;note.youdao.com&#x2F;noteshare?id=87c20567eb8016de063861ee455cb648&amp;sub=171D7D2CB60A4CE28FC5063AF02FF50A">
-<meta property="og:updated_time" content="2020-02-22T16:27:50.263Z">
+<meta property="og:updated_time" content="2020-08-14T09:47:02.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;note.youdao.com&#x2F;noteshare?id=87c20567eb8016de063861ee455cb648&amp;sub=171D7D2CB60A4CE28FC5063AF02FF50A">
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>docker搭建kafka | 打怪升级的司图</title>
+  <title>kafka配置之日志清除策略 | 打怪升级的司图</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker搭建kafka</h1>
+          <h1 class="post-title" itemprop="name headline">kafka配置之日志清除策略</h1>
         
 
         <div class="post-meta">
@@ -413,7 +413,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://kanatsux.github.io/2019/11/01/kafka%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B9%8Bkafka%E7%9A%84%E6%97%A5%E5%BF%97%E6%B8%85%E9%99%A4%E7%AD%96%E7%95%A5/" title="docker搭建kafka">http://kanatsux.github.io/2019/11/01/kafka%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B9%8Bkafka%E7%9A%84%E6%97%A5%E5%BF%97%E6%B8%85%E9%99%A4%E7%AD%96%E7%95%A5/</a>
+    <a href="http://kanatsux.github.io/2019/11/01/kafka%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B9%8Bkafka%E7%9A%84%E6%97%A5%E5%BF%97%E6%B8%85%E9%99%A4%E7%AD%96%E7%95%A5/" title="kafka配置之日志清除策略">http://kanatsux.github.io/2019/11/01/kafka%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B9%8Bkafka%E7%9A%84%E6%97%A5%E5%BF%97%E6%B8%85%E9%99%A4%E7%AD%96%E7%95%A5/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
