@@ -79,19 +79,21 @@
 
 
 
-<meta name="description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe![image-20200903110359294](&#x2F;Users&#x2F;xiaxia&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20200903110359294.png) 2. vbs文件后台运行实现方法如下： 12set wscriptObj = Cre">
+<meta name="description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe 2. vbs文件后台运行实现方法如下： 12set wscriptObj = CreateObject(&amp;quot;Wscript.Shell&amp;quot;)   wscriptObj.run &amp;quot;cmd&amp;quot;,0  保存成.vbs文件，直接运行.vbs文件即可实现后台运行。也可以删除文件 12set">
 <meta name="keywords" content="新手村">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows下后台运行程序">
 <meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;09&#x2F;04&#x2F;windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="打怪升级的司图">
-<meta property="og:description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe![image-20200903110359294](&#x2F;Users&#x2F;xiaxia&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20200903110359294.png) 2. vbs文件后台运行实现方法如下： 12set wscriptObj = Cre">
+<meta property="og:description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe 2. vbs文件后台运行实现方法如下： 12set wscriptObj = CreateObject(&amp;quot;Wscript.Shell&amp;quot;)   wscriptObj.run &amp;quot;cmd&amp;quot;,0  保存成.vbs文件，直接运行.vbs文件即可实现后台运行。也可以删除文件 12set">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;Users&#x2F;xiaxia&#x2F;code&#x2F;kanatsux&#x2F;source&#x2F;_posts&#x2F;imgs&#x2F;windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F&#x2F;image-20200903110359294.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;Users&#x2F;xiaxia&#x2F;code&#x2F;kanatsux&#x2F;source&#x2F;_posts&#x2F;imgs&#x2F;windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F&#x2F;image-20200903110531583.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511131724460?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511132052217?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
-<meta property="og:updated_time" content="2020-09-04T09:50:34.526Z">
+<meta property="og:updated_time" content="2020-09-04T10:07:42.042Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511131724460?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;Users&#x2F;xiaxia&#x2F;code&#x2F;kanatsux&#x2F;source&#x2F;_posts&#x2F;imgs&#x2F;windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F&#x2F;image-20200903110359294.png">
 
 
 
@@ -325,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  306
+                  280
                 </span>
               
 
@@ -362,14 +364,14 @@
       
 
       
-        <h1 id="windows下后台运行程序-python"><a href="#windows下后台运行程序-python" class="headerlink" title="windows下后台运行程序(python)"></a>windows下后台运行程序(python)</h1><h2 id="1-Python进行无窗口打包exe"><a href="#1-Python进行无窗口打包exe" class="headerlink" title="1. Python进行无窗口打包exe"></a>1. Python进行无窗口打包exe</h2><p>![image-20200903110359294](/Users/xiaxia/Library/Application Support/typora-user-images/image-20200903110359294.png)</p>
+        <h1 id="windows下后台运行程序-python"><a href="#windows下后台运行程序-python" class="headerlink" title="windows下后台运行程序(python)"></a>windows下后台运行程序(python)</h1><h2 id="1-Python进行无窗口打包exe"><a href="#1-Python进行无窗口打包exe" class="headerlink" title="1. Python进行无窗口打包exe"></a>1. Python进行无窗口打包exe</h2><p><img src="/Users/xiaxia/code/kanatsux/source/_posts/imgs/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/image-20200903110359294.png" alt="image-20200903110359294"></p>
 <h2 id="2-vbs文件后台运行"><a href="#2-vbs文件后台运行" class="headerlink" title="2. vbs文件后台运行"></a>2. vbs文件后台运行</h2><p><strong>实现方法如下：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set wscriptObj = CreateObject(&quot;Wscript.Shell&quot;)   </span><br><span class="line">wscriptObj.run &quot;cmd&quot;,0</span><br></pre></td></tr></table></figure>
 
 <p>保存成<code>.vbs</code>文件，直接运行<code>.vbs</code>文件即可实现后台运行。<br>也可以删除文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set fso = createobject(&quot;scripting.filesystemobject&quot;)</span><br><span class="line">f = fso.deletefile(&quot;name.vbs&quot;)</span><br></pre></td></tr></table></figure>
 
-<p>![image-20200903110531583](/Users/xiaxia/Library/Application Support/typora-user-images/image-20200903110531583.png)</p>
+<p><img src="/Users/xiaxia/code/kanatsux/source/_posts/imgs/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/image-20200903110531583.png" alt="image-20200903110531583"></p>
 <h2 id="3-bat文件后台运行"><a href="#3-bat文件后台运行" class="headerlink" title="3. bat文件后台运行"></a>3. bat文件后台运行</h2><h4 id="bat文件"><a href="#bat文件" class="headerlink" title=".bat文件"></a><code>.bat</code>文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">mspaint</span><br><span class="line">calc</span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
 
 <p>会有一闪而过的暂留,不如.vbs的好</p>
