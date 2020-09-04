@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="在linux下永久添加静态路由有两种方法： 添加路由的命令： 1，route add 1234route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路由route add default gw 192.168.0.1 #添加默认路由 route del -net 192.168.1.0&#x2F;24 gw 192.168.0.1 #">
+<meta name="description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe![image-20200903110359294](&#x2F;Users&#x2F;xiaxia&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20200903110359294.png) 2. vbs文件后台运行实现方法如下： 12set wscriptObj = Cre">
 <meta name="keywords" content="新手村">
 <meta property="og:type" content="article">
-<meta property="og:title" content="永久保存route表">
-<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2019&#x2F;08&#x2F;29&#x2F;%E6%B0%B8%E4%B9%85%E4%BF%9D%E5%AD%98route%E8%A1%A8&#x2F;index.html">
+<meta property="og:title" content="windows下后台运行程序">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;09&#x2F;04&#x2F;windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="打怪升级的司图">
-<meta property="og:description" content="在linux下永久添加静态路由有两种方法： 添加路由的命令： 1，route add 1234route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路由route add default gw 192.168.0.1 #添加默认路由 route del -net 192.168.1.0&#x2F;24 gw 192.168.0.1 #">
+<meta property="og:description" content="windows下后台运行程序(python)1. Python进行无窗口打包exe![image-20200903110359294](&#x2F;Users&#x2F;xiaxia&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20200903110359294.png) 2. vbs文件后台运行实现方法如下： 12set wscriptObj = Cre">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-22T16:31:08.901Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511131724460?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511132052217?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
+<meta property="og:updated_time" content="2020-09-04T09:50:34.526Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20180511131724460?watermark&#x2F;2&#x2F;text&#x2F;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx&#x2F;font&#x2F;5a6L5L2T&#x2F;fontsize&#x2F;400&#x2F;fill&#x2F;I0JBQkFCMA==&#x2F;dissolve&#x2F;70">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://kanatsux.github.io/2019/08/29/永久保存route表/"/>
+  <link rel="canonical" href="http://kanatsux.github.io/2020/09/04/windows下后台运行程序/"/>
 
 
 
 
 
-  <title>永久保存route表 | 打怪升级的司图</title>
+  <title>windows下后台运行程序 | 打怪升级的司图</title>
   
 
 
@@ -261,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2019/08/29/%E6%B0%B8%E4%B9%85%E4%BF%9D%E5%AD%98route%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2020/09/04/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="司图">
@@ -278,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">永久保存route表</h1>
+          <h1 class="post-title" itemprop="name headline">windows下后台运行程序</h1>
         
 
         <div class="post-meta">
@@ -290,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-29T17:21:59+08:00">
-                2019-08-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-04T17:50:34+08:00">
+                2020-09-04
               </time>
             
 
@@ -322,7 +325,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  657
+                  306
                 </span>
               
 
@@ -338,7 +341,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -359,55 +362,28 @@
       
 
       
-        <p>在linux下永久添加静态路由有两种方法：</p>
-<p>添加路由的命令：</p>
-<p>1，route add</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路由</span><br><span class="line">route add default gw 192.168.0.1 #添加默认路由 </span><br><span class="line">route del -net 192.168.1.0/24 gw 192.168.0.1 #删除一条路由</span><br><span class="line">route -n #查看路由表</span><br></pre></td></tr></table></figure>
+        <h1 id="windows下后台运行程序-python"><a href="#windows下后台运行程序-python" class="headerlink" title="windows下后台运行程序(python)"></a>windows下后台运行程序(python)</h1><h2 id="1-Python进行无窗口打包exe"><a href="#1-Python进行无窗口打包exe" class="headerlink" title="1. Python进行无窗口打包exe"></a>1. Python进行无窗口打包exe</h2><p>![image-20200903110359294](/Users/xiaxia/Library/Application Support/typora-user-images/image-20200903110359294.png)</p>
+<h2 id="2-vbs文件后台运行"><a href="#2-vbs文件后台运行" class="headerlink" title="2. vbs文件后台运行"></a>2. vbs文件后台运行</h2><p><strong>实现方法如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set wscriptObj = CreateObject(&quot;Wscript.Shell&quot;)   </span><br><span class="line">wscriptObj.run &quot;cmd&quot;,0</span><br></pre></td></tr></table></figure>
 
-<p>2，ip ro add</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip ro add 192.56.76.0/24 dev 192.168.0.1 #添加一条静态路由</span><br><span class="line">ip ro add default via 192.168.0.1 dev eth0 #添加默认路由</span><br><span class="line">ip ro del 192.168.1.0/24 #删除一条路由</span><br><span class="line">ip route show #查看路由表</span><br></pre></td></tr></table></figure>
+<p>保存成<code>.vbs</code>文件，直接运行<code>.vbs</code>文件即可实现后台运行。<br>也可以删除文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set fso = createobject(&quot;scripting.filesystemobject&quot;)</span><br><span class="line">f = fso.deletefile(&quot;name.vbs&quot;)</span><br></pre></td></tr></table></figure>
 
-<p>常见参数：</p>
-<p> add 增加路由</p>
-<p> del 删除路由</p>
-<p> via 网关出口IP地址</p>
-<p> dev 网关出口物理设备名</p>
-<p>让路由重启服务器后依然生效：</p>
-<p> 1，在/etc/rc.local里面添加：</p>
-<p> 添加路由命令为：直接将在命令行操作的命令复制到该文件中，保存退出即可。</p>
-<p> 2，在/etc/sysconfig/static-routes文件里面写入：</p>
-<p> 如果该文件不存在，则手动创建，添加内容格式为：</p>
-<p> 参照/etc/init.d/network文件里面的shell语句：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Add non interface-specific static-routes.</span></span><br><span class="line">if [ -f /etc/sysconfig/static-routes ]; then</span><br><span class="line">    grep "^any" /etc/sysconfig/static-routes | while read ignore args ; do</span><br><span class="line">    /sbin/route add -$args</span><br><span class="line">done</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>![image-20200903110531583](/Users/xiaxia/Library/Application Support/typora-user-images/image-20200903110531583.png)</p>
+<h2 id="3-bat文件后台运行"><a href="#3-bat文件后台运行" class="headerlink" title="3. bat文件后台运行"></a>3. bat文件后台运行</h2><h4 id="bat文件"><a href="#bat文件" class="headerlink" title=".bat文件"></a><code>.bat</code>文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">mspaint</span><br><span class="line">calc</span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
 
-
-
-<p> 则，如果要添加一条静态路由，命令为:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0</span><br></pre></td></tr></table></figure>
-
-<p> 那么，在/etc/sysconfig/static-routes文件中添加格式为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">any -net 192.56.76.0 netmask 255.255.255.0 dev eth0</span><br></pre></td></tr></table></figure>
-
-
-
-<p>两种方式添加静态路由对比：</p>
-<p> 1，rc.local：</p>
-<p> 重启服务器生效；</p>
-<p> 重启网络服务，则静态路由失效；</p>
-<p> rc.local是系统启动后最后运行的一个脚本，因此如果有如NFS需要网络才能挂载的服务需求，则该方式不适合；</p>
-<p> 2，static-routes：</p>
-<p> 重启服务器生效；</p>
-<p> 重启网络服务生效：</p>
-<p> 适合需要网络需求的服务；</p>
-<p>脚本添加静态路由的方法和rc.local就差不多了：</p>
-<p> 这种方法其实也是自己写脚本，放在/etc/rc3.d/ 开头设置为S。</p>
-<p> S意思是启动，数字是顺序，K意思是停止。</p>
-<p> 一般是启动是守护进程在某个模式的启动顺序。</p>
-<p> 数字越小启动的顺序越靠前；</p>
-<p> /etc/rc3.d是文本多用户环境，一般生产环境都是这个环境。</p>
-<p> 其坏处也是：重启网络后失效。</p>
-<p>总结：</p>
-<p> 如果需要添加静态路由，尽量将静态路由添加到/etc/sysconfig/static-routes文件中。避免因重启网络服务导致路由失效，从而避免故障的发生。</p>
+<p>会有一闪而过的暂留,不如.vbs的好</p>
+<h2 id="4-开机自启动"><a href="#4-开机自启动" class="headerlink" title="4. 开机自启动"></a>4. 开机自启动</h2><p>1.把<code>.vbs</code>文件直接复制到 <code>开始--&gt;所有程序--&gt;启动</code> 文件夹下。<br>2.创建一个<code>.vbs</code>文件的快捷方式到 <code>开始--&gt;所有程序--&gt;启动</code> 文件夹下。</p>
+<h3 id="附"><a href="#附" class="headerlink" title="附:"></a>附:</h3><p>移动的<code>cmd</code> 为<code>mv</code>,或者 复制命令是<code>copy</code> , 链接的命令是<code>link</code>,<strong>输出的命令是<code>echo &gt;&gt;</code></strong></p>
+<ul>
+<li><p>所有用户:</p>
+<p><code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code> <img src="https://img-blog.csdn.net/20180511131724460?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="阿德飒飒"></p>
+</li>
+<li><p>单个用户:</p>
+<p><code>C:\Users\**username**\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code> <img src="https://img-blog.csdn.net/20180511132052217?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xlbmRx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="啊实打实"></p>
+</li>
+</ul>
+<p>以后每次启动计算机，<code>.vbs</code>文件就能开机自启动。</p>
 
       
     </div>
@@ -428,7 +404,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://kanatsux.github.io/2019/08/29/%E6%B0%B8%E4%B9%85%E4%BF%9D%E5%AD%98route%E8%A1%A8/" title="永久保存route表">http://kanatsux.github.io/2019/08/29/%E6%B0%B8%E4%B9%85%E4%BF%9D%E5%AD%98route%E8%A1%A8/</a>
+    <a href="http://kanatsux.github.io/2020/09/04/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/" title="windows下后台运行程序">http://kanatsux.github.io/2020/09/04/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -459,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF/" rel="next" title="机器学习算法适用场景">
-                <i class="fa fa-chevron-left"></i> 机器学习算法适用场景
+              <a href="/2020/09/04/python%E6%89%A7%E8%A1%8Cmsf%E7%94%9F%E6%88%90%E7%9A%84shellcode/" rel="next" title="python执行msf生成的shellcode">
+                <i class="fa fa-chevron-left"></i> python执行msf生成的shellcode
               </a>
             
           </div>
@@ -468,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/29/kafka%E4%B9%8B%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="prev" title="kafka之本地搭建及使用">
-                kafka之本地搭建及使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -523,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -620,6 +601,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#windows下后台运行程序-python"><span class="nav-number">1.</span> <span class="nav-text">windows下后台运行程序(python)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Python进行无窗口打包exe"><span class="nav-number">1.1.</span> <span class="nav-text">1. Python进行无窗口打包exe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-vbs文件后台运行"><span class="nav-number">1.2.</span> <span class="nav-text">2. vbs文件后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-bat文件后台运行"><span class="nav-number">1.3.</span> <span class="nav-text">3. bat文件后台运行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bat文件"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">.bat文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-开机自启动"><span class="nav-number">1.4.</span> <span class="nav-text">4. 开机自启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#附"><span class="nav-number">1.4.1.</span> <span class="nav-text">附:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
