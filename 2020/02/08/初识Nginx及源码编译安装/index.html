@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="打怪升级的司图">
 <meta property="og:description" content="初识Nginx简介Nginx是一款优秀的服务器，主要的应用场景为：静态资源服务器、API服务器、反向代理服务器。Nginx作为反向代理服务器具备两个功能：高效缓存加速和负载均衡。 Nginx的优点 高并发与高性能并存（一般二者同时做到很难） 可扩展性能好（模块化设计） 高可靠性（一般企业用于入口负载均衡，可以长时间运行而不宕机） 热部署（可以平滑升级nginx，而不用粗暴重启在线业务，不用断开已建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-04T10:28:14.027Z">
+<meta property="og:updated_time" content="2020-09-08T08:53:48.160Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -431,6 +431,7 @@
 <li>部分指令的参数支持正则表达式<h2 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h2></li>
 <li>时间单位：ms, s, m, h, d, w, M, y</li>
 <li>空间单位： , k/K, m/M, g/G (空默认为字节)<h2 id="http指令块"><a href="#http指令块" class="headerlink" title="http指令块"></a>http指令块</h2>http指令块中包含http，server, location, upstream  (待矫正！！！！！！)<h1 id="Nginx命令行"><a href="#Nginx命令行" class="headerlink" title="Nginx命令行"></a>Nginx命令行</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload # 重载配置文件</span><br><span class="line">nginx -?/ nginx -h   # 帮助文档</span><br><span class="line">nginx -c /path/to/conffile # 重新指定配置文档路径（不使用默认配置）</span><br><span class="line">nginx -g xxxxxx #指定配置指令（想要单独覆盖某条配置时使用）</span><br><span class="line">nginx -p /path/to/run # 指定nginx的运行目录</span><br><span class="line">nginx -s xxx  # 发送信号</span><br><span class="line"><span class="meta">#</span><span class="bash"> 信号类型:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.stop（立即停止）;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.quit（优雅退出）;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.reload（重新加载配置文件）;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.reopen(重新记录日志)</span></span><br><span class="line">nginx -t/ nginx -T # 测试配置文件是否存在语法错误</span><br><span class="line">nginx -v # 版本信息</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 
@@ -584,7 +585,7 @@
                 <a href="/archives/">
                 
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -596,7 +597,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -607,7 +608,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -690,7 +691,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -704,7 +705,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">42.8k</span>
+    <span title="Site words total count">67.2k</span>
   
 </div>
 

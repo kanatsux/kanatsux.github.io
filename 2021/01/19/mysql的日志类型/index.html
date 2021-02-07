@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MySQL 日志的类型原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiaocen&#x2F;p&#x2F;3709114.html https:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.6&#x2F;en&#x2F;server-logs.html 官方文档：https:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.7&#x2F;en&#x2F;server-logs.html https:&#x2F;&#x2F;dev.mysql.">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql的日志类型">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2021&#x2F;01&#x2F;19&#x2F;mysql%E7%9A%84%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="MySQL 日志的类型原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiaocen&#x2F;p&#x2F;3709114.html https:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.6&#x2F;en&#x2F;server-logs.html 官方文档：https:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.7&#x2F;en&#x2F;server-logs.html https:&#x2F;&#x2F;dev.mysql.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20210119160543.png">
+<meta property="og:updated_time" content="2021-01-20T07:19:36.389Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20210119160543.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2021/01/19/mysql的日志类型/"/>
+
+
+
+
+
+  <title>mysql的日志类型 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2021/01/19/mysql%E7%9A%84%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql的日志类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-19T16:03:05+08:00">
+                2021-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MySQL-日志的类型"><a href="#MySQL-日志的类型" class="headerlink" title="MySQL 日志的类型"></a><a href="https://www.cnblogs.com/xiaocen/p/3709114.html" target="_blank" rel="noopener">MySQL 日志的类型</a></h1><p><strong>原文链接</strong>：<a href="https://www.cnblogs.com/xiaocen/p/3709114.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaocen/p/3709114.html</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.6/en/server-logs.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.6/en/server-logs.html</a></p>
+<p>官方文档：<a href="https://dev.mysql.com/doc/refman/5.7/en/server-logs.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/server-logs.html</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/server-logs.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/server-logs.html</a></p>
+<p>MySQL Server has several logs that can help you find out what activity is taking place.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Log Type</th>
+<th align="left">Information Written to Log</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Error log</td>
+<td align="left">Problems encountered starting, running, or stopping <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqld.html" target="_blank" rel="noopener"><strong>mysqld</strong></a></td>
+</tr>
+<tr>
+<td align="left">General query log</td>
+<td align="left">Established client connections and statements received from clients</td>
+</tr>
+<tr>
+<td align="left">Binary log</td>
+<td align="left">Statements that change data (also used for replication)</td>
+</tr>
+<tr>
+<td align="left">Relay log</td>
+<td align="left">Data changes received from a replication source server</td>
+</tr>
+<tr>
+<td align="left">Slow query log</td>
+<td align="left">Queries that took more than <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_long_query_time" target="_blank" rel="noopener"><code>long_query_time</code></a> seconds to execute</td>
+</tr>
+<tr>
+<td align="left">DDL log (metadata log)</td>
+<td align="left">Metadata operations performed by DDL statements</td>
+</tr>
+</tbody></table>
+<p><strong>MySQL日志类别</strong>：<br><strong>一般查询日志：</strong>log，general_log，log_output<br><strong>慢查询日志：</strong>查询执行的时长超过指定的查询，即为慢查询；<br><strong>错误日志：</strong>通常时指错误日志的相关信息,通常用服务器关闭和启动的日志信息，服务器运行过程中的错误信息，还可以记录警告信息。<br><strong>二进制日志：</strong>只是跟修改相关的操作，可以理解为一个重做日志，用于复制的基本凭据；<br><strong>中继日志：</strong>它其实跟复制相关的，与二进制日志几乎相同；</p>
+<p><strong>事物日志：</strong>随机I/O转换为顺序I/O，一般在两个文件存储，一个存满了就换另外一个存</p>
+<p>默认情况下，除了windows平台下的错误日志外，其他所有日志均未启用。DDL日志在需要的时候会自动创建，用户无法自主配置DDL日志。默认情况下，某种日志开启后，会记录到对应默认的日志文件中，用户可以强制修改记录的目标日志文件路径；</p>
+<p><strong>查询日志</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log=&#123;ON|OFF&#125; # 是否记录所有语句的日志信息于一般查询日志文件（general_log）中；</span><br><span class="line">log_output=&#123;TABLE | FILE | NONE&#125; # 定义log保存形式，none表示不保存日志；table和file可以同时出现，用逗号分隔即可；</span><br><span class="line">general_log=&#123;ON|OFF&#125; # 是否启动查询日志；</span><br><span class="line">general_log_file # 定义一般查询日志保存的文件；</span><br><span class="line">mysql &gt; SET GOLBAL general_log =&#123;OFF|ON&#125;;启用或关闭一般查询日志</span><br><span class="line">mysql &gt; SET GLOGAL log_output=’TABLE’;选项可以控制log的存放方法,table表示以表格的方式存放。</span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<ul>
+<li>若想开启查询日志，则log和general_log参数都必须处于ON状态；</li>
+<li>对于繁忙的MySQL，不建议开启此日志；</li>
+</ul>
+<p><strong>慢查询日志</strong>：查询执行时长超过指定时长的查询，即为慢查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long_query_time # 定义慢查询的时长；</span><br><span class="line">slow_query_log &#123;ON|OFF&#125; # 全局参数，设定是否启用慢查询日志；它的输出位置也取决于log_output的值；</span><br><span class="line">slow_query_log_file # 定义日志文件路径及名称；</span><br></pre></td></tr></table></figure>
+
+<p>启用慢速查询日志后，服务器会将输出写入<a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_log_output" target="_blank" rel="noopener"><code>log_output</code></a>系统变量指定的任何目标 。如果启用日志，服务器将打开日志文件并向其中写入启动消息。但是，除非<code>FILE</code>选择了日志目标，否则不会对文件进行进一步的查询日志记录。如果目标是 <code>NONE</code>，则即使启用了慢查询日志，服务器也不会写入任何查询。如果<code>FILE</code>未选择日志文件名作为输出目标，则设置日志文件名对日志记录无效。</p>
+<p>如果启用了慢查询日志并将<code>FILE</code>其选择为输出目标，则写入日志的每个语句都以一行开头，该行以<code>#</code>字符开头， 并具有以下字段（所有字段都位于一行中）：</p>
+<ul>
+<li><p><code>Query_time: *</code>duration<code>*</code></p>
+<p>语句执行时间，以秒为单位。</p>
+</li>
+<li><p><code>Lock_time: *</code>duration<code>*</code></p>
+<p>获取锁的时间（以秒为单位）。</p>
+</li>
+<li><p><code>Rows_sent: *</code>N<code>*</code></p>
+<p>发送给客户端的行数。</p>
+</li>
+<li><p><code>Rows_examined:*``*</code></p>
+<p>服务器层检查的行数（不计算存储引擎内部的任何处理）。</p>
+</li>
+</ul>
+<p>写入慢速查询日志文件的每个语句之前都有一个<a href="https://dev.mysql.com/doc/refman/5.7/en/set-variable.html" target="_blank" rel="noopener"><code>SET</code></a> 包含时间戳的语句，该时间戳记指示慢速语句的记录时间（该语句在执行完成后发生）。</p>
+<p>服务器将重写写入慢速查询日志的语句中的密码，以使之不会以纯文本形式出现。</p>
+<p><strong>错误日志</strong></p>
+<p><strong>主要记录内容</strong>：</p>
+<ul>
+<li>服务器启动和关闭过程中的信息；</li>
+<li>服务器运行过程中的错误信息；</li>
+<li>事件调度器运行一个事件时产生的信息；</li>
+<li>在复制架构中从服务器上启动从服务器线程时产生的信息；</li>
+</ul>
+<p><strong>参数设定</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_error = /path/to/error_log_file # 定义错误日志文件</span><br><span class="line">log_warnings = &#123;1|0&#125; # 是否记录警告信息于错误日志中，Version: &apos;5.7.32&apos;测试出错，服务器无法启动</span><br></pre></td></tr></table></figure>
+
+<p><strong>二进制日志</strong>：</p>
+<p>二进制日志包含描述数据库更改（例如表创建操作或表数据更改）的“事件”。它还包含针对可能进行了更改的语句的事件（例如， <a href="https://dev.mysql.com/doc/refman/5.7/en/delete.html" target="_blank" rel="noopener"><code>DELETE</code></a>不匹配任何行的a），除非使用基于行的日志记录。二进制日志还包含有关每个语句花费该更新数据多长时间的信息。二进制日志有两个重要目的：</p>
+<ul>
+<li>对于复制，复制源服务器上的二进制日志提供了要发送到副本的数据更改的记录。源将其二进制日志中包含的事件发送到其副本，副本将执行这些事件以对源进行相同的数据更改。请参见 <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-implementation.html" target="_blank" rel="noopener">第16.2节“复制实现”</a>。</li>
+<li>某些数据恢复操作需要使用二进制日志。还原备份后，将重新执行在执行备份后记录的二进制日志中的事件。这些事件使数据库从备份开始就保持最新状态。请参见 <a href="https://dev.mysql.com/doc/refman/5.7/en/point-in-time-recovery.html" target="_blank" rel="noopener">第7.5节“时间点（增量）恢复”</a>。</li>
+</ul>
+<p>二进制日志不用于诸如<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html" target="_blank" rel="noopener"><code>SELECT</code></a>或 <a href="https://dev.mysql.com/doc/refman/5.7/en/show.html" target="_blank" rel="noopener"><code>SHOW</code></a>不修改数据的语句 。要记录所有语句（例如，确定问题查询），请使用常规查询日志。请参见<a href="https://dev.mysql.com/doc/refman/5.7/en/query-log.html" target="_blank" rel="noopener">第5.4.3节“常规查询日志”</a>。</p>
+<p>运行启用了二进制日志记录的服务器会使性能稍微降低。但是，二进制日志在使您能够设置复制和进行还原操作方面的优势通常超过了这种较小的性能下降。</p>
+<p>二进制日志通常可以抵御意外的暂停，因为仅记录或读取完整的事务。有关 更多信息<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-solutions-unexpected-replica-halt.html" target="_blank" rel="noopener">，</a>请参见 <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-solutions-unexpected-replica-halt.html" target="_blank" rel="noopener">第16.3.2节“处理副本的意外中断”</a>。</p>
+<p>服务器将重写写在二进制日志中的语句中的密码，以使它们不会以纯文本形式出现。</p>
+<p>。<code>mysql</code>使用以下规则将影响数据库表的语句写入二进制日志：</p>
+<ul>
+<li><code>mysql</code>根据<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_format" target="_blank" rel="noopener"><code>binlog_format</code></a>系统变量的设置，直接记录直接 更改数据库表中 数据的数据操作语句 。这适用于语句，如 <a href="https://dev.mysql.com/doc/refman/5.7/en/insert.html" target="_blank" rel="noopener"><code>INSERT</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/update.html" target="_blank" rel="noopener"><code>UPDATE</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/delete.html" target="_blank" rel="noopener"><code>DELETE</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/replace.html" target="_blank" rel="noopener"><code>REPLACE</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/do.html" target="_blank" rel="noopener"><code>DO</code></a>，<a href="https://dev.mysql.com/doc/refman/5.7/en/load-data.html" target="_blank" rel="noopener"><code>LOAD DATA</code></a>，<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html" target="_blank" rel="noopener"><code>SELECT</code></a>，和 <a href="https://dev.mysql.com/doc/refman/5.7/en/truncate-table.html" target="_blank" rel="noopener"><code>TRUNCATE TABLE</code></a>。</li>
+<li><code>mysql</code>不管的值如何，都 将间接更改数据库的语句记录为语句<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_format" target="_blank" rel="noopener"><code>binlog_format</code></a>。这涉及语句，例如 <a href="https://dev.mysql.com/doc/refman/5.7/en/grant.html" target="_blank" rel="noopener"><code>GRANT</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/revoke.html" target="_blank" rel="noopener"><code>REVOKE</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/set-password.html" target="_blank" rel="noopener"><code>SET PASSWORD</code></a>， <a href="https://dev.mysql.com/doc/refman/5.7/en/rename-user.html" target="_blank" rel="noopener"><code>RENAME USER</code></a>， <code>CREATE</code>（所有形式的除外 <a href="https://dev.mysql.com/doc/refman/5.7/en/create-table.html" target="_blank" rel="noopener"><code>CREATE TABLE ... SELECT</code></a>）， <code>ALTER</code>（所有形式的），和<code>DROP</code>（各种形式）。</li>
+</ul>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/create-table.html" target="_blank" rel="noopener"><code>CREATE TABLE ... SELECT</code></a>是数据定义和数据操作的组合。该<a href="https://dev.mysql.com/doc/refman/5.7/en/create-table.html" target="_blank" rel="noopener"><code>CREATE TABLE</code></a> 部分是利用语句格式记录，且 <a href="https://dev.mysql.com/doc/refman/5.7/en/select.html" target="_blank" rel="noopener"><code>SELECT</code></a>部分是根据的值记录<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_format" target="_blank" rel="noopener"><code>binlog_format</code></a>。</p>
+<p>记录了对MySQL数据库进行的修改操作，影响数据潜在的内容的信息，select的是不会被记录到二进制日志的，二进制日志也叫复制日志，默认在数据目录下，<strong>专门查看日志的命令是：mysqlbinlog</strong></p>
+<p><strong>功能</strong>：1、做时间点恢复，要想从哪个时间点恢复我们可以手动调的，所以这是一个备份恢复的重要工具</p>
+<p>　　　 2、 mysql主从复制架构中使用；</p>
+<p>　　　因为我们的MySQL数据是单进程多线程的工作机制，所以他可以同时发起很多们修改的语句，但是我们服务器使用的日志只有一个，那如果同时进行的多个线程 的请求都同时往日志文件中写数据，日志文件就成了资源热点，也叫资源征用点，那就会混乱不堪，为了解决这种问题，这里，当我们的线程要往二进制日志文件中 写数据的时候，它不是直接写到日志文件中去，还是统一写到日志缓冲区中，由日志缓冲区逐一写入日志文件中去，然而我们的日志文件对于一个很繁忙的服务器来 讲，每天都会产生很大的数据量，如果所有的二进制日志数据都写在一个日志文件中，那管理起来就特点的不方便了，也很不合理，如是日志文件丢失，那所有的日 志数据信息都丢失了，不应该这么做，那我们就有日志滚动的机制了，二进制日志我们可以自己定义，有两种定义日志滚致力的方法，一种是按大小来定义的，比如 说我们定义一个日志文件的大小为1G，那他存储一了大概1G左右就会滚动，使用下一个日志来存放二进制日志数据；另一种可以按时间来定义的，比如说一周滚 动一次，或者说一个月，一天滚动一次都可以；或者每次重启服务时或者执行FLUSH LOGS命令时都会滚动一次日志。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; SHOW MASTER STATUS;可以查看当前服务器正在使用的二进制日志文件以及下一下个事件开始时基于的位置Position，如果当前使用的是00004，那么00001、2、3将不会再被使用，因为已经被滚动过去了。</span><br><span class="line">MariaDB [hellodb]&gt; SHOW BINARY LOGS;查看当前系统上所有的的二进制日志文件，其实就是数据目录下mysql-bin.index文件中的信息，这个文件就是保存已经滚动过的日志文件的条目。</span><br><span class="line">MariaDB [hellodb]&gt; flush logs;</span><br><span class="line">清除日志文件的命令：PURGE</span><br><span class="line">MariaDB [hellodb]&gt; show binlog events in ‘log_file’;</span><br><span class="line"># mysqlbinlog</span><br><span class="line">--start-time</span><br><span class="line">--stop-time</span><br><span class="line">--start-</span><br><span class="line"># mysqlbinlog --start-protion=1139 mysql-bin.000001：在命令行中查看某个日志文件的某个位置点往后所记录的数据信息。可以用输出重定向保存到某个文件中去将来用于执行的。</span><br><span class="line">server-id：服务器的身份标识，</span><br><span class="line">MariaDB [hellodb]&gt; SELECT  VERSION();查看当前数据库的版本</span><br><span class="line">MariaDB [(none)]&gt; SHOW BINLOG EVENTS IN &apos;mysql-bin.000001&apos; FROM 1139;查看某个二进制日志文件中从哪个位置往后发生的事件信息。</span><br><span class="line">MariaDB [(none)]&gt; SHOW BINLOG EVENTS IN &apos;mysql-bin.000006&apos;\G查看某个二进制文件中在所有时间点和结束点等相关的信息。</span><br></pre></td></tr></table></figure>
+
+<p><strong>MySQL记录二进制日志的格式</strong>：</p>
+<p>您可以通过使用启动MySQL服务器来显式选择二进制日志记录格式 。支持的值为： <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_format" target="_blank" rel="noopener"><code>--binlog-format=*</code>type<code>*</code></a><em><code>type</code></em></p>
+<ul>
+<li><code>STATEMENT</code> 使日志记录基于语句。</li>
+<li><code>ROW</code> 使日志记录基于行。</li>
+<li><code>MIXED</code> 使日志记录使用混合格式。</li>
+</ul>
+<p><strong>statement</strong>：基于语句</p>
+<ul>
+<li>缺陷：执行带时间函数的语句时，会导致主从服务器执行结果不一致；</li>
+<li>如 insert into tb1 value (current_date());</li>
+</ul>
+<p><strong>row</strong>：基于行</p>
+<ul>
+<li>缺陷：批量更新操作将导致从服务器进行更多的操作 update tb2 set salary=salary+1000;</li>
+<li>mixed：混合模式，由MySQL自行判断选择适合的方式基于语句或基于行记录日志；</li>
+</ul>
+<p><strong>二进制日志文件的内容格式</strong></p>
+<ul>
+<li>事件发生的日期和时间</li>
+<li>服务器id：server_id</li>
+<li>事件的结束位置：end_log_pos</li>
+<li>事件的类型：如Query，GTID等</li>
+<li>原服务器生成此事件时的线程id：thread_id</li>
+<li>语句的时间戳和写入二进制日志文件的时间差，exec_time</li>
+<li>错误代码：error_code</li>
+<li>事件位置：at #，相当于下一事件的开始位置</li>
+</ul>
+<p><strong>设定参数</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">log_bin = &#123;ON|OFF|FileName&#125; # 全局变量，控制二进制文件位置</span><br><span class="line">log_bin_trust_function_creators # 全局变量，仅在启用二进制日志时有效，用于控制创建存储函数时如果会导致不安全的事件是否禁止创建存储函数</span><br><span class="line">sql_log_bin = &#123;ON|OFF&#125; # 会话级别，用于控制二进制日志信息是否记录进日志文件</span><br><span class="line">sync_binlog # 设定多久同步一次二进制日志至磁盘文件中，0表示不同步，任何正数值都表示对二进制每多少次写操作之后同步一次；</span><br><span class="line">binlog_format=&#123;statement|row|mixed&#125; # 指定二进制日志的类型</span><br><span class="line">max_binlog_cache_size= # 二进制日志缓冲空间大小，仅用于缓冲事务类的语句, 其上限由max_binlog_stmt_cache_size决定</span><br><span class="line">max_binlog_size= # 二进制日志文件大小上限，单位字节，默认大小1G</span><br><span class="line"># 注：切勿将二进制日志与数据文件放在同一磁盘上，减少磁盘I/O</span><br></pre></td></tr></table></figure>
+
+<p><strong>中继日志</strong>：它其实跟复制相关的，与二进制日志几乎相同，只不过它不是用于记录事件的，而是作为读取数据的源并且在本地执行的，当然中继日志是在从服务器上。</p>
+<p><strong>设定参数</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"> MariaDB [hellodb]&gt; SHOW GLOBAL VARIABLES LIKE ``&apos;%relay%&apos;``;查看中继日志的相关参数信息</span><br><span class="line">relay_log=file_name # 设定中继日志的文件名称</span><br><span class="line">relay_log_index=file_name # 设定中继日志的索引文件名，默认为为数据目录中的host_name-relay-bin.index</span><br><span class="line">relay_log_purge=&#123;ON|OFF&#125; # 是否自动清理不再需要的中继日志</span><br><span class="line">relay_log_space_limit= # 设定用于存储所有中继日志文件的可用空间大小，0表示不限制</span><br><span class="line">relay_log_recovery：跟中继日志自动恢复相关的</span><br><span class="line">relay_log=&#123;空&#125;：是否启用中继日志的</span><br></pre></td></tr></table></figure>
+
+<p><strong>事务日志</strong>：</p>
+<ul>
+<li>暂存事务提交的数据，实现将随机I/O转换成顺序I/O；</li>
+<li>事务数据提交流程：innodb_buffer–&gt;事务日志–&gt;数据文件；</li>
+<li>事务日志文件组，至少应该有2个日志文件，一般保存在数据目录下，为ib_logfile0和ib_logfile1；</li>
+</ul>
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>尽可能使用小事务以提升事务引擎的性能；因为事务越大，回滚开销越大；</li>
+<li>崩溃恢复：将提交的事务从事务日志中同步至数据文件，将未提交的事务执行回滚操作，以保证数据一致性；</li>
+<li>避免磁盘故障导致事务文件丢失：对事务日志所在的磁盘做数据镜像；</li>
+<li>事务日志文件和数据文件应分离存放：防止对同一磁盘过于频繁的I/O操作；</li>
+</ul>
+<p><strong>设定参数</strong>：</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20210119160543.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2021/01/19/mysql%E7%9A%84%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/" title="mysql的日志类型">http://kanatsux.github.io/2021/01/19/mysql%E7%9A%84%E6%97%A5%E5%BF%97%E7%B1%BB%E5%9E%8B/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/27/MySQL%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B/" rel="next" title="MySQL中的时间类型">
+                <i class="fa fa-chevron-left"></i> MySQL中的时间类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/20/%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E8%AF%8D%E6%B1%87%E4%B8%AD%E8%8B%B1%E6%96%87%E5%AF%B9%E7%85%A7%E8%A1%A8/" rel="prev" title="音频技术专业词汇中英文对照表">
+                音频技术专业词汇中英文对照表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-日志的类型"><span class="nav-number">1.</span> <span class="nav-text">MySQL 日志的类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">67.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

