@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Goods: Organizing Google’s Datasets（翻译）转载自：http:&#x2F;&#x2F;cxy7.com&#x2F;articles&#x2F;2017&#x2F;06&#x2F;20&#x2F;1497959253489.html  2017-06-20  |   0 评论  |   3,199 浏览  1. INTRODUCTION 2. CHALLENGES 2.1数据集的数量和大小的规模 2.2 多样性 2.3 Catalog">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Goods Organizing Google’s Datasets（翻译）">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2021&#x2F;02&#x2F;23&#x2F;Goods%20Organizing%20Google%E2%80%99s%20Datasets%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="Goods: Organizing Google’s Datasets（翻译）转载自：http:&#x2F;&#x2F;cxy7.com&#x2F;articles&#x2F;2017&#x2F;06&#x2F;20&#x2F;1497959253489.html  2017-06-20  |   0 评论  |   3,199 浏览  1. INTRODUCTION 2. CHALLENGES 2.1数据集的数量和大小的规模 2.2 多样性 2.3 Catalog">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;1497999896452073784.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;1497999931333049119.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;1497999952630030669.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;1497999968458054210.png">
+<meta property="og:updated_time" content="2021-02-23T08:06:54.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;1497999896452073784.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2021/02/23/Goods Organizing Google’s Datasets（翻译）/"/>
+
+
+
+
+
+  <title>Goods Organizing Google’s Datasets（翻译） | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2021/02/23/Goods%20Organizing%20Google%E2%80%99s%20Datasets%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Goods Organizing Google’s Datasets（翻译）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-23T16:05:57+08:00">
+                2021-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  16.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  58
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Goods-Organizing-Google’s-Datasets（翻译）"><a href="#Goods-Organizing-Google’s-Datasets（翻译）" class="headerlink" title="Goods: Organizing Google’s Datasets（翻译）"></a><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html" target="_blank" rel="noopener">Goods: Organizing Google’s Datasets（翻译）</a></h1><p>转载自：<a href="http://cxy7.com/articles/2017/06/20/1497959253489.html" target="_blank" rel="noopener">http://cxy7.com/articles/2017/06/20/1497959253489.html</a></p>
+<p> 2017-06-20  |   <a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#comments" target="_blank" rel="noopener">0 评论</a>  |   3,199 浏览</p>
+<ul>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_0" target="_blank" rel="noopener">1. INTRODUCTION</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_1" target="_blank" rel="noopener">2. CHALLENGES</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_2" target="_blank" rel="noopener">2.1数据集的数量和大小的规模</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_3" target="_blank" rel="noopener">2.2 多样性</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_4" target="_blank" rel="noopener">2.3 Catalog条目的丢失</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_5" target="_blank" rel="noopener">2.4元数据发现的不确定性</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_6" target="_blank" rel="noopener">2.5 计算数据集的重要性</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_7" target="_blank" rel="noopener">2.6 了解数据集语义</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_8" target="_blank" rel="noopener">3. THE GOODS CATALOG</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_9" target="_blank" rel="noopener">3.1 元数据</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_10" target="_blank" rel="noopener">3.2 将数据集组织成cluster</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_11" target="_blank" rel="noopener">4.后端实现</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_12" target="_blank" rel="noopener">4.1 Catalog storage</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_13" target="_blank" rel="noopener">4.2批处理作业和调度</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_14" target="_blank" rel="noopener">4.3容错</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_15" target="_blank" rel="noopener">4.4垃圾收集元数据</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_16" target="_blank" rel="noopener">5 前端：服务 Catalog</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_17" target="_blank" rel="noopener">5.1数据集配置文件页面</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_18" target="_blank" rel="noopener">5.2数据集搜索</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h2_19" target="_blank" rel="noopener">5.3团队仪表板</a></li>
+<li><a href="http://cxy7.com/articles/2017/06/20/1497959253489.html#b3_solo_h1_20" target="_blank" rel="noopener">6.学习经验</a></li>
+</ul>
+<p>ABSTRACT</p>
+<p>企业越来越依赖结构化数据集来运营企业。这些数据集采用各种形式，例如结构化文件，数据库，电子表格，甚至提供数据访问的服务。数据集通常驻留在不同的存储系统中，可能会因格式而异，可能会每天更改。在本文中，我们提出Goods，一个重新思考我们如何组织规模化结构化数据集的项目，在一个环境中，团队使用多种多样的，特别的方式来生成数据集，而没有集中的系统来存储和查询它们。Goods提取元数据，从关于每个数据集（所有者，时间戳，模式）的显着信息到数据集之间的关系，如相似性和来源。然后，它通过允许工程师在公司内查找数据集的服务公开这些元数据，监视数据集，注释它们，以使其他人能够使用其数据集，并分析它们之间的关系。我们讨论我们必须克服的技术挑战，以便抓取和推断数十亿个数据集的元数据，以维持我们的元数据 Catalog的一致性，并将元数据公开给用户。我们认为，我们学到的许多经验教训都适用于建立大型企业级数据管理系统。</p>
+<h1 id="1-INTRODUCTION"><a href="#1-INTRODUCTION" class="headerlink" title="1. INTRODUCTION"></a>1. INTRODUCTION</h1><p>目前，大多数大型企业的内部数据集的数量爆炸式增长，用于正在进行的研究与开发。这个爆炸背后的原因很简单：通过允许工程师和数据科学家以不受约束的方式消费和生成数据集，企业促进快速的开发周期，实验和最终创新，从而推动其竞争优势。因此，这些内部生成的数据集通常成为公司的主要资产，与源代码和内部基础架构相当。然而，虽然企业已经开发出了如何管理后者的强大文化，但是使用我们现在认为在业界“标准”的代码开发工具和方法（例如代码版本控制和索引，评估或测试），类似的方法通常不会存在用于管理数据集。我们认为，制定数据集管理的原则性和灵活性方法已成为必不可少的，以免企业面临内部数据集的风险，从而导致生产力和机会的重大损失，重复的工作和数据的误操作。<br>企业数据管理（EDM）是在企业环境中组织数据集的常用方法之一。然而，在EDM的情况下，公司的利益相关者必须采用这种方法，使用EDM系统发布，检索和集成其数据集。一种替代方法是使企业内部能够完全自由地访问和生成数据集，并以事后方式解决找到正确数据的问题。这种方法在精神上类似于数据湖的概念[4,22]，其中湖包括并持续地累积企业内生成的所有数据集。目标是提供方法，根据需要，将正确的数据集从“湖”中捞出。<br>在本文中，我们描述了Google数据集搜索（Goods），这是我们为了组织在Google中生成和使用的数据集而构建的一个事后系统。具体来说，在不影响数据集所有者或用户的情况下，Goods在不同流水线创建，访问或更新数据集之后收集和汇总关于数据集的元数据。换句话说，团队和工程师继续使用他们选择的工具生成和访问数据集，而Goods在后台以非侵入的方式工作，以收集有关数据集及其用途的元数据。然后，Goods使用此元数据为服务提供支持，使Google工程师能够以更原则的方式组织和查找其数据集。</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/1497999896452073784.png" alt="1.png"></p>
+<p><strong>图1：Google数据集搜索（Goods）概述。该图显示了从各种存储系统以及其他来源收集有关数据集的元数据的“Goods数据集” Catalog。我们还通过处理其他来源，例如数据集所有者及其项目的日志和信息，通过分析数据集的内容以及从Goods用户收集输入来推断元数据。我们使用 Catalog中的信息来构建搜索，监视和可视化数据流的工具。</strong></p>
+<p>图1显示了我们系统的原理图。Goods不断地爬行不同的存储系统和生产基础设施（例如，运行流水线的日志），以发现存在哪些数据集，并收集关于每个数据集的元数据（例如，所有者，访问时间，内容特征，生产管道的访问）。Goods在中央Catalog中聚合此元数据，并将特定数据集的元数据与其他数据集的信息相关联。<br>Goods使用此Catalog为Google工程师提供数据集管理服务。为了说明由Goods供应的服务类型，想象一个负责开发文本语料库（例如新闻文章）的自然语言理解（NLU）的团队。团队中的工程师可能会在全球范围内分发，并保留了多条管道，为不同的文本语料库添加注释。每个管道可以具有多个阶段，其基于各种技术添加注释，包括短语分块，词性标签和共同参考分辨率。其他团队可以使用NLU团队生成的数据集，NLU团队的管道可能会消耗其他团队的数据集。</p>
+<p>根据其 Catalog中的信息，Goods为NLU团队（在这种情况下是数据集生产者）提供了一个仪表板，显示所有数据集，并通过方面（例如所有者，数据中心，模式）进行浏览。即使团队的数据集处于不同的存储系统中，工程师可以统一查看所有数据集及其中的依赖关系。Goods可以监视数据集的特征，例如其大小，内容中的值分布或其可用性，然后提醒所有者，如果功能意外更改。<br>Goods提供的另一个重要信息是数据集来源：即关于哪些数据集用于创建给定数据集（上游数据集）的信息以及依赖于它的数据集（下游数据集）的信息。请注意，上游和下游数据集都可能由其他团队创建。当NLU团队的工程师观察到数据集的问题时，她可以检查来源可视化，以确定某些上游数据集中的更改是否导致了问题。同样，如果团队即将对其管道进行重大改变，或发现其他团队已经消耗的现有数据集中存在错误，则可以快速通知受问题影响的人员。<br>从数据集消费者的角度而言，例如在我们的示例中，不是NLU团队的一部分，Goods在公司的所有数据集上提供搜索引擎，以及缩小搜索结果的方面，以查找最新的或最新的潜在的重要数据集。Goods为每个数据集提供一个配置文件页面，帮助不熟悉数据的用户来了解其模式，并创建用于访问和查询数据的样板代码。配置文件页面还包含与内容类似于当前数据集内容的数据集的信息。相似性信息可以实现数据集的新颖组合：例如，如果两个数据集共享主键列，则它们可以提供补充信息，因此是加入的良好候选者。<br>Goods允许用户使用大量来源的元数据扩展 Catalog。例如，数据集所有者可以用描述来注释数据集，以帮助用户找出哪些数据集适合于其使用（例如，某些数据集中使用哪些分析技术以及哪些陷阱需要注意）。数据集审核员可以标记包含敏感信息和警报数据集所有者的数据集，或者提示进行审查，以确保数据处理得当。以这种方式，Goods及其 Catalog成为用户可以共享和交换关于生成的数据集的信息的中心。Goods还暴露了一个API，通过该API，团队可以向 Catalog提供元数据，以便团队自己受限制使用，并帮助其他团队和用户轻松了解其数据集。<br>正如我们在本文的其余部分所讨论的，我们在设计和建造Goods时遇到了许多挑战，这些挑战是由数量众多的数据集（在我们的案例中是数百亿美元），在更新方面的高流失，个别数据集的大小在许多情况下，千兆字节或TB），它们所在的许多不同的数据格式和存储，以及每个数据集收集的信息的质量和重要性。 Google提供的数据湖的规模和特点，造成了我们在Goods中遇到的许多挑战。不过，我们相信我们的经验和经验教训将适用于其他企业的类似系统。</p>
+<h1 id="2-CHALLENGES"><a href="#2-CHALLENGES" class="headerlink" title="2. CHALLENGES"></a>2. CHALLENGES</h1><p>在本节中，我们将更详细地描述我们在建立Goods时所面临的挑战。尽管其中一些挑战是针对Google设置的，但我们认为，以下大部分内容将转移给其他大型企业。</p>
+<h2 id="2-1数据集的数量和大小的规模"><a href="#2-1数据集的数量和大小的规模" class="headerlink" title="2.1数据集的数量和大小的规模"></a>2.1数据集的数量和大小的规模</h2><p>虽然我们预计公司中存在大量数据集，但实际数量远远超出了我们的初步计算。目前的 Catalog索引超过260亿个数据集，尽管它只包括访问权限使所有Google工程师都可读取的数据集。我们预计，当我们用受限制的访问权限对数据集进行索引以及开始支持其他存储系统时， Catalog数量将增加一倍以上。重要的是要注意， Catalog已经排除了许多类型的不感兴趣的数据集（例如，我们丢弃了没有内容的已知的“标记”文件）并且规范化路径以避免明显的冗余（例如，我们对相应于不同碎片的路径进行归一化数据集到公共路径，不要将它们分别存储在 Catalog中）。<br>在这个规模上，收集所有数据集的元数据变得不可行。实际上，即使我们每个数据集花费一秒钟（并且许多数据集太大，无法在一秒钟内处理），通过使用千台并行机器的260亿个数据集的 Catalog仍需要大约300天的时间。因此，我们必须制定优先级和优化数据集处理的策略。<br>规模问题因元数据推理出现的“正方形”问题而加剧。例如，Goods识别包含相同或相同内容的数据集，包括总体以及各个列。将任何两个数据集彼此进行比较可能已经是昂贵的，因为大量的数据集大小，但是数十亿数据集的内容的成对对比比较是不可行的。</p>
+<h2 id="2-2-多样性"><a href="#2-2-多样性" class="headerlink" title="2.2 多样性"></a>2.2 多样性</h2><p>数据集以多种格式（文本文件，csv文件，Bigtables [13]等）和存储系统（GoogleFS，数据库服务器等）存储，每种都有自己的元数据类型和访问特征。这种多样性使得难以定义涵盖所有实际数据集类型的单个“数据集”概念。隐藏来自用户的多样性和复杂性，并呈现统一的方式来访问和查询关于所有类型的数据集的信息，这两者都是Goods的目标和挑战。<br>更重要的是元数据提取的成本多样化，这可以根据数据集的类型和大小以及元数据的类型而大大改变。因此，我们的元数据提取过程需要是差异化的：我们必须确定哪些数据集很重要，然后根据具有特定类型的元数据的成本和收益来执行元数据推理。<br>品种也体现在数据集之间的关系中，从而影响我们如何在 Catalog中建立和存储元数据。以Bigtable数据集为例[13]。它包含几个列族，每个家族从包含的Bigtable继承元数据，但也拥有自己的元数据和访问属性。因此，我们可以将列系列视为单个数据集，并将其作为整体Bigtable数据集的一部分。此外，Bigtable的底层存储基础架构由分布式文件系统提供，因此我们还可以将相应的文件视为数据集。在Bigtable的情况下，隐藏这些基础文件以支持Bigtable数据集的决定似乎是合理的。然而，在其他情况下，类似的决定也不太清楚。例如，我们在 Catalog中包含数据库表（具体来说，Dremel表[19]）。这些表是从其他文件创建的数据集数26亿每天添加的路径数量16亿每天删除的路径数量16亿存储系统数量6数据集格式数量&gt; 20</p>
+<table>
+<thead>
+<tr>
+<th>Number of datasets</th>
+<th>26 billion</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Number of paths added per day</td>
+<td>1.6 billion</td>
+</tr>
+<tr>
+<td>Number of paths deleted per day</td>
+<td>1.6 billion</td>
+</tr>
+<tr>
+<td>Number of storage systems</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Number of dataset formats</td>
+<td>&gt; 20</td>
+</tr>
+</tbody></table>
+<p><strong>表1：Goods Catalog中条目的规模，种类和流失。</strong><br>（也在我们的 Catalog中），在这种情况下，将 Catalog中的文件和数据库表格分开（但连接）的数据集视为其访问模式有很大的不同是有意义的。请注意，最后一个例子说明了一种数据集的别名。别名可以在我们的 Catalog中以多种方式出现，我们已经根据相应的使用模式分别处理了每个别名类型。</p>
+<h2 id="2-3-Catalog条目的丢失"><a href="#2-3-Catalog条目的丢失" class="headerlink" title="2.3 Catalog条目的丢失"></a>2.3 Catalog条目的丢失</h2><p>每天，生产作业都会生成新的数据集，并且旧的数据集会被明确地删除，或者是因为它们指定的time-tolive（TTL）已过期。实际上，我们发现 Catalog中的数据集超过5％（即约10亿）每天都会被删除。几乎相同数量的新条目也被添加回来。这个流失水平增加了我们如何优先考虑我们计算元数据的数据集以及我们在 Catalog中包含的数据集的更多考虑。例如，许多从创建的生存时间（TTL）的数据集是在几天后垃圾收集的大型生产管道的中间结果。一种可能性是忽略这些用于元数据提取的瞬态数据集，甚至将其从 Catalog中排除。但是，有两个考虑。首先，这些数据集中的一些具有很长的TTL（例如，以周为单位），因此当刚刚创建数据集时，它们对用户的价值可能很高。其次，我们稍后再讨论，这些瞬态数据集中的一些将非瞬态数据集彼此链接，因此对数据集来源的计算至关重要。因此，完全黑名单暂存数据集不是Goods的选择。</p>
+<h2 id="2-4元数据发现的不确定性"><a href="#2-4元数据发现的不确定性" class="headerlink" title="2.4元数据发现的不确定性"></a>2.4元数据发现的不确定性</h2><p>因为Goods以事后和非侵入的方式明确地识别和分析数据集，所以通常不可能完全确定所有类型的元数据。例如，许多数据集由其模式符合特定protocol buffers [23]（即嵌套关系模式）的记录组成。但是，数据集本身不引用描述其内容的特定protocol buffers ，protocol buffers 和数据集之间的关联在访问数据集的源代码中是隐含的。Goods试图通过几个信号来发现这种隐含的关联：例如，我们将数据集内容与Google内的所有注册类型的protocol buffers 进行“匹配”，或者查询可能记录了实际protocol buffers 的使用日志。这个推断本质上是含糊的，并且可能导致数据集和protocol buffers 之间的几种可能的匹配。<br>类似地，Goods分析数据集以确定哪些字段可以作为主键，但是依靠一个近似的过程来处理问题的规模 - 另一个不确定的推论。<br>大多数这种不确定性出现是因为我们以事后方式处理数据集：我们不需要数据集所有者更改其工作流程，以便在所有者创建数据集时将这种类型的元数据与数据集相关联。相反，我们选择收集已经登录在现有基础架构的不同角落的数据集元数据，然后我们聚合和清理元数据以供进一步使用。</p>
+<table>
+<thead>
+<tr>
+<th>Metadata Groups</th>
+<th>Metadata</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Basic</td>
+<td>size, format, aliases, last modified time, access control lists</td>
+</tr>
+<tr>
+<td>Content-based</td>
+<td>schema, number of records, data fingerprint, key field, frequent tokens, similar datasets</td>
+</tr>
+<tr>
+<td>Provenance</td>
+<td>reading jobs, writing jobs, downstream datasets, upstream datasets</td>
+</tr>
+<tr>
+<td>User-supplied</td>
+<td>description, annotations</td>
+</tr>
+<tr>
+<td>Team and Project</td>
+<td>project description, owner team name</td>
+</tr>
+<tr>
+<td>Temporal</td>
+<td>change history</td>
+</tr>
+</tbody></table>
+<p><strong>Table 2: Metadata in the Goods catalog</strong></p>
+<h2 id="2-5-计算数据集的重要性"><a href="#2-5-计算数据集的重要性" class="headerlink" title="2.5 计算数据集的重要性"></a>2.5 计算数据集的重要性</h2><p>在我们发现和编目数据集之后，推测他们对用户的相对重要性将带来更多的挑战。首先，使数据集重要的基本问题难以回答。单独查看数据集可以提供一些提示，但是通常需要在更全球的环境中检查数据集（例如，考虑生产管道访问数据集的频率），以了解其重要性。<br>请注意，重要性和相对重要性的概念在Web搜索的上下文中突出显现。然而，企业环境中的结构化数据集中的排名和重要性与Web搜索设置有很大不同：我们所拥有的唯一明确的链接是源代码链接，并不一定表示重要性。此外，我们可以用于Web搜索的许多信号（例如，锚文本）对于数据集不存在，而数据集可以提供网页不具有的结构化上下文。<br>除了数据集对用户的重要性之外，当我们为我们导出元数据的数据集进行优先级排序时，会出现一个不同的重要概念。例如，我们经常会考虑到瞬态数据集不重要。然而，如果瞬态数据集提供非瞬态，重要数据集之间的来源链接，则自然会提高其重要性。</p>
+<h2 id="2-6-了解数据集语义"><a href="#2-6-了解数据集语义" class="headerlink" title="2.6 了解数据集语义"></a>2.6 了解数据集语义</h2><p>了解数据集内容的语义在搜索，排序和描述数据集方面非常有用。 假设我们知道数据集的模式，并且模式中的某些字段使用整数值。 现在，假设通过对数据集内容的一些推断，我们可以确定这些整数值是已知地理标志的ID。 当用户搜索Goods的地理数据时，我们可以使用这种类型的内容语义来改进搜索。 一般来说，通过将抽象级别从原始字节提升到概念，我们可以进行推理，从而导致更深入和更干净的数据集元数据。 然而，从原始数据中识别语义是一个很难的问题，即使是小数据集[12]，因为数据中很少有足够的信息进行推理。 对具有数十亿条记录的数据集进行推理变得更加困难。</p>
+<h1 id="3-THE-GOODS-CATALOG"><a href="#3-THE-GOODS-CATALOG" class="headerlink" title="3. THE GOODS CATALOG"></a>3. THE GOODS CATALOG</h1><p>描述了我们在建立Goods方面所面临的挑战，现在我们将注意力转向系统的细节。我们首先仔细观察Goods Catalog，这是我们系统的核心。在高级别， Catalog包含通过在Google中爬行不同存储系统的Goods发现的每个数据集的条目。虽然公司内的每个独立存储系统都可以对其所服务的数据集维护一个 Catalog，但是每个这样的 Catalog都有不同类型的元数据，并且数据经常以无拘束的方式从一个系统流向另一个系统。这种自由使得很难获得整个公司可用的数据集的全球统一视图。Goods Catalog填补了这一空白，因此，即使我们不考虑图1顶部的服务，本身也是一个重要的贡献。<br>Goods Catalog不仅包含通过爬行不同的存储系统而收集的各个数据集，而且还将相关的数据集分组到cluster中，这些数据集成为 Catalog中的首要条目。考虑例如每天或甚至每小时生成一个新版本的数据集。我们的 Catalog将包含此类数据集的每个版本的条目。然而，用户通常会将这些版本视为单个逻辑数据集。此外，所有这些版本都可能具有一些常见的元数据（例如，所有者或模式），并且因此针对每个版本分别收集元数据是浪费的 - 并且通常在资源方面是禁止的。由于这两个原因，我们在一个cluster中组织了这些相关的数据集，它成为 Catalog中的一个单独条目。Goods将此cluster映射到用户，作为表示所有生成的版本的逻辑数据集。假设cluster中的所有数据集具有相似的属性，Goods也使用cluster优化元数据的计算。<br>在本节中，我们首先描述我们与每个数据集关联的元数据类型（第3.1节），然后描述我们基于数据cluster的元数据提取机制（第3.2节）。</p>
+<h2 id="3-1-元数据"><a href="#3-1-元数据" class="headerlink" title="3.1 元数据"></a>3.1 元数据</h2><p>Goods通过爬行Google的存储系统（例如GoogleFS，Bigtable，数据库服务器）来引导其 Catalog，以便发现存在哪些数据集，并获取数据集的大小，所有者，读者和访问权限等一些基本元数据。然而，大多数存储系统不能跟踪其他重要的元数据，例如生成数据集的作业，访问它的团队和用户，其模式等等（表2）。该信息分布在访问这些数据集的进程编写的日志中，在数据集本身内进行编码，也可以通过分析数据集的内容来推导出来。因此，除了爬行，我们执行元数据推断。在下文中，我们更详细地描述了Goods Catalog中不同类型的元数据（收集和推断）。<br><strong><em>基本元数据</em></strong> - 每个数据集的基本元数据包括其时间戳，文件格式，所有者和访问权限。我们通过爬行存储系统获得这个基本元数据，这个过程通常不需要任何推断。其他Goods模块通常依赖于这些基本信息来确定其行为。例如，某些模块会绕过具有限制访问权限的 Catalog条目或最近未修改的条目。<br><strong><em>Provenance</em></strong> - 数据集是由代码生成和使用的，这些代码可能包括用于查询数据集的分析工具，通过API提供访问数据集的基础设施，或将其转换为其他数据集的ETL流程等。通常，我们可以通过生产和使用这些数据集的周边软件更好地了解数据集。此外，这些信息有助于跟踪数据如何在企业以及公司内部团队和组织内部流通。因此，对于每个数据集，“ 缪斯 catalog”维护了数据集的生成方式，消费方式，数据集所依赖的数据集以及哪些数据集依赖于此数据集。我们通过分析生产日志来识别和填充来源元数据，生产日志能够提供哪些作业读取和写入每个数据集的信息。然后，我们创建连接数据集和作业的图形的传递闭环，以确定数据集本身如何彼此链接。例如，如果作业J读取数据集D1并生成数据集D2，则D1的元数据包含D2作为其下游数据集之一，反之亦然。我们还把时间信息考虑进来，以便确定这些依赖关系的最早和最新的时间点。但是，日志中的数据访问事件的数量可能非常高，传递闭包的大小也是如此。</p>
+<p>因此，我们通过仅处理来自日志的数据访问事件的样本，以及仅在几跳内仅实现下游和上游关系，而不是计算真实的传递闭包，用完整性的牺牲获得了效率。</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/1497999931333049119.png" alt="2.png"></p>
+<p><strong><em>Schema</em></strong> - Schema是另一种核心类型的元数据，可帮助我们了解数据集。 Google中最常用的数据集格式不是自我描述的，我们必须推断Schema。谷歌结构化数据集中几乎所有的记录都被编码为序列化protocol buffers [23]。困难在于确定哪个protocol buffers 用于对给定数据集中的记录进行编码。大多数Google数据集使用的protocol buffers 几乎总是被检入Google的中央代码库。因此，我们有一个完整的列表，可以与我们已经爬网的数据集进行匹配。我们通过从文件中扫描几条记录来执行这种匹配，并通过每个协议消息定义来确定是否可以想象地生成了我们在这些记录中看到的字节。协议缓冲器将多种逻辑类型编码为相同的物理类型，特别是字符串和嵌套消息都被编码为可变长度字节字符串。因此，匹配过程是推测性的并且可以产生多个候选协议缓冲器。所有候选protocol buffers 以及每个候选者的启发式分数成为元数据的一部分</p>
+<p><strong><em>内容摘要</em></strong> - 对于我们能够打开和扫描的每个数据集，我们还收集总结数据集内容的元数据。我们通过对内容进行抽样来记录我们发现的频繁令牌。我们分析一些字段以确定它们是否单独或组合地包含数据的Key。为了找到潜在的Keys，我们使用HyperLogLog算法[15]来估计各个字段和字段组合中的值的基数，并将这个基数与记录数量进行比较以找到潜在的Keys。我们还收集针对内容的各个字段和位置哈希值（LSH）敏感的内容的校验和的指纹。我们使用这些指纹来查找与给定数据集相似或相同的内容的数据集，或者与其他与当前数据集中的列相似或相同的数据集的列。我们还使用校验和来确定哪些字段在数据集的记录中填充。</p>
+<p><strong><em>用户提供的注释</em></strong> - 我们允许数据集所有者提供其数据集的文本描述。这些描述对我们的排名至关重要，并且还帮助我们过滤掉实验性的数据集，或者我们不应该向用户显示。<br><strong><em>语义</em></strong> - Goods组合了几个嘈杂的信号，以便导出关于数据集语义的元数据。对于模式符合protocol buffers 的数据集，Goods可以检查定义protocol buffers 的源代码，并提取任何附加的注释。这些评论通常是高质量的，而且他们的词汇分析可以提供捕捉模式语义的短语。作为一个实际的例子，Goods Catalog中的一些数据集符合protocol buffers ，并具有一个名为mpn的字段。但是，源代码包含了字段上方的注释“// Model Product Number”，它消除了其语义。Goods还可以检查数据集内容并将其与Google的知识图[11]进行匹配，以识别出现在不同字段中的实体（例如，位置，业务）。除了上面列出的元数据，我们收集拥有数据集的团队的标识符，数据集所属的项目的描述以及数据集元数据更改的历史记录。<br>最后，我们的基础设施（第4节）允许其他团队添加自己的元数据类型。例如，团队可能会依赖不同类型的内容摘要，或提供其他来源信息。Goods Catalog正在成为团队收集元数据并访问它的统一的地方。</p>
+<h2 id="3-2-将数据集组织成cluster"><a href="#3-2-将数据集组织成cluster" class="headerlink" title="3.2 将数据集组织成cluster"></a>3.2 将数据集组织成cluster</h2><p>Goods Catalog中的26B数据集并不完全独立。我们经常看到正在定期生成的数据集的不同版本，跨不同数据中心复制的数据集，被分成较小数据集的数据集，以加快加载等等。如果我们可以识别数据集所属的自然cluster，那么不仅我们可以为用户提供将这些不同版本分组在一起的有用的逻辑级抽象，而且还可以节省元数据提取，尽管这可能是以精确为代价的。也就是说，我们不是为每个单独的数据集收集昂贵的元数据，而只能为cluster中的几个数据集收集元数据。然后，我们可以在cluster中的其他数据集之间传播元数据。例如，如果同一作业每天生成数据集的版本，则这些数据集可能具有相同的模式。因此，我们不需要推断每个版本的模式。类似地，如果用户提供数据集的描述，它通常适用于cluster的所有成员，而不仅仅是一个版本。当cluster很大时，我们通过避免对cluster中每个成员的分析而获得的计算节省可能是重要的。</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/1497999952630030669.png" alt="3.png"></p>
+<p><strong>图3：群集大小的分布。 X轴是cluster中数据集的数量（cluster大小）。 Y轴是相应簇大小的簇数。</strong><br>对于聚类来减少计算开销，聚类本身应该是便宜的。需要调查数据集内容的聚类技术可以通过避免重复的元数据提取来掩盖我们获得的计算节省。幸运的是，数据集的路径通常会提供如何通过嵌入式标识符对时间戳，版本等进行聚类的提示。例如，考虑每天生成的数据集，并将/ dataset / 2015-10-10 / daily_scan作为其中一个实例的路径。我们可以抽出日期的日期，以获得一个月生成的所有数据集的通用表示：/ dataset / 2015-10- <day> / daily_scan，代表从2015年10月起的所有实例。通过抽出月份，我们可以在层次结构中创建代表同一年生成的所有数据集的抽象路径：/ dataset / 2015- <month> - <day> / daily_scan。<br>通过构建不同维度的层次结构，我们可以构建粒度半格子结构，其中每个节点对应于查看数据集的不同粒度。<br>图2示出了通过组合两个层次结构获得的这样的半格子的示例，一个沿着日期，另一个沿着版本号。<br>表3列出了我们当前用于构建每个数据集的粒度半格子的抽象维度。通过从所有数据集路径抽出各种维度，我们最终获得了一组半格点，其非叶节点代表将数据集分组到cluster中的不同选择。我们可以在 Catalog的当前状态下优化具有合适目标函数的cluster选择，但是日常 Catalog流失会导致对cluster的重新计算。因此，用户可能会每天看到不同的cluster（表示逻辑数据集），这可能令人困惑。我们采用了一个在实践中运行良好的简单解决方案：我们为每个semilattice的最顶层元素创建一个条目。返回到图2的示例， Catalog将具有用于cluster / dataset / <date> / <version>的条目，表示格子底部的三个数据集。这种方法使cluster条目数量保持不变，保证每个数据集映射到一个cluster，并且随着时间的推移维护一组稳定的cluster。</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/1497999968458054210.png" alt="4.png"></p>
+<p><strong>图4：通过cluster的代表元素将所有者元数据传播到未分析的数据集的示例。</strong><br>在我们计算cluster后，我们通过聚合各个成员的元数据来获取每个cluster的元数据。例如，如果我们知道cluster的几个成员的模式，并且它们对于所有组件都是相同的，那么我们可以将整个cluster的模式传播（图4）。是否实现这种传播的信息，或者简单地按需要计算它是一个特定于应用的设计决策。在我们的例子中，我们根据需要进行计算，以便通过实际分析获得的传播元数据和元数据之间明确区分开来。<br>图3显示了我们 Catalog中每个cluster内的数据集数量的分布。该图显示，聚类可以将“物理”数据集的集合大大压缩成更小的一组“逻辑”数据集，从而使用户更容易检查 Catalog。此外，元数据拖尾的计算节省是显着的，特别是对于极大的cluster。</p>
+<h1 id="4-后端实现"><a href="#4-后端实现" class="headerlink" title="4.后端实现"></a>4.后端实现</h1><p>在本节中，我们将重点介绍第3节中描述的建立和维护 Catalog的实现细节。我们讨论 Catalog的物理结构，扩展填充 Catalog的模块，一致性和垃圾收集的方法，以及 最后，容错。</p>
+<h2 id="4-1-Catalog-storage"><a href="#4-1-Catalog-storage" class="headerlink" title="4.1 Catalog storage"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#41-catalog-storage" target="_blank" rel="noopener">4.1 Catalog storage</a></h2><p>我们使用Bigtable [13]，一个可扩展的时间键值存储，作为我们目录的存储介质。每行代表一个数据集或数据集集（第3.2节），数据集路径或集群路径作为关键。 Bigtable提供每行事务一致性，这是一个很好的适合，因为我们系统中的大多数（尽管并非全部）处理是每个数据集。例如，我们可以推断数据集的模式，而不查看其他数据集的条目;我们可以通过检查一行来分析数据集的内容。</p>
+<p>我们的系统的一些方面偏离了这个perdataset处理。例如，我们将信息从多行聚合到我们的抽象格子中的逻辑数据集（第3.2节）。在同一集群中的数据集之间传播元数据也不符合独立处理每个数据集的模型。然而，这种元数据传播是最大的努力，不需要很强的一致性。</p>
+<p>在物理层面上，一个Bigtable包含几个独立的列族。我们保留仅通过批处理作业（而不是投放到前端工具）访问的数据，我们调整为批处理（高度压缩，而不是记忆体）的单独的列系列。例如，我们最大的列系列包含原始来源数据，用于计算出处图，但是我们不直接在前端服务（第5节）：在这里，我们仅在抽象数据集簇级。因此，我们可以积极压缩这个大型列系列。</p>
+<table>
+<thead>
+<tr>
+<th>Abstraction Dimension</th>
+<th>Description</th>
+<th>Examples of paths with instances</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Timestamps</td>
+<td>All specifications of dates and times</td>
+<td>/gfs/generated_at_20150505T20:21:56</td>
+</tr>
+<tr>
+<td>Data-center Names</td>
+<td>Specification of data center names</td>
+<td>/gfs/oregon/dataset</td>
+</tr>
+<tr>
+<td>Machine Names</td>
+<td>Hostnames of machines (either user’s or one in the data center)</td>
+<td>/gfs/dataset/<a href="http://foo.corp.google.com/" target="_blank" rel="noopener">foo.corp.google.com</a></td>
+</tr>
+<tr>
+<td>Version</td>
+<td>Numeric and hexa-numeric version specifications</td>
+<td>/gfs/dataset/0x12ab12c/bar</td>
+</tr>
+<tr>
+<td>Universally Unique Identifier</td>
+<td>UUIDs as specified in RFC4122[6]</td>
+<td>/gfs/dataset/30201010-5041-7061-9081-F0E0D0C0B0AA/foo</td>
+</tr>
+</tbody></table>
+<p><strong>Table 3: The dimensions that Goods uses to abstract dataset paths. The examples illustrate portions of the paths that correspond to the abstraction dimensions.</strong></p>
+<p>我们在Bigtablebacked目录中为每行存储两种元数据：（a）数据集的元数据（第3节）; （b）关于处理给定数据集的模块的结果的元数据，状态元数据。状态元数据列出处理特定条目的每个模块，具有时间戳，成功状态和错误消息（如果有）。我们使用状态元数据来协调模块的执行（第4.2节），以及我们自己对系统的检查（模块X成功处理的数据集的几个部分是什么？最常见的错误代码是什么？）结合Bigtable的时间数据模型，状态元数据对调试也非常有用。我们配置Bigtable保留多代状态元数据，让我们看到我们的模块在一段时间内一直在做什么（例如，在给定的有问题的数据集上，模块何时开始发出错误？是错误确定性的？）</p>
+<h2 id="4-2批处理作业和调度"><a href="#4-2批处理作业和调度" class="headerlink" title="4.2批处理作业和调度"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#42批处理作业和调度" target="_blank" rel="noopener">4.2批处理作业和调度</a></h2><p>我们的系统由两种类型的工作组成：（1）大量不同的批处理工作;和（2）少数为我们的前端和API服务的工作。此外，我们将系统设计为可扩展的，并适应新的数据集源和其他元数据源的爬虫，以及新的分析模块。我们的一些批处理工作相当快，通常在几个小时内完成我们的 Catalog;其他人，如分析数据集内容的数据，需要很多时间才能赶上新的爬网，将新的数据集添加到 Catalog中。我们安排这些工作在地理上靠近他们分析的数据集，这些数据集在全球分布。</p>
+<p>我们允许所有作业彼此独立运行：我们不限制作业运行的顺序，或限制是否同时运行。某些工作可能在任何给定的时间被打破，我们可以临时离线。每个作业都包含一个或多个模块，例如爬行器或分析仪。</p>
+<p>单个模块通常依赖于其他模块，并且无法处理给定的数据集，直到其他模块处理它。例如，计算列的指纹的模块需要知道数据集的模式，因此对确定数据集的模式（即所谓的模式分析器模块）的模块具有依赖性。这些模块使用我们前面提到的状态元数据，以各个Bigtable行的粒度彼此协调执行。如果模块A必须（成功）在模块B之前处理一行，则当模块B检查一行时，它将检查指示模块A成功访问的状态元数据条目。如果没有此类状态条目，则模块B绕过那行它会在下次运行时再次尝试。如果模块A重新处理一行，则在下一次访问该行时，模块B还将重新处理它，以传播最新的元数据（例如，基于更新的模式的重新指纹）。模块还使用自己的状态元数据来避免在可配置的新鲜度窗口中重新处理它们已经处理的行。</p>
+<p>大多数工作都配置为每天运行，并在24小时内舒适地完成。当工作超出他们的日常周期时，我们优化和/或添加并行性。这些作业使用每24小时循环来处理新的 Catalog行和/或刷新已经处于新鲜度窗口之外的已处理的 Catalog行。</p>
+<p>在大量新数据集（例如并入数据集路径的新来源）之后，我们最重的工作就是架构分析器需要几天或几个星期才能赶上。我们使用简单的优先级机制来确保我们最重要的数据集在此“追赶”情景中不被模式分析器忽略：我们启发式地将具有用户提供的注释或高来源中心性的数据集指定为“重要”工作的两个实例：一个实例只处理重要的数据集，并且可以快速地获得这些数据集，另一个实例旨在处理所有数据集，但是到目前为止只能获得其中的一小部分。在实践中，与Web爬行一样，确保重要性分配的“头”的良好覆盖和新鲜度足以满足大多数用户场景。</p>
+<p>我们的大型抓取工作对 Catalog执行“盲目写入”：它们从源中读取数据，并将所有数据写入我们的Bigtable。 Bigtable不区分插入和更新，所以这种方法产生了no-op更新和插入的组合。这种方法比阅读我们的 Catalog更有效，可以通过新的源抓取来反加入。但是，在某些情况下，我们必须注意避免无操作的写入，因为它可能导致依赖模块重新运行，或阻止垃圾收集（参见第4.4节）。</p>
+<h2 id="4-3容错"><a href="#4-3容错" class="headerlink" title="4.3容错"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#43容错" target="_blank" rel="noopener">4.3容错</a></h2><p>在分析了这么多数量的数据集之后，我们遇到了许多不同种类的问题。对于处理各个数据集的模块，我们会在数据集中的数据集条目的状态元数据中记录每个数据集的错误。指示模块完成错误的状态元数据触发（有限数量）重试。不隔离处理每个数据集的模块（例如来源链接）依赖于指定作业的开始时间和作业是否成功的作业范围状态元数据条目。例如，如果链接的时间戳比最后成功执行模块（如在模块范围的状态元数据中记录的）更新，则原始链接模块将数据集 - 作业链接合并到传送源图中。这种方法是保守的：如果以前的模块执行失败，我们可能会重做一些BigTable写入。然而，这种方法可以确保由此产生的原始图形是正确的，因为BigTable写入是幂等的。此外，它使我们能够将记录的工作来源信息标记为“消费”，这是对垃圾收集至关重要的功能，我们稍后将讨论。</p>
+<p>检查数据集内容的我们的几个模块使用特定于不同文件格式的各种库。有时，这些库会崩溃或进入无限循环。 （当我们努力追踪和消除这些情况时，完全根除这些情况是不可行的，特别是考虑到我们环境中文件和文件格式的演进性质）。由于我们不能长期运行的分析工作崩溃或挂起，沙箱在一个单独的过程中这样的潜在危险的工作。然后，我们使用看门狗线程将长的档位转换为崩溃，同时允许其余的管道继续进行。</p>
+<p>我们在多个地理位置复制我们的 Catalog。写入主人，并在其他地方的背景下异步复制。</p>
+<h2 id="4-4垃圾收集元数据"><a href="#4-4垃圾收集元数据" class="headerlink" title="4.4垃圾收集元数据"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#44垃圾收集元数据" target="_blank" rel="noopener">4.4垃圾收集元数据</a></h2><p>我们每天摄取和创建大量数据。这个数据的一个非常重要的部分是短暂的。在我们消耗这种瞬态数据来构建原始图之后，只要我们的模块已经消耗了相关元数据来更新 Catalog，我们就可以删除与删除的数据集相对应的条目。我们最初赞成一种简单，保守的垃圾收集方法。例如，如果一周没有更新，我们将删除一行。然而，我们的 Catalog变得尴尬的一些事件告诉我们，积极的垃圾收集是必要的。在我们的项目初期，有两次，我们不得不将所有的抓取工具和非垃圾收集相关的分析模块停用数天，以便从这种情况中恢复。 我们实施的垃圾收集机制目前正在解决我们沿途发现的几个限制：</p>
+<ol>
+<li>删除行的条件最好表示为使用可能访问或更新行的其他模块的元数据和状态的声明谓词。例如，当我们可以从“Goods Catalog”中删除数据集时，我们有以下条件：“数据集已从存储系统中删除，其最近更新的来源信息已由成功的原始链接器模块处理，成功完成“。</li>
+<li>当我们从 Catalog中删除条目时，我们必须确保不创建所谓的“悬挂行”：回想一下Bigtable不区分插入和更新。因此，当我们删除一行时，我们必须确保没有其他并发运行的模块将只添加部分信息（具体来说只包括特定模块负责的信息）。例如，假设在垃圾回收器和正在检查同一行的元维度模块之间存在竞争条件。垃圾回收器移除该行，然后元数据推理模块插入行;此行将仅包含此模块所推断的信息。该序列导致关于相应数据集被抓取的位置的信息丢失，可能损害其他模块的完整性。</li>
+<li>所有其他模块必须能够独立于垃圾回收并同时运行。</li>
+</ol>
+<p>Bigtable支持条件突变，如果给定的谓词以事务方式产生真实，那么它们是更新或删除Bigtable行的风格化事务。将所有模块的Bigtable更新限制在未被删除的行上，被证明是太贵了：条件突变引起大量的日志结构读取开销。</p>
+<p>我们的最终设计允许除垃圾收集器之外的所有模块执行非事务性更新。为了实现这种灵活性，垃圾收集分为两个阶段：（a）在第一阶段，我们使用声明性谓词批准删除 Catalog行（参见上面的第一个条件）。然而，在第一阶段，我们的垃圾收集器实际上并不删除Bigtable条目，而是在其上放置一个特殊的墓碑标记。 （b）24小时后（见下文有关此门槛的更多信息），如果该行仍然符合删除条件，我们将其删除;否则，我们删除墓碑。</p>
+<p>同时，所有其他模块都符合以下限制：（a）它们可以执行非事务性更新; （b）它们忽略带有墓碑标记的行，以避免更新预定删除的行; （c）模块的单次迭代不能保持活动超过24小时（我们的模块调度机制强制执行）。 该设计满足上述三个条件，同时保持整个系统的效率。</p>
+<h1 id="5-前端：服务-Catalog"><a href="#5-前端：服务-Catalog" class="headerlink" title="5 前端：服务 Catalog"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#5-前端服务目录" target="_blank" rel="noopener">5 前端：服务 Catalog</a></h1><p>我们至今专注于建立和维护Goods Catalog的过程。在本节中，我们将描述我们在Goods中收集的元数据启用的主要服务（参见图1的顶部）。</p>
+<h2 id="5-1数据集配置文件页面"><a href="#5-1数据集配置文件页面" class="headerlink" title="5.1数据集配置文件页面"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#51数据集配置文件页面" target="_blank" rel="noopener">5.1数据集配置文件页面</a></h2><p>第一个服务是在数据集的易于查看的配置文件页面中导出特定数据集的元数据。具体来说，简档页面服务接受数据集或数据集cluster的路径作为输入，并从存储在 Catalog中的元数据生成HTML页面。该服务还提供编辑元数据的特定部分的方法，以允许用户增加或更正存储在 Catalog中的信息。</p>
+<p>配置文件页面呈现我们在第3节中描述的大多数数据集元数据。将用户页面呈现给用户时，我们必须以全面的方式平衡呈现元数据的需要，并希望在页面上保留信息量。管理。可管理的大小很重要，既不要用太多信息压倒用户，也不要避免传输大量信息。考虑来源信息，例如：受欢迎的数据集可能被成千上万的作业读取，并且数以万计的数据集在其下游。顺便提及，诸如Goods模块等需要访问公司中的每个数据集的工作，都有数十亿个数据集上游。为了避免转移并试图向用户提供这样大量的信息（这将无济于事），我们使用与我们在3.2节中介绍的相同的抽象机制，在离线时将原始数据元素压缩到任何空间。然后我们使用这个压缩来源来呈现配置文件页面。如果压缩版本仍然太大，那么我们最后的手段就是保留最近的一些条目。</p>
+<p>数据集的配置文件页面将某些元数据与其他更专业的工具交叉连接。例如，配置文件页面将源数据元数据（例如生成数据集的作业）链接到具有以作业为中心的工具的这些作业的详细信息的页面。类似地，我们将模式元数据链接到代码管理工具，该工具提供了该模式的定义。相应地，这些工具链接到Goods，以帮助用户获得有关数据集的更多信息。</p>
+<p>配置文件页面还提供不同语言的访问片段（例如，C ++，Java，SQL）来访问数据集的内容。我们为特定数据集自定义生成的片段：例如，片段使用数据集的路径和模式（当已知时），用户可以将代码段复制粘贴到各自的编程环境中。这些片段背后的目标是补充配置文件页面中的内容元数据：后者提供有关数据集内容的模式级信息，而代码片段可以方便快速检查实际内容或通过代码分析内容。</p>
+<p>总体而言，配置文件页面的目的是提供一站式商店，用户可以在其中检查有关数据集的信息，并了解数据集可用于生产的上下文。此功能使配置文件页面成为在用户之间共享数据集或从其他工具链接到数据集信息的自然句柄。作为后者的一个例子，当用户检查 Catalog的内容时，Google的文件系统浏览器可以直接链接到Goods数据集配置文件页面</p>
+<h2 id="5-2数据集搜索"><a href="#5-2数据集搜索" class="headerlink" title="5.2数据集搜索"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#52数据集搜索" target="_blank" rel="noopener">5.2数据集搜索</a></h2><p>个人资料页面允许用户查看有关特定数据集的信息，但用户如何查找感兴趣的数据集？这个任务是我们的数据集搜索服务所在的地方。</p>
+<p>数据集搜索允许Google员工使用简单的关键词查询来查找数据集。该服务由用于文档检索的常规反向索引支持，其中每个数据集变为“文档”，并且从数据集元数据的子集中导出每个文档的索引令牌。在本上下文中通常，每个令牌可以与索引的特定部分相关联。例如，从数据集的路径导出的令牌与索引的“路径”部分相关联。因此，搜索原子“path：x”将仅匹配数据集路径上的关键字“x”，而不合格的原子“x”将匹配数据集元数据的任何部分中的关键字。表4总结了数据集搜索索引中的主要部分及其在查询中的含义。</p>
+<p>索引令牌的提取遵循索引必须涵盖的查询类型。例如，我们要支持数据集路径上的部分匹配，用户可以搜索“x / y”以匹配数据集与路径“a / x / y / b”（但不包含“a / y” / X / b”）。一种方法是沿着公共分隔符索引路径的每个子序列（例如，对于路径“a / x / y / b”提取索引令牌“a / x”，“x / y”，…， a / x / y“，”x / y / b“等）。然而，这种做法导致了索引大小的爆炸。相反，我们按照公共分隔符分解数据集的路径，然后将每个生成的令牌与其在路径中的位置相关联。回到我们的示例，路径“a / x / y / b”按照该顺序映射到索引令牌“a”，“x”，“y”和“b”。当用户发出具有部分路径的搜索查询时，我们的服务将以相同的方式解析部分路径，并将该查询的令牌与索引中的连续标记相匹配。当索引protocol buffers 的名称时，我们遵循类似的方案，可以使用命名空间进行限定（例如“foo.bar.X”）。以这种方式，用户可以搜索其模式与特定命名空间下的任何protocol buffers 匹配的所有数据集。</p>
+<p>将搜索关键字与数据集匹配只是搜索任务的第一部分。第二部分是得出一个评分函数来对匹配的数据集进行排序，以便最终的结果与用户的搜索相关。评分通常是一个困难的问题，我们正在进行的工作的一部分涉及到根据用户体验调整评分功能。在下文中，我们描述了一些启发式，通知了到目前为止的评分功能的设计。</p>
+<ul>
+<li><em>数据集的重要性取决于其类型</em>。例如，我们的评分函数在文件数据集上支持Dremel表[19]，其他所有表都相同。直觉是数据集所有者必须明确地将数据集注册为Dremel表，这反过来使数据集对更多用户可见。我们将此操作解释为数据集很重要的信号，并将其反映在我们的最终得分中。 符合条件令牌匹配路径：数据集proto的路径：aprotocol buffers 的名称read_by：a写入/写入的作业的名称write_by：数据集upstream_of：数据集的下游/上游数据集的路径upstream_of：一种：数据集所有者的类型：数据集的所有者</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Qualified token</th>
+<th>Where token matches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>path:a</td>
+<td>Path of the dataset</td>
+</tr>
+<tr>
+<td>proto:a</td>
+<td>Name of protocol buffer</td>
+</tr>
+<tr>
+<td>read_by:a  written_by:a</td>
+<td>Names of jobs reading/writing the dataset</td>
+</tr>
+<tr>
+<td>downstream_of:a  upstream_of:a</td>
+<td>Paths of datasets downstream/upstream of the dataset</td>
+</tr>
+<tr>
+<td>kind:a</td>
+<td>Type of the dataset</td>
+</tr>
+<tr>
+<td>owner:a</td>
+<td>Owners of the dataset</td>
+</tr>
+</tbody></table>
+<p><strong>表4：限定搜索令牌a以使其与索引的不同部分匹配的示例。搜索查询可以包括若干合格且不合格的令牌。</strong></p>
+<ul>
+<li><em>关键字匹配的重要性取决于索引部分</em>。例如，在数据集路径上的关键字匹配比读取或写入数据集的作业的匹配更重要，所有其他相同。这种启发式反映了我们在实践中观察到的搜索类型。</li>
+<li><em>沿袭扇出是数据集重要性的良好指标</em>。具体来说，这种启发式有利于具有许多阅读作业和许多下游数据集的数据集。直觉是，如果许多生产管道访问数据集，那么很可能数据集很重要。可以将此启发式视图作为PageRank在Graph中的近似值，其中数据集和生产作业是顶点，边缘表示从作业获取的数据集。这种启发式的有趣工具和Google的生产管道（以及其他企业的潜在管道）的性质是将某些数据集分配到非常高的分数，因为它们被许多内部管道间接消耗 - 即使它们可能无用给大多数用户一个这样的例子是Google的Web爬网，许多管道消耗（通常是间接的），以便提取不同类型的信息。因此，调整和控制这个启发式对整体排名功能的贡献变得很重要，否则这些数据集往往会被排到高位，即使是模糊相关的搜索。</li>
+<li><em>具有所有者资料描述的数据集可能很重要</em>。我们的用户界面使数据集所有者能够提供他们希望其他团队使用的数据集的描述。我们将存在这样的描述视为数据集重要性的信号。如果关键字匹配发生在数据集的描述中，则该数据集也应该加权更高。</li>
+</ul>
+<p>我们的评分功能包含了这些启发式和其他信号，和任何类似的设置一样，调整不同信号的贡献一直是我们团队中不断的努力。请注意，我们并不声称我们提到的启发式是完整的。事实上，一个有趣的研究问题是理解影响搜索时间数据集重要性的因素（当搜索关键字提供用户意图的一些指示），而且在一个静态的，更全局的情况下，考虑到数据集的使用与企业中的其他数据集，工作和团队。这个静态上下文与我们的后端相关，作为我们应该优先考虑元数据提取的数据集的附加信号。</p>
+<p>除了关键字搜索之外，Goods还提供了 Catalog中某些分类元数据的元数据方面，例如数据集所有者和数据集文件格式。这些方面为用户提供了匹配数据集的概述，并帮助他们更容易地制定后续的钻取查询。</p>
+<h2 id="5-3团队仪表板"><a href="#5-3团队仪表板" class="headerlink" title="5.3团队仪表板"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#53团队仪表板" target="_blank" rel="noopener">5.3团队仪表板</a></h2><p>Goods仪表板是一个可配置的一站式商店，用于显示由团队生成的所有数据集，以及每个数据集的有用元数据，例如各种健康指标，其他仪表板，以及数据集所在的存储系统是否联机。随着仪表板中更新数据集的元数据，Goods会自动更新仪表板的内容。用户可以轻松地将仪表板页面嵌入到其他文档中，并与其他文档共享仪表板。</p>
+<p>Goods仪表板还提供了监控数据集和防火警报的方法，如果某些预期的属性不能成立（例如，一个数据集应该有一定数量的碎片或者应该具有一定的值分布）。用户可以点击几下设置这种类型的监控，然后Goods负责检查相应数据集的监控属性，并将任何警报传播到内部监控用户界面。除了进行固定的验证检查之外，Goods还可以通过学习趋势来产生一些常见的感兴趣的属性。例如，如果数据集的大小每个版本历史上增加10％，则Goods可以推荐相应的检查，以确定下一个数据集大小应在预计大小周围的一定范围内。</p>
+<h1 id="6-学习经验"><a href="#6-学习经验" class="headerlink" title="6.学习经验"></a><a href="file:///C:/Users/ixiaoyu/AppData/Local/Youdao/YNote/markdown/index.html#6学习经验" target="_blank" rel="noopener">6.学习经验</a></h1><p>在我们建立Goods的努力中，我们遇到了许多陷阱 - 一些是可以避免的，有些是难以预料的。在本节中，我们总结了我们沿途学到的一些教训。 随着时间的推移 - 我们开始使用数据集发现构建 Catalog作为目标用例。很快，我们意识到工程师正在以各种方式使用Goods，其中一些偏离或改进了初始用例。以下是我们在使用日志中观察到的主要趋势，或从我们的用户中学到：</p>
+<ul>
+<li>审计protocol buffers 某些protocol buffers 可能包含个人身份信息，因此使用这些protocol buffers 的任何数据集必须遵守严格的使用和访问策略。使用Goods，工程师可以轻松找到符合敏感protocol buffers 的所有数据集，并在违反政策的情况下提醒数据集所有者。</li>
+<li>重新找到数据集工程师生成许多“实验”数据集作为其工作的一部分，但是当他们想要共享这些数据集或继续处理这些数据集时，往往会忘记路径。通常这些数据集可以通过简单的关键词搜索轻松重新找到。</li>
+<li>了解遗留代码旧代码的最新文档很难找到。Goods展示了一个原始图，工程师可以使用它来跟踪传统代码的先前执行以及输入和输出数据集，这反过来可为底层逻辑提供有用的线索。</li>
+<li>书签数据集数据集的个人资料页面是一个有关数据集信息的自然商店。用户将这些页面标记为便于访问，并与其他用户共享数据集。</li>
+<li>注释数据集Goods Catalog作为数据集注释的中心，可以在各个团队之间共享。例如，团队可以使用不同隐私级别来标记他们的数据集，以便向工程师警告数据集的预期使用情况，并促进策略检查。</li>
+</ul>
+<p>值得注意的是，最后一个功能是由Google内的一个不同的团队构建的，它们搭载在我们开发的基础设施上。这种外部贡献验证了我们的目标，帮助创建围绕数据集管理的公司范围的工具生态系统。 在开发Goods时，我们与Google内的团队进行了几次会议，讨论了数据集管理的难点。我们非常快速地意识到，除了搜索之外，还需要一套全面的数据管理工具，包括监视数据集健康的仪表板，自动化数据集测试以及了解数据集之间差异的工具。我们的可扩展设计使我们能够以相对较小的增量工作来支持这些用例。此外，其中一些工具可以增加 Catalog，并附加适用于其他用例的元数据。例如，用户显式包含在数据仪表板中进行监控的数据集显然是重要的数据集，因此我们可以提高其排名。</p>
+<p><strong><em>使用域特定信号进行排名</em></strong> - 如第2节所述，与其他域中的排名问题（例如，Web排名）相比，排序数据集的问题具有独特的特征。我们的Goods经验证实了这一观察。例如，我们发现数据集之间的来源关系提供了强大的域特定排名信号。具体来说，团队通常会生成一些“主”数据集的非规范化版本，以便于主数据的不同类型的分析。这些非规范化数据集可以匹配与主数据集相同的搜索关键字，但很明显，主数据集应该被排在较高的通用查询或元数据提取。当来自一个团队的数据集被处理以在另一个团队或项目的范围内创建数据集时，另一个例子来自跨团队边界的来源关系。在这种情况下，我们可以提高输入数据集的重要性，如外部团队的使用所证明的那样。</p>
+<p><strong><em>输出数据集也很重要</em></strong>，因为我们可以将其视为外部项目中其他数据集的起源。 识别出处关系的类型是一个有趣的研究问题，特别是在事后元数据推理的背景下。我们可以在这个方向上利用这些信号，包括数据集中的内容相似性，已知的来源关系以及所有者提供的描述等众包信息。一旦我们对这些关系进行分类，我们就必须在排名范围内对它们进行推理，这个问题本身涉及不同的挑战。 预期和处理异常数据集 - 鉴于 Catalog中的大量数据集，我们早期遇到了许多意想不到的情况。我们将其中一些作为一次性专用代码，另外还需要系统级的重新设计。例如，3.2节中描述的抽象机制采用特殊逻辑来提取非常规的日期（例如“05Jan2015”）和版本。处理由于我们的代码库之外的第三方库中的问题导致我们的分析器崩溃的某些数据集需要第4.3节中描述的沙盒机制。我们采取了采用最简单的方法来解决问题的策略，并且在需要时将其概括为一体。</p>
+<p><strong><em>根据需要导出数据</em></strong> - Goods Catalog的存储介质是键值存储，搜索服务由传统的反向索引支持。然而，这些结构都不适用于在源图上可视化或执行复杂路径查询。为了支持这种用例，我们将 Catalog数据的每日导出设置为主题 - 谓词 - 对象三元组。然后，我们将这些三元组导入到支持路径查询的基于图形的系统中，并公开了一个更易于可视化的API。对于需要更强大的查询处理功能的用例，我们的存储介质本身不支持，最简单的策略是将 Catalog数据导出到适当的专用引擎。 确保可恢复性 - 提取数十亿个数据集的元数据是昂贵的。在稳定状态下，我们在一天内处理一天的新数据集。丢失或破坏 Catalog的重要部分可能需要几周才能恢复，除非我们将重要的额外计算资源用于恢复。此外，我们可能甚至不能在重大数据丢失后重新计算一些元数据。例如，一些暂时文件链接起源图中的输入和输出数据集。如果我们放弃了我们从这些瞬态文件中推断的来源数据，我们将无法恢复。</p>
+<p>为了确保可恢复性，我们已经配置了Bigtable，以便在几天内保留快照的快照窗口，但是我们还为Goods专门制定了定制的恢复方案。具体来说，我们已经添加了一个专门的过程，以便在单独的 Catalog中快照高价值数据集（用户已经通过注释明确表达兴趣），以防止数据丢失。另一个进程复制了为配置文件页面供电的 Catalog的子集，以便即使主 Catalog脱机，该服务仍然可用。此外，我们使用Goods数据集监视服务作为 Catalog本身（这是另一个结构化数据集！），以确保及早发现数据损坏和删除。我们根据我们在多次修复 Catalog的经验，达成了这种组合方法，其中一些导致了面向用户的服务的重大中断。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2021/02/23/Goods%20Organizing%20Google%E2%80%99s%20Datasets%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/" title="Goods Organizing Google’s Datasets（翻译）">http://kanatsux.github.io/2021/02/23/Goods%20Organizing%20Google%E2%80%99s%20Datasets%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/02/04/%E5%9C%A8windows%E4%B8%8Bpython3%E4%BD%BF%E7%94%A8multiprocessing.Pool%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="在windows下python3使用multiprocessing.Pool时出现的问题">
+                <i class="fa fa-chevron-left"></i> 在windows下python3使用multiprocessing.Pool时出现的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://fakecola.gitee.io/" title="邪恶的产品万图" target="_blank">邪恶的产品万图</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Goods-Organizing-Google’s-Datasets（翻译）"><span class="nav-number">1.</span> <span class="nav-text">Goods: Organizing Google’s Datasets（翻译）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-INTRODUCTION"><span class="nav-number">2.</span> <span class="nav-text">1. INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-CHALLENGES"><span class="nav-number">3.</span> <span class="nav-text">2. CHALLENGES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1数据集的数量和大小的规模"><span class="nav-number">3.1.</span> <span class="nav-text">2.1数据集的数量和大小的规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-多样性"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 多样性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Catalog条目的丢失"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Catalog条目的丢失</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4元数据发现的不确定性"><span class="nav-number">3.4.</span> <span class="nav-text">2.4元数据发现的不确定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-计算数据集的重要性"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 计算数据集的重要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-了解数据集语义"><span class="nav-number">3.6.</span> <span class="nav-text">2.6 了解数据集语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-THE-GOODS-CATALOG"><span class="nav-number">4.</span> <span class="nav-text">3. THE GOODS CATALOG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-元数据"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 元数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-将数据集组织成cluster"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 将数据集组织成cluster</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-后端实现"><span class="nav-number">5.</span> <span class="nav-text">4.后端实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Catalog-storage"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Catalog storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2批处理作业和调度"><span class="nav-number">5.2.</span> <span class="nav-text">4.2批处理作业和调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3容错"><span class="nav-number">5.3.</span> <span class="nav-text">4.3容错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4垃圾收集元数据"><span class="nav-number">5.4.</span> <span class="nav-text">4.4垃圾收集元数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-前端：服务-Catalog"><span class="nav-number">6.</span> <span class="nav-text">5 前端：服务 Catalog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1数据集配置文件页面"><span class="nav-number">6.1.</span> <span class="nav-text">5.1数据集配置文件页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2数据集搜索"><span class="nav-number">6.2.</span> <span class="nav-text">5.2数据集搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3团队仪表板"><span class="nav-number">6.3.</span> <span class="nav-text">5.3团队仪表板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-学习经验"><span class="nav-number">7.</span> <span class="nav-text">6.学习经验</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">454.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
