@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Waves 11 全套插件说明书转载自：https:&#x2F;&#x2F;tieba.baidu.com&#x2F;p&#x2F;6803558523?see_lz=1  Waves混音 DTS Neural Surround UpMix这款插件由DTS&amp;#174;授权研发，能够在广播、后期制作中让混音师将立体声转换到四声道、5.1及7.1环绕声，同时也能够将5.1转换到7.1环绕声，从而避免在标准向上混音中出现原始素材不符合所需的多">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="waves插件说明书">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2021&#x2F;03&#x2F;12&#x2F;waves%E6%8F%92%E4%BB%B6%E8%AF%B4%E6%98%8E%E4%B9%A6&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="Waves 11 全套插件说明书转载自：https:&#x2F;&#x2F;tieba.baidu.com&#x2F;p&#x2F;6803558523?see_lz=1  Waves混音 DTS Neural Surround UpMix这款插件由DTS&amp;#174;授权研发，能够在广播、后期制作中让混音师将立体声转换到四声道、5.1及7.1环绕声，同时也能够将5.1转换到7.1环绕声，从而避免在标准向上混音中出现原始素材不符合所需的多">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20210312132511.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=88239670742762d0803ea4b790ed0849&#x2F;21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=65d546ccb30f4bfb8cd09e5c334e788f&#x2F;08eb62ecab64034f9f27eb55b8c379310b551d88.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=ec94539121d3d539c13d0fcb0a86e927&#x2F;96292f013af33a87cc2e7375d15c10385343b52b.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=8aef89a9c6c8a786be2a4a065708c9c7&#x2F;e49650167f3e670966cd6cac2cc79f3df9dc55a1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=653e4e05c7160924dc25a213e406359b&#x2F;4a343219972bd407e639faae6c899e510eb309fc.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=2d36410323a85edffa8cfe2b795409d8&#x2F;1dcf14b0cb1349549824c037414e9258d1094ab8.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=563ea45b8c504fc2a25fb00dd5dde7f0&#x2F;0cd24c638535e5dd9e018d8c61c6a7efce1b6241.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=a7bf43bc9ab1cb133e693c1bed5456da&#x2F;8803d0550923dd54c5598f3bc609b3de9c824848.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=060dd59fd4cec3fd8b3ea77de688d4b6&#x2F;80ed65029245d6886b209af7b3c27d1ed21b2450.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=88239670742762d0803ea4b790ed0849&#x2F;21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=4e0cd1dc7b81800a6ee58906813433d6&#x2F;c31a80d9bc3eb135acae9fe8b11ea8d3fd1f440d.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=354c6e9395025aafd3327ec3cbecab8d&#x2F;19bf3d0e4bfbfbed4f3b1e2c6ff0f736afc31f10.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=babfa15da63533faf5b6932698d2fdca&#x2F;70ea1b8aa61ea8d35e785c57800a304e251f5818.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=4bb4c8b31ffa513d51aa6cd60d6c554c&#x2F;122dbf9659ee3d6d8fc0daa454166d224f4ade69.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=73902462363fb80e0cd161df06d02ffb&#x2F;fb1ee2ed54e736d15d57a45b8c504fc2d562692a.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=60efc0a746da81cb4ee683c56267d0a4&#x2F;c2dba0dab6fd52661d971447bc18972bd4073632.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=3a7c8d318f22720e7bcee2f24bca0a3a&#x2F;311e95f2d7ca7bcb39cdef7ca9096b63f724a8c4.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=5a5f2bb0c239b6004dce0fbfd9513526&#x2F;f510a3f23a87e9507abbdb3f07385343faf2b4c2.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=7f051e584cb5c9ea62f303ebe538b622&#x2F;8afa8ccf36d3d539fd9e27902d87e950342ab0d7.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=4177ea60868fa0ec7fc764051696594a&#x2F;e3fc91fb513d26977a49200e42fbb2fb4216d8d8.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=d3a6d45e67cf3bc7e800cde4e101babd&#x2F;78d7063cf8dcd1000e0ed072658b4710b8122fe0.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=1f5bed7c2d292df597c3ac1d8c305ce2&#x2F;6ee579ff9925bc31d7d529cb49df8db1ca1370ee.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=7baa625d7009c93d07f20effaf3cf8bb&#x2F;8a2de9ce3bc79f3d4a61cc63ada1cd11738b29f6.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=0165d072658b4710ce2ffdc4f3cfc3b2&#x2F;04002013c8fcc3ce7839e1608545d688d53f20fd.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=cfddad1ddd8065387beaa41ba7dca115&#x2F;262895d6912397ddfd8ab0574e82b2b7d1a28787.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=7e0cefb0402c11dfded1bf2b53266255&#x2F;52cf30ed8a1363277e05ea60868fa0ec09fac78e.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=d3d4d45e67cf3bc7e800cde4e101babd&#x2F;78d7063cf8dcd1000e7cd072658b4710b8122f96.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=295c27926bd98d1076d40c39113eb807&#x2F;ce0098e83901213fbf8fffb243e736d12f2e9535.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=19dab2a06e310a55c424defc87444387&#x2F;49452a18ebc4b745ad459f45d8fc1e178b8215a5.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=4dfcaebd8b82d158bb8259b9b00b19d5&#x2F;924855be6c81800a852da15da63533fa838b47ae.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=35e86e9395025aafd3327ec3cbecab8d&#x2F;19bf3d0e4bfbfbed4f9f1e2c6ff0f736aec31fb4.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=178cd774683e6709be0045f70bc79fb8&#x2F;2419503c70cf3bc72f37e6bfc600baa1cd112abb.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=53c68f4080dda144da096cba82b7d009&#x2F;e25434355982b2b78fb3129726adcbef76099b42.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=96e29ce8b11ea8d38a22740ca70a30cf&#x2F;ebc3641e4134970a95563b7c82cad1c8a7865d49.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=e72024902d87e9504217f3642038531b&#x2F;aa40ac2bc65c10380263e591a5119313b07e8951.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=6e277341584a20a4311e3ccfa0539847&#x2F;63b4df2209f79052b5136c6d1bf3d7ca7bcbd562.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=88239670742762d0803ea4b790ed0849&#x2F;21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=ce7547e1a5b7d0a27bc90495fbee760d&#x2F;93b295f531adcbef15485555bbaf2edda3cc9f72.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=3b7012b4862397ddd679980c6983b216&#x2F;d4cd3845ad345982ecffcec11bf431adcbef8479.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;feed-image.baidu.com&#x2F;0&#x2F;pic&#x2F;4073701928c5e49dac5ac7c4475ef8cf.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;aod-image.baidu.com&#x2F;5&#x2F;pic&#x2F;e49b173f4f765829e251b905696dc386.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=aad6b7625b086e066aa83f4332097b5a&#x2F;2d1684940a7b020869bb14b275d9f2d3572cc800.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=cf188c3bc609b3deebbfe460fcbe6cd3&#x2F;f0ce0583d158ccbff5d79e690ed8bc3eb135410f.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=a30c8641650e0cf3a0f74ef33a47f23d&#x2F;4fe34ecb7bcb0a46c141a06a7c63f6246b60af17.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=4f5e30109cd4b31cf03c94b3b7d7276f&#x2F;f00c1e00a18b87d622cc804c100828381e30fdec.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=6314637dc51b0ef46ce89856edc551a1&#x2F;4de482d4ad6eddc4960c9fa82edbb6fd5366338f.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=08b5cf6aa4de9c82a665f9875c8080d2&#x2F;df924859ccbf6c811ae707bbab3eb13532fa40a6.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=cd2693d2dc1349547e1ee86c664f92dd&#x2F;0a449022dd54564e01a1cf6aa4de9c82d0584faa.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;loading_69032b0.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=3d0b2f2d321f95caa6f592bef9177fc5&#x2F;d6da48c9a786c917d53f786ade3d70cf3bc757b2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=0255fa3f073853438ccf8729a312b01f&#x2F;105362f3b21193138701f6e372380cd791238d30.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=2fe908cb49df8db1bc2e7c6c3922dddb&#x2F;cea1521249540923aedd6a2d8558d109b3de493a.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=0a01ed20ba4bd11304cdb73a6aaea488&#x2F;9203eaf182025aaf669b7798ecedab64024f1acd.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=39968d5624fa828bd1239debcd1e41cd&#x2F;c19b3f1fa8d3fd1fc49cab69274e251f94ca5fd9.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=dfff0949d15c1038247ececa8210931c&#x2F;5328ca42fbf2b211a5bc8c1ddd8065380dd78ee0.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=fbadc199b851f3dec3b2b96ca4eff0ec&#x2F;b0ce2d8e8c5494ee96a4064a3af5e0fe98257ef4.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=5ffd4cac2cc79f3d8fe1e4388aa0cdbc&#x2F;dc2d61ddd100baa15bd14ee85010b912c9fc2ef1.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=e791a88de71f3a295ac8d5c6a924bce3&#x2F;7939b4f4e0fe9925d7f4600323a85edf8cb171fe.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=9564be45d8fc1e17fdbf8c397a91f67c&#x2F;5d071383b9014a9020ce4feebe773912b21bee87.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=a591d79b0d4c510faec4e21250582528&#x2F;121f40f8d72a605907f8e8493f34349b023bba8e.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;jubao_button_4ee5c4f.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;tb2.bdstatic.com&#x2F;tb&#x2F;static-pb&#x2F;img&#x2F;head_80.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;tiebapic.baidu.com&#x2F;forum&#x2F;w%3D580&#x2F;sign=12a69128c61373f0f53f6f97940e4b8b&#x2F;30e01b035aafa40f881ec78ebc64034f79f0199e.jpg">
+<meta property="og:updated_time" content="2021-03-12T05:35:41.202Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;20210312132511.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2021/03/12/waves插件说明书/"/>
+
+
+
+
+
+  <title>waves插件说明书 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2021/03/12/waves%E6%8F%92%E4%BB%B6%E8%AF%B4%E6%98%8E%E4%B9%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">waves插件说明书</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-12T13:20:09+08:00">
+                2021-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  21.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  75
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Waves-11-全套插件说明书"><a href="#Waves-11-全套插件说明书" class="headerlink" title="Waves 11 全套插件说明书"></a>Waves 11 全套插件说明书</h1><p>转载自：<a href="https://tieba.baidu.com/p/6803558523?see_lz=1" target="_blank" rel="noopener">https://tieba.baidu.com/p/6803558523?see_lz=1</a> </p>
+<h2 id="Waves混音-DTS-Neural-Surround-UpMix"><a href="#Waves混音-DTS-Neural-Surround-UpMix" class="headerlink" title="Waves混音 DTS Neural Surround UpMix"></a>Waves混音 DTS Neural Surround UpMix</h2><p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/20210312132511.png" alt=""><br>这款插件由DTS&#174;授权研发，能够在广播、后期制作中让混音师将立体声转换到四声道、5.1及7.1环绕声，同时也能够将5.1转换到7.1环绕声，从而避免在标准向上混音中出现原始素材不符合所需的多声道格式的情况。<br>融合了精确性与创意灵活性，DTS Neural&#8482; Surround UpMix能够为声场的宽度和深度、声道布局、输出电平、低频通道滤波（LFE Filtering）以及总限制器等不同层面提供全面的、创造性的控制。<br>常用实例<br>电视直播<br>在一个立体声电视主控室中使用时，DTS Neural&#8482; Surround UpMix能将原始的立体声内容处理成环绕声，而后可以对环绕声内容进行编码并加嵌到视频当中，实现完全的高清直播传送。<br>实况转播<br>DTS Neural&#8482; Surround UpMix插件是一个理想的软件替代品，能够取代目前大多数转播车上的传统硬件设备。这种极具性价比的软件解决方案能够让转播公司自由地升级到现代化的制作系统，同时不会缺失任何工作流程中必要的处理工具。<br>网络流媒体和电视/广播制作<br>DTS Neural&#8482; Surround UpMix能让制作工程师将立体声转换成为环绕声内容，从而通过互联网或地面广播进行传输。特点：<br>由DTS授权研发<br>符合现场直播和影视后期制作的行业标准<br>忠实地完成立体声到四声道、立体声到5.1、立体声到7.1，或者5.1转7.1的转换<br>在一个多声道混音里，人物对话能够被正确放置到中央声道当中</p>
+<h2 id="Waves11-M360-Surround-Manager-Mixdown"><a href="#Waves11-M360-Surround-Manager-Mixdown" class="headerlink" title="Waves11 M360 Surround Manager Mixdown"></a>Waves11 M360 Surround Manager Mixdown</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=88239670742762d0803ea4b790ed0849/21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg" alt="img"><br>在做环绕声设计或是环绕声混音时，你需要符合行业标准的环绕声监听系统，包括精确的卫星音箱和超低音箱。对于5.1混音室的监听校准和低频管理来说，M360° Surround Manager和M360° Surround Mixdown都是必不可少的工具，它们能帮助你获得准确的音箱摆位和声音平衡。<br>特点：</p>
+<p>角度信号发送功能，能够与其它声像控制器联合使用（如S360）<br>TU标准混音输出矩阵模式<br>10种输出格式<br>从环绕声中导出四声道、左中右声道（LC R）、立体声和单声道</p>
+<h2 id="Waves11-dbx-160-Compressor-Limiter-压缩器"><a href="#Waves11-dbx-160-Compressor-Limiter-压缩器" class="headerlink" title="Waves11 dbx 160 Compressor/Limiter 压缩器"></a>Waves11 dbx 160 Compressor/Limiter 压缩器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=65d546ccb30f4bfb8cd09e5c334e788f/08eb62ecab64034f9f27eb55b8c379310b551d88.jpg" alt="img"><br>dbx&#174; 160硬件压缩器被认为是有史以来最好的鼓压缩器之一，在同类型设备中傲视群雄。它拥有引以为傲的纯净声音和极小的总谐波失真（THD）。从70年代末到整个80年代，拥有极快响应速度的dbx&#174; 160压缩器几乎被使用在每一次重要的录音当中。在之后的岁月里，160系列的后续型号也同样成为了行业标准。<br>Waves与dbx&#174;合作开发，带来这个传奇硬件压缩器的软件版本：Waves dbx&#174; 160 Compressor/Limiter插件，旨在真实重现经典硬件的声音。除了对经典硬件压缩器的精细建模外，Waves dbx&#174; 160插件还融入了一些原始硬件不具备的独特功能，例如： MS矩阵、混合度（并联压缩控制）、噪声控制以及立体声组件。这些优异性能让Waves dbx&#174; 160 Compressor/Limiter成为你在录音室或现场演出混音中的不二之选。<br>“尽可能地真实重现现场演出”是dbx&#174;公司在70年代创立之初就一直追求的目标。Waves dbx&#174; 160 Compressor/Limiter插件不忘初心，不仅让你的录音获得出色的真实感，还能让你的现场表演在细微之处不同凡响<br>特点：<br>与dbx&#174;合作研发<br>基于dbx&#174; 160压缩器硬件原型的精准建模<br>为录音棚和现场使用设计<br>MS矩阵<br>混合比（并联压缩控制）与噪声控制<br>立体声组件</p>
+<h2 id="Waves效果器-Power-Pack混响插件套装"><a href="#Waves效果器-Power-Pack混响插件套装" class="headerlink" title="Waves效果器 Power Pack混响插件套装"></a>Waves效果器 Power Pack混响插件套装</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=ec94539121d3d539c13d0fcb0a86e927/96292f013af33a87cc2e7375d15c10385343b52b.jpg" alt="img"></p>
+<p>凭借从混响、延时和均衡到压缩、限制和电平最大化等所有功能，Power Pack套装是Waves的完美入门体验。无论是刚刚入行，还是准备扩展自己的制作装备，Power Pack都能提供你和你的混音作品必不可少的处理能力。<br>用于混音和母带制作的10个重要插件<br>Waves 的完美入门体验<br>包括压缩、均衡、混响、延时和电平最大化等等<br>所有插件也包含在Silver套装中</p>
+<h2 id="Waves11-DTS-Neural-Surround-DownMix"><a href="#Waves11-DTS-Neural-Surround-DownMix" class="headerlink" title="Waves11 DTS Neural Surround DownMix"></a>Waves11 DTS Neural Surround DownMix</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=8aef89a9c6c8a786be2a4a065708c9c7/e49650167f3e670966cd6cac2cc79f3df9dc55a1.jpg" alt="img"><br>这款插件由DTS&#174;授权研发，能将5.1或7.1环绕声内容处理为双声道立体声混音，并按照内容创作者所期望的声音图景来重新精确定位。<br>任何5.1或7.1声道的内容，包括体育、音乐或其他节目的实时转播都可以被向下混成一个立体声信号，从而在标准双声道设备上传输或重放。得益于DTS Neural&#8482; Surround DownMix，使用立体声设备的观众也能够在收听环绕声内容时得到精确、平衡的立体声聆听体验。<br>采用了DTS主动修正技术的专利，DTS Neural Surround DownMix解决了常见的立体声处理问题，比如梳状滤波和空间偏移。经它处理后得到的立体声混音听感自然，如同原始多通道环绕声内容一样，能够真实重现空间中的每一个声音元素。</p>
+<p>特点：</p>
+<p>由DTS授权研发<br>行业标准：应用于现场直播和影视后期制作<br>如实地将5.1和7.1环绕声转换成为立体声，或者将7.1环绕声转换成为5.1声道<br>主动修正技术，能够修复比如梳状滤波、空间偏移和失真等问题</p>
+<h2 id="Waves11-DTS-Neural-Surround-UpMix混音插件"><a href="#Waves11-DTS-Neural-Surround-UpMix混音插件" class="headerlink" title="Waves11 DTS Neural Surround UpMix混音插件"></a>Waves11 DTS Neural Surround UpMix混音插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=653e4e05c7160924dc25a213e406359b/4a343219972bd407e639faae6c899e510eb309fc.jpg" alt="img"><br>这款插件由DTS&#174;授权研发，能够在广播、后期制作中让混音师将立体声转换到四声道、5.1及7.1环绕声，同时也能够将5.1转换到7.1环绕声，从而避免在标准向上混音中出现原始素材不符合所需的多声道格式的情况。<br>融合了精确性与创意灵活性，DTS Neural&#8482; Surround UpMix能够为声场的宽度和深度、声道布局、输出电平、低频通道滤波（LFE Filtering）以及总限制器等不同层面提供全面的、创造性的控制。<br>常用实例<br>电视直播<br>在一个立体声电视主控室中使用时，DTS Neural&#8482; Surround UpMix能将原始的立体声内容处理成环绕声，而后可以对环绕声内容进行编码并加嵌到视频当中，实现完全的高清直播传送。<br>实况转播<br>DTS Neural&#8482; Surround UpMix插件是一个理想的软件替代品，能够取代目前大多数转播车上的传统硬件设备。这种极具性价比的软件解决方案能够让转播公司自由地升级到现代化的制作系统，同时不会缺失任何工作流程中必要的处理工具。<br>网络流媒体和电视/广播制作<br>DTS Neural&#8482; Surround UpMix能让制作工程师将立体声转换成为环绕声内容，从而通过互联网或地面广播进行传输。特点：</p>
+<p>由DTS授权研发<br>符合现场直播和影视后期制作的行业标准<br>忠实地完成立体声到四声道、立体声到5.1、立体声到7.1，或者5.1转7.1的转换<br>在一个多声道混音里，人物对话能够被正确放置到中央声道当中</p>
+<h2 id="Waves11-Dugan-Automixer-Dugan-Automixer自动混音控制器"><a href="#Waves11-Dugan-Automixer-Dugan-Automixer自动混音控制器" class="headerlink" title="Waves11 Dugan Automixer Dugan Automixer自动混音控制器"></a>Waves11 Dugan Automixer Dugan Automixer自动混音控制器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=2d36410323a85edffa8cfe2b795409d8/1dcf14b0cb1349549824c037414e9258d1094ab8.jpg" alt="img"><br>Dugan Automixer能自动实时控制多个麦克风的增益，对于新闻直播、脱口秀节目以及任何涉及多人参与的场景，它都是最理想的选择。Waves Dugan Automixer由Waves与知名的专业音频发明家Dan Dugan合作开发。在世界范围内被广泛使用的Dugan自动混音控制器（Dugan Speech System Automatic Mixing Controllers）现在有了开创性的软件版本。Dugan Automixer几乎适用于任何调音台，对于新闻广播、脱口秀节目、礼拜堂、影视对白录音或任何涉及多个话筒和参与者的讨论/会议场景，它都是终极的解决方案。Waves Dugan Automixer插件采用Dugan专有的主动语音处理技术，可对多个麦克风的增益进行实时的自动控制，从而显著减少反馈、环境噪声和相邻麦克风产生的梳状滤波效果。即使在多个演讲者同时开口发声的情况下，它也能够保持一致的系统增益，并可以实现完美过渡的交叉淡入淡出，而不产生任何信号压缩，也不会有噪声门可能带来的不自然的声音效果。特点;<br>与知名的专业音频发明家Dan Dugan合作开发<br>仅在MultiRack Native和MultiRack SoundGrid上运行<br>几乎适用于任何调音台<br>实时自动控制多个现场话筒<br>同时自动控制最多可达64个通道<br>任何多人对话场景下的理想选择<br>完美过渡且不留痕迹的淡入淡出</p>
+<h2 id="Waves-混音Dugan-Automixer-Dugan-Speech自动混音插件"><a href="#Waves-混音Dugan-Automixer-Dugan-Speech自动混音插件" class="headerlink" title="Waves 混音Dugan Automixer + Dugan Speech自动混音插件"></a>Waves 混音Dugan Automixer + Dugan Speech自动混音插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=563ea45b8c504fc2a25fb00dd5dde7f0/0cd24c638535e5dd9e018d8c61c6a7efce1b6241.jpg" alt="img"><br>给多个麦克风混音可以非常简单，只需要两款实时自动混音插件——一个用于eMotion LV1调音台，一个用于其他现场调音台（通过MultiRack）。<br>对于新闻广播、电台和电视台脱口秀节目、公众集会、影视对白录音、研讨活动以及任何涉及多个话筒和参与者的场景，Dugan Speech和Dugan Automixer都是终极的解决方案。<br>利用这个高水准套装，你可以调用集成于eMotion LV1调音台中的Dugan Speech插件，通过MultiRack插件宿主还可以在其他主流调音台中使用Dugan Automixer插件。与专业音频发明家Dan Dugan合作开发的这两款插件都具备Dugan专有的主动语音处理技术作为背书。<br>在多个演讲者同时开口讲话的情况下，Dugan系列插件不需要你去手动调整，就能完成同时最多64个通道的自动控制，实现完美过渡的交叉淡入淡出，而不产生任何信号压缩，也不会有噪声门可能带来的不自然的声音效果。它们也能够显著减少反馈、环境噪声和相邻麦克风产生的梳状滤波效果，确保多个演讲者同时发声时系统增益保持一致。<br>特点：<br>与Dan Dugan合作开发的插件套装<br>Dugan Speech用于eMotion LV1调音台，Dugan Automixer用于其他调音台（只能通过MultiRack）<br>同时自动控制最多可达64个通道<br>无需手动调整<br>任何多人对话场景下的理想选择<br>自动减少反馈和环境噪声<br>确保系统增益保持一致<br>完美过渡且不留痕迹的淡入淡出</p>
+<h2 id="Waves11-Dugan-Speech自动调音台"><a href="#Waves11-Dugan-Speech自动调音台" class="headerlink" title="Waves11 Dugan Speech自动调音台"></a>Waves11 Dugan Speech自动调音台</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=a7bf43bc9ab1cb133e693c1bed5456da/8803d0550923dd54c5598f3bc609b3de9c824848.jpg" alt="img"><br>Dugan Speech是Dugan自动调音台（Dugan Automixer）的软件版本，被设计集成到eMotion LV1 现场调音台内，用于自动控制多个麦克风的增益。<br>Dugan Speech为一切涉及多个话筒和参与者的场景提供了权威的解决方案，包括电视新闻、脱口秀节目、公众集会、影视对白录音以及多人会议等等。<br>采用Dan Dugan专有的主动语音处理技术，Dugan Speech可对多个麦克风的增益进行实时的自动控制，从而显著减少反馈、环境噪声和相邻话筒产生的梳状滤波效果。<br>即使在多个演讲者同时开口讲话的情况下，Dugan Speech也能够确保系统增益保持一致。同时它能够实现完美过渡的交叉淡入淡出，无论任何情况下都不产生任何信号压缩，也不会有噪声门可能带来的不自然的声音效果。<br>通过在eMotion LV1调音台任何通道中以层级模式（Layer Mode）轻松调用Dugan界面，Dugan Speech可以让多个话筒的自动混音前所未有地简单轻松。<br>特点：</p>
+<p>可对多个现场话筒信号自动实时混音<br>可同时对多达64个通道自动混音<br>被完美集成在eMotion LV1现场调音台中<br>与Dan Dugan合作开发<br>Dugan静音/覆盖编组功能集成在LV1调音台的静音功能（Mute）里<br>任何多人对话场景下的理想选择</p>
+<h2 id="Waves混音-S360-Surround-Imager-amp-Panner"><a href="#Waves混音-S360-Surround-Imager-amp-Panner" class="headerlink" title="Waves混音 S360 Surround Imager &amp; Panner"></a>Waves混音 S360 Surround Imager &amp; Panner</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=060dd59fd4cec3fd8b3ea77de688d4b6/80ed65029245d6886b209af7b3c27d1ed21b2450.jpg" alt="img"><br>环绕声技术为人们带来激动人心、远超立体声的听觉体验。利用S360°插件，你可以对声像进行精准的定位，对纵深进行调整，并且对于空间感做整体加强。S360°Surround Imager以及S360°Surround Panner插件能够通过增加早期反射声以及运用Shuffling处理（一种用于多通道的增强处理技术），来实现低频宽度和纵深的扩展。<br>特点：<br>参数、图示以及实时处理模块<br>多重链接，显示以及控制选项<br>针对时间码、速度、小节、采样、SMPTE码、帧速、音调、音程以及频率的控制<br>成对或者三个一组的声像旋转运算<br>中间声像以及LFE（低频效果通道）的发送控制</p>
+<h2 id="Waves11-M360-Surround-Manager-环绕声监听"><a href="#Waves11-M360-Surround-Manager-环绕声监听" class="headerlink" title="Waves11 M360 Surround Manager 环绕声监听"></a>Waves11 M360 Surround Manager 环绕声监听</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=88239670742762d0803ea4b790ed0849/21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg" alt="img"><br>在做环绕声设计或是环绕声混音时，你需要符合行业标准的环绕声监听系统，包括精确的卫星音箱和超低音箱。对于5.1混音室的监听校准和低频管理来说，M360° Surround Manager和M360° Surround Mixdown都是必不可少的工具，它们能帮助你获得准确的音箱摆位和声音平衡。</p>
+<p>特点：</p>
+<p>角度信号发送功能，能够与其它声像控制器联合使用（如S360）<br>TU标准混音输出矩阵模式<br>10种输出格式<br>从环绕声中导出四声道、左中右声道（LC R）、立体声和单声道</p>
+<h2 id="Waves插件Nx-–-Virtual-Mix-Room-over-Headphones虚拟监听插件"><a href="#Waves插件Nx-–-Virtual-Mix-Room-over-Headphones虚拟监听插件" class="headerlink" title="Waves插件Nx – Virtual Mix Room over Headphones虚拟监听插件"></a>Waves插件Nx – Virtual Mix Room over Headphones虚拟监听插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=4e0cd1dc7b81800a6ee58906813433d6/c31a80d9bc3eb135acae9fe8b11ea8d3fd1f440d.jpg" alt="img"><br>想创造优秀的混音作品却苦于缺少完美的房间声学？想在旅途中混音？那么这款插件可以在你的耳机世界中重塑高端的录音棚声学条件，从而使你无论何时何地都可以对混音做出正确的决断。<br>Nx Virtual Mix Room是一款基于Waves Nx技术的虚拟监听插件。它让用户在头戴式耳机中便能体验到与专业的音箱监听环境一致的高品质声音所带来的三维深度与立体声声像。<br>Nx能更好地将你的耳机混音品质与音箱监听效果对应起来，从而让你更加自信的进行混音和监听。你只需要在母线上挂载这个插件，便仿佛置身于专业混音棚中，坐在最佳监听位置，精准地聆听你的混音作品。<br>想在耳机中进行7.1、5.1或5.0格式的环绕声混音么？Nx也可以使你得偿所愿——这无疑是环绕混音技术的一大革新。<br>Nx系列也包含了Nx Ambisonics套装中的相关组件，可以使用立体声耳机监听Ambisonics B-Format格式的音频，为360度全景声及VR项目服务。为了最佳的精确呈现，Nx Ambisonics还提供了一个3D的空间频谱显示表，用于显示360°球形空间中各个方向上声音的能量和频率。<br>最赞的是，Nx在提供上述功能的同时，并未对声音信号造成任何染色或带来任何人工处理的痕迹，你所监听到的正是恰到好处的真实混音。唯一不同的是，现在我们可以通过耳机更精确地做到这一点了。<br>最后，Nx还包含一个耳机均衡调校功能，允许用户为特定的耳机型号选择正确的均衡曲线。根据<a href="http://jump2.bdimg.com/safecheck/index?url=x+Z5mMbGPAsP4Kms9LDMkaN82CLuVp7mYGxP0+/MR3OjiLTi+otGApvswfZt0q8L7SToCZrwEXNnIP5lvMg9fRwig5nd8WCtjam400vRLI2FpdathVGqqQMVtPpUxTWNdj2oeHoEzTI=" target="_blank" rel="noopener">http://www.headphone.com</a>网站提供的专业数据，Nx的EQ调校专门针对部分耳机的特殊频响特质做了优化设计，以获得更自然平直的频响，为后续的监听与混音建立良好开端。<br>使用Waves的Nx可利用计算机的摄像头或Waves的Nx Head Tracker进行实时头部追踪，便能随时随地置身于更真实的混音空间中。<br>特点：<br>在耳机中获得理想的声学空间<br>使用耳机便能精准控制混音的深度、平衡以及声相<br>对原始音质的真实还原<br>使用立体声耳机监听7.1、5.1以及5.0信号<br>使用立体声耳机监听Ambisonics B-format信号<br>在录音时同步提升耳机的监听品质<br>为适应个人头部尺寸而提供的个性化校准系统<br>针对不同耳机型号的均衡校准功能<br>配合Nx Head Tracker实现更优化的真实体验</p>
+<h2 id="WAVES11-CLA-MixDown混音插件"><a href="#WAVES11-CLA-MixDown混音插件" class="headerlink" title="WAVES11 CLA MixDown混音插件"></a>WAVES11 CLA MixDown混音插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=354c6e9395025aafd3327ec3cbecab8d/19bf3d0e4bfbfbed4f3b1e2c6ff0f736afc31f10.jpg" alt="img"><br>来自格莱美获奖混音工程师Chris Lord-Alge的终极总线混音插件，能为你的混音画上最后的点睛之笔。（Chris Lord-Alge曾操刀Green Day、Bruce Springsteen、Keith Urban、Muse等著名音乐人的专辑制作）<br>从Aerosmith到U2，从Foo Fighters再到Muse，30多年来Chris Lord-Alge一直是摇滚乐界的殿堂级混音师。Chris的混音拥有其标志性的独特风格，其中的秘密之一，就是他在混音最后使用既有爆发力又平滑的、超乎传统的母线混音效果链——如今在CLA MixDown插件中，你也可以拥有所有这些效果。<br>“这些年里我经历了超过20000次混音，逐渐完善了我的总线效果器链，”Chris说道，“我选择了两个我最喜欢的效果链，并把他们综合到了这个简单易用的超级插件中。CLA MixDown中有两种风格独特的母线压缩效果，另外还有模拟调音台的过载失真和一个后置的均衡器，可以给低频和高频带来完美的修饰曲线。”<br>“你可以在母线上使用CLA MixDown效果器插件，也可以通过更‘CLA’的方式使用——用在母线的辅助输出轨上。你可以在彻底完成混音之后使用这个插件，为混音画上点睛之笔。但是，我建议最好在开始混音之前就插入这个插件，然后带着这个插件进行混音，这样可以帮助你更好地控制混音的细节，从而获得最棒的声音。无论哪种方式，这个插件都能神奇地让您的混音整体提升一个层次，并节省你的宝贵时间！”<br>特点：<br>简单易用的母线混音插件，能够丰富和美化你的最终混音<br>与荣获格莱美奖的混音工程师Chris Lord-Alge合作研发<br>四个推子控制，为你的混音增添色彩、改善动态、添加模拟失真<br>Bass低频推子：控制混音的丰满度<br>Treble高频推子：增加或减少高频临场感<br>Glue融合推子：带有两种不同风格的压缩处理，让混音更有凝聚力<br>Drive模拟失真推子：通过增添谐波失真来模仿经典模拟调音台的过载效果</p>
+<h2 id="WAVES-混音Maserati-GRP效果插件"><a href="#WAVES-混音Maserati-GRP效果插件" class="headerlink" title="WAVES 混音Maserati GRP效果插件"></a>WAVES 混音Maserati GRP效果插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=babfa15da63533faf5b6932698d2fdca/70ea1b8aa61ea8d35e785c57800a304e251f5818.jpg" alt="img"><br>GRP编组声部处理器插件构思者Tony Maserati说：“Maserati GRP插件旨在让音乐制作在最后一步的处理中更上一层楼。这个插件中有一个很棒的内置均衡器，但是避免了任何强烈的效果处理和提升衰减，不像在分轨混音时的那些操作。事实上，这个插件中的压缩处理是非常非常细微的，因为通常来说，我不会在我的乐器编组上加入很强烈的压缩。而是GRP却给混音中的人声和音与鼓组增加了一层美丽的光辉，听起来犹如清风拂面。”</p>
+<p>特点：</p>
+<p>为编组通道设计的多合一多效果插件<br>给编组通道增加均衡和压缩处理<br>是鼓组、人声和音等的理想选择<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音室中！</p>
+<h2 id="Waves11-Flow-Motion-FM合成器"><a href="#Waves11-Flow-Motion-FM合成器" class="headerlink" title="Waves11 Flow Motion FM合成器"></a>Waves11 Flow Motion FM合成器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=4bb4c8b31ffa513d51aa6cd60d6c554c/122dbf9659ee3d6d8fc0daa454166d224f4ade69.jpg" alt="img"></p>
+<p>这款混合型FM合成器拥有直观的图形界面，令FM合成创作变得简单又充满乐趣。不论是设计深沉贝斯、尖叫主奏、丰满铺底，抑或是咆哮音效，创新的16步快照音序器以及超过1000种预设的丰富音色库，都让你游刃有余。<br>Flow Motion结合了FM调频合成器和模拟减法合成器的最优元素，集二者强大于一身。<br>Flow浮动界面简化了FM合成的方式，设计独特的图形化FM调制矩阵，连结了四个强大的单音/复音振荡器，各自又拥有独立的波形和声像控制。你可以使用四个独立的浮动低频振荡器（LFO）/包络调制器，通过直观的拖拽操作轻松改变振荡器之间的配合。<br>Motion动作界面则允许以“传统”的减法方式进一步控制滤波器、振幅、均衡和效果，以更为灵活地增加音色的功力。<br>16步快照音序器可以轻松捕捉合成器的16种不同状态并进行实时切换，每个音色步序的16个可调用快照，能帮助你快速创建令人惊讶的音序，过程如行云流水。<br>通过16步音序器/琶音器和内置效果，Flow Motion混合型合成器将带给你全新境界的创意体验。无论你是初学者还是合成器专家，Flow M特点：<br>混合型FM合成器，FM合成器和减法合成器相结合<br>直观的图形化FM调制矩阵，提供即时视觉反馈<br>1000多种预设的强大音色库，包括独家艺术家预设音色<br>4个高分辨率振荡器<br>4个灵活的低频振荡器（LFO）和包络调制器<br>16步快照音序器：每个音色步序最多能编排16个可调用快照<br>内置音符音序器/琶音器<br>顶级的录音室品质效果<br>既可作为插件加载，也可以作为独立乐器运行，录音室或现场皆适用<br>支持NKS标准，可使用NI Komplete Kontrol和Maschine直接进行控制</p>
+<h2 id="Waves11-X-FDBK-现场音响工程师现场表演者的必备工具"><a href="#Waves11-X-FDBK-现场音响工程师现场表演者的必备工具" class="headerlink" title="Waves11 X-FDBK 现场音响工程师现场表演者的必备工具"></a>Waves11 X-FDBK 现场音响工程师现场表演者的必备工具</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=73902462363fb80e0cd161df06d02ffb/fb1ee2ed54e736d15d57a45b8c504fc2d562692a.jpg" alt="img"><br>X-FDBK可以精准地识别导致回授的频率并有针对性地去除它们，有效地缩短了主扩和返送系统的调试时间。<br>X-FDBK是有史以来第一个提供完整自动回授抑制解决方案的插件。无论你是面对上千观众的主扩调音师，还是使用自己的小型扩声系统进行演出的歌手，你现在都可以在几秒钟内获得响亮、清晰和无回授的声音。这样你就可以毫无顾虑全身心投入到混音这件真正重要的事情上去了。<br>亟待解决的问题<br>在任何试音和演出前最重要的一件事情就是检测扩声系统——将它们的音量推至产生可听见回授的程度，然后识别出回授频率，并用图示均衡器对其做出衰减。单纯用耳朵来判断是缓慢、痛苦、不准确的，因此效率底下。此外，为了避免回授，监听系统通常都要被抑制，这样做的后果就是演出者不能听到足够大的声音。<br>问题的解决方案<br>X-FDBK极大地改善了反馈检测过程并将其缩短至几秒钟。它可以快速准确地识别回授频率，并使用一个窄带的下陷对其进行衰减，维持了PA系统的保真度，并使你获得最大限度的无回授增益。<br>你要做到的就是提升电平至PA系统产生回授，然后激活插件并等待几秒钟，直至听到回授消失。<br>插件的图示频谱显示了所有的回授频率以及它们被衰减的程度，如果需要，你还可以手动调整。<br>特点：<br>自动衰减导致回授的频段<br>在你的监听和PA系统中获得更加清晰、响亮和没有回授的声音<br>设置完成则无须再次调试<br>显著改善你的现场声音和工作流程<br>使用简便快捷<br>任何现场音响工程师或现场表演者的必备工具</p>
+<h2 id="Waves-插件WNS-Noise-Suppressor实时降噪插件"><a href="#Waves-插件WNS-Noise-Suppressor实时降噪插件" class="headerlink" title="Waves 插件WNS Noise Suppressor实时降噪插件"></a>Waves 插件WNS Noise Suppressor实时降噪插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=60efc0a746da81cb4ee683c56267d0a4/c2dba0dab6fd52661d971447bc18972bd4073632.jpg" alt="img"><br>WNS Waves Noise Suppressor是一款实时降噪插件，主要用于清除语音对话音轨中的噪声。无论是室内还是户外进行同期录音，在稳态或动态噪声的抑制方面，WNS可以独步天下！它采用了精密的设计，完美衰减在对话、旁白、配音以及广播中产生的噪音，并最大程度保留原始自然的声音。WNS具有六个可调频段和一个大型的图形显示屏，可以针对问题频率实现精准识别；独有的Suggest（建议）功能，可以通过先进的技术手段来分析信号噪音，并自动调整插件参数，以提供更为优化的起点。<br>特点：<br>对话、旁白、配音及广播中降噪处理的首选工具<br>动态频率范围选项，可实现对每个频带从宽幅到精细的降噪处理<br>友好的图形显示屏<br>独树一帜的Suggest智能辅助功能<br>零延迟，确保完美的图形同步显示<br>拥有比硬件设备更为实惠的价格<br>本插件支持多个同时运行</p>
+<h2 id="Waves11-Waves-Tune-Real-Time-实时自动修正人声音高"><a href="#Waves11-Waves-Tune-Real-Time-实时自动修正人声音高" class="headerlink" title="Waves11 Waves Tune Real-Time 实时自动修正人声音高"></a>Waves11 Waves Tune Real-Time 实时自动修正人声音高</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=3a7c8d318f22720e7bcee2f24bca0a3a/311e95f2d7ca7bcb39cdef7ca9096b63f724a8c4.jpg" alt="img"></p>
+<p>一款梦幻般的工具，让歌唱家在歌唱的同时保持音调准确，保持自信，并专注于表演所表达的情感——无论是在录音棚还是在舞台上现场演出。<br>一旦音符从歌唱者的口中发出，Waves Tune Real-Time就能实时自动地进行流畅自然的人声音高修正。专为现场演出、前期制作、录音和混音打造，这款插件创新性的音调检测和修正技术保证了修正过的人声依然保持歌唱家自然的声音状态。制作人、工程师和表演者可以使用这款插件进行细微的音调修正，也可以用它来完成富有创意的音调量化效果——全部都可以实时完成！<br>简易的参数控制，简单的界面，再加上对触控屏的支持，这款插件是让时间紧迫的工程师快速得到稳妥人声的关键。<br>Waves Tune Real-Time可以根据歌曲特性轻松编程，也能对歌手的发音进行个性化调整。你可以控制检测范围，选择调性，提前标记出需要修正或避开的音符，控制插件的灵敏度，甚至可以调整歌手的颤音，同时保持自然的音调运动。如果不知道这首歌的调性，你可以用虚拟键盘输入音符，或者把插件提前设置为跟随由MIDI输入的旋律。<br>Waves Tune Real-Time兼容所有的Waves SoundGrid应用程序和eMotion调音台，并且可以通过MultiRack与任何现场调音台协同工作，而不需要繁琐的设置。<br>特点：实时自动修正人声音高超低延时，实时反应为录音棚和现场演出优化先进的共振峰修正，能够保持听感自然的人声修正颤音并保持自然的音调律动制作音调量化效果通过MIDI编程或演奏修正音高通过MultiRack SoundGrid在任何现场混音台上运行与所有SoundGrid应用兼容：StudioRack、MultiRack、eMotion ST、eMotion LV1</p>
+<h2 id="Waves11-W43-Noise-Reduction-Plugin插件"><a href="#Waves11-W43-Noise-Reduction-Plugin插件" class="headerlink" title="Waves11 W43 Noise Reduction Plugin插件"></a>Waves11 W43 Noise Reduction Plugin插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=5a5f2bb0c239b6004dce0fbfd9513526/f510a3f23a87e9507abbdb3f07385343faf2b4c2.jpg" alt="img"><br>在录制语音对白时，经常会遇到诸如嘶嘶声、轰鸣声、交通背景、风声、空调声之类的环境噪音，这些噪音经常会给录制的语音信号带来灾难性的影响。但有了Waves W43,上述一切将成为过往浮云。<br>W43的设计源自于极富盛誉的Dolby CAT43硬件降噪器，其在后期制作领域曾成为延续数十年的传世经典。W43拥有4个固定频段，是一款经济实惠、简单易用的插件。与原始硬件一样，它提供了高品质且人工痕迹最小化的降噪效果，并在此基础上融入了软件效果器的独特优势。<br>由于不同降噪技术的服务目的不同，在后期处理环节中并不适宜使用太多的降噪工具。而无论你的对白中夹杂了哪种噪音，只要使用W43，问题都将迎刃而解。<br>特点：</p>
+<p>经济实惠、简单易用<br>零延迟的完美音画同步<br>多任务同时处理</p>
+<h2 id="Waves插件-Torque鼓音调转换器"><a href="#Waves插件-Torque鼓音调转换器" class="headerlink" title="Waves插件 Torque鼓音调转换器"></a>Waves插件 Torque鼓音调转换器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=7f051e584cb5c9ea62f303ebe538b622/8afa8ccf36d3d539fd9e27902d87e950342ab0d7.jpg" alt="img"><br>这款插件可以做到普通音调转换器无法做到的自然音色，在混音中增强军鼓、嗵鼓、底鼓或是整套鼓组的声音。<br>鼓组音色的平衡是一个出色混音的关键。然而，作为混音师我们并不总能得到完美调音和录制的鼓声。<br>Torque是一个精确的鼓音调转换器，能够帮助你挽救调音不准的鼓，无需重录或替换，即可将它们调至特定的调并增强其音色，而不会像传统的音调转换器产生人工痕迹，并且不会导致形体感、音色、共鸣和力度的损失。<br>基于Waves的Organic ReSynthesis&#174;（自然再合成）技术，Torque可以检测和分析鼓的共振峰、振幅和载波信息并将其重组，使你能够调整音色和音调特征，同时保持原有声音自然的起振、共鸣和稳态特性。<br>得益于直观的控制和零延时特性，Torque完美适用于录音棚和现场演出，FOH工程师大可在演出中途甚至歌曲中途重新校准有问题的鼓音调<br>特点：<br>针对原声鼓和电鼓的音调转换器<br>无需重录或替换即可调整鼓的音色和音调<br>精确到+/-1200音分（12半音/1个八度）的音调调整<br>用于精确控制共振峰/频率的聚焦截面<br>精确的阈值和修剪控制<br>零延时的Torque Live现场组件<br>基于Waves的Organic ReSynthesis&#174;（自然再合成）技术</p>
+<h2 id="Waves11-混音Submarine效果器"><a href="#Waves11-混音Submarine效果器" class="headerlink" title="Waves11 混音Submarine效果器"></a>Waves11 混音Submarine效果器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=4177ea60868fa0ec7fc764051696594a/e3fc91fb513d26977a49200e42fbb2fb4216d8d8.jpg" alt="img"></p>
+<p>为你的音轨增添更大更深的超低频，清晰度和低频精度前所未有！依托于Waves Organic ReSynthesis（自然再合成）技术，Submarine的两个次谐波发生器可在任何大型音响系统上提供均衡的超低音效果。超低频率是现代音乐制作的支柱。要真正感受到音乐，你需要节拍、贝斯线和整个混音猛击超低频段位。许多制作人都在上下求索去制作轰动的低音内容，并力求其在大型音响系统中依旧保持水晶般清澈不浑浊，没有人工加工感或过多的隆隆声。Submarine的两个超低频发生器会帮你处理音源——地鼓、贝斯，甚至是完整的混音，并在你选择的精确频率范围之下干净利落地添加新的次谐波频率，最多达到两个倍频程。Submarine创新的Organic ReSynthesis引擎将原始信号的核心元素剥离——载波、音调、共振峰和包络——再单独处理它们，然后重建音频以创建全新的超低频率，并保留原始信号的精确音高和时值。其结果就是，极具深度的次谐波内容干净而具音乐性，与你的音源自然融合。插件精确定位的RANGE滑块让你可以在20-240 Hz之间的任何位置输入想要产生超低频声音的确切频率：如果你想要给整个混音添加次谐波，或是应用于老式鼓采样——且仅仅针对地鼓，而不影响军鼓或其他乐器，那么Submarine就是完美之选。使用DRIVE旋钮可以控制新增加的超低频的染色，并轻松将其粘合到混音里。使用DYNAMICS旋钮，可以控制经过压缩的短瞬态声音，乃至持续时间更长的超低音符。当低频EQ提升无济于事时（因为你的音轨一开始就缺少低频率），或者像Renaissance Bass这样的心理声学低音增强器不够用时（它们在小型扬声器上法力强大，在大型超低音箱可能有点乏力），Submarine就是你的大救星！创造震颤身体的节拍，你可以用胸腔感受到它。为声音稀薄的混音添加一个大低频，制作爆炸性的电影音效，用骇人的超低地鼓震碎舞池。使用Submarine“超低潜艇”插件，你可以随心所欲下潜到声音最深处，低频景色清晰绝伦。特点：基于Organic ReSynthesis（自然再合成）技术的次谐波生成插件两个次谐波发生器（Sub -1和Sub -2），可以在音源选定频率范围下添加一到两个完整倍频程声音RANGE高精度频率范围滑块（20-240 Hz），可精确定位频率DRIVE染色控制，轻松将添加的次低频粘合到混音中DYNAMICS动态控制，实现强烈压缩的低频瞬态，乃至持续更长的超低音符可选择单声道/立体声控制用于并联混音的干/湿混合比控制零延迟实时混音；兼容SoundGrid由格莱美获奖制作人和混音工程师提供预设</p>
+<h2 id="WAVES11-Sub-Align插件"><a href="#WAVES11-Sub-Align插件" class="headerlink" title="WAVES11 Sub Align插件"></a>WAVES11 Sub Align插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=d3a6d45e67cf3bc7e800cde4e101babd/78d7063cf8dcd1000e0ed072658b4710b8122fe0.jpg" alt="img"><br>Sub Align是现场音响工程师必备的生存工具。在完美的扩声系统中，全频音箱和超低音箱的相位是相互对齐的。当全频音箱和超低音箱固定在一起，或者无法使用系统处理器的时候，Sub Align就能够帮助主扩调音师在全频和超低音箱的之间进行相位对齐。由此一来，Sub Align为工程师们每天都在苦苦挣扎的问题提供了革命性的解决方案。<br>亟待解决的问题<br>全频音箱和超低音箱的相对位置及距离对扩声系统的冲击力和清晰度至关重要。然而，大多数表演者和工程师都在中小型场地工作，在这种场地里，全频音箱和超低音箱往往没有正确对齐。为了腾出地面空间用于演出，超低音箱通常被放置在场地的两侧甚至后方，最后导致声音变得模糊不清。而有一些场地的全频与超低音箱固定在一起，无法通过位置移动去对齐相位。更糟糕的是，主扩调音师往往很难接触到演出场地的系统处理器，因此对这种问题也常常束手无策。<br>问题的解决方案<br>为了完美校准场地的扩声系统，Sub Align提供了一个简单而原创的方案：控制全频音箱和超低音箱的延时，并在他们之间创建一个分频点。这样一来，你就能够根据全频音箱的位置，向前或向后“移动”超低音箱，直到感觉超低音箱已经位于听感最佳的位置。由此一来，你不再需要花费宝贵的时间，用均衡器和压缩器来矫正未对齐的扩声系统。此外，Sub Align还可以让你控制超低音箱的音量和相位，从而获得额外的清晰度和冲击力。<br>一切尽在掌握<br>不要让相位混乱的扩声系统影响到你的混音效果！Sub Align将控制权交到你的手中，无论在哪种演出场地，它都能让你获得更清晰更有冲击力的声音。<br>特点：</p>
+<p>现场音响工程师必备的生存工具<br>可完美对齐全频和超低音箱<br>增加冲击力和清晰度<br>易上手，易使用<br>极大地优化你的现场音响效果</p>
+<h2 id="Waves11-Scheps-Parallel-Particles混音均衡器"><a href="#Waves11-Scheps-Parallel-Particles混音均衡器" class="headerlink" title="Waves11 Scheps Parallel Particles混音均衡器"></a>Waves11 Scheps Parallel Particles混音均衡器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=1f5bed7c2d292df597c3ac1d8c305ce2/6ee579ff9925bc31d7d529cb49df8db1ca1370ee.jpg" alt="img"><br>格莱美获奖的制作人/工程师Andrew Scheps（制作过Red Hot Chili Peppers、Adele、Metallica、Jay-Z、Black Sabbath、Lana Del Rey等艺人作品）的标志性音色，将与你一同探索声音塑造的新可能<br>“这个插件与态度、能量和情感密切相关，”Andrew说，“你可以找到你想要的声音，而无需去研究哪些传统工具可以帮你达到目的。它不仅是音色塑造者，而且也是一个态度塑造者，让你更加专注于音乐感觉。”<br>Scheps Parallel Particles以四个简单易用的旋钮捕捉了Andrew的大师级经验，每个旋钮都分别代表了Andrew的一种最有效的混音方法：</p>
+<p>Sub 是一个谐波发生器，它产生低音并且添加不曾存在的中低频信息。通过更多地利用谐波而不是进行均衡处理，它可以在可控范围内明显增强低频。<br>Air专注处理那些难以捉摸的“空气”频率并使它们凸显出来。与Sub一样，它是一个谐波发生器，可以创造出原始素材中不曾存在的新的共鸣。传统的均衡器有时会放大不需要的噪声或产生不自然的人工痕迹，但此插件利用原始素材中存在的相对低频信息来合成高频信息，有效地规避了这一问题。<br>Bite 旨在创造声音的活力和激情。它主要控制着音头（那些先到达你耳朵里的信息），但同时也极大地影响着音尾。它可以被用在任何素材上，使你的声音变得更具侵略性。歌手会听起来更加充沛有力；军鼓会更具冲击力；贝斯会更加明晰，不一而足。<br>Thick 为声音增添坚实的“躯体”，均衡中低频和中频，能够创造一种更加“贴耳”的听感，或是让空间环境变暗。单独来看，这些控制通过非常不同的方式来塑造声音的活力。总体来看，它们可以让你深入探索并用微妙的方式做出巨大的改变。</p>
+<p>特点：<br>与格莱美获奖的制作人/工程师Andrew Scheps合作研发<br>用四个旋钮捕捉Andrew的四种最有效的混音方法<br>快速、轻松地实现深奥的音色塑形效果<br>友好的交互界面<br>并联处理</p>
+<h2 id="Waves11-Scheps-Omni-Channel混音插件"><a href="#Waves11-Scheps-Omni-Channel混音插件" class="headerlink" title="Waves11 Scheps Omni Channel混音插件"></a>Waves11 Scheps Omni Channel混音插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=7baa625d7009c93d07f20effaf3cf8bb/8a2de9ce3bc79f3d4a61cc63ada1cd11738b29f6.jpg" alt="img"><br>与格莱美奖得主、混音师Andrew Scheps合作设计（他曾操刀Adele、Jay Z和Metallica的作品），这款灵活的通道条插件提供了Andrew多年来工作中所积累和验证的处理组合——压缩、均衡、染色等等，并将它们全部完美凝练地整合在一起。<br>通道条是混音世界最高效的工具，提供了你需要的所有基础处理，将均衡、压缩、门限以及更多功能都集中在一个简明易用的模块中。<br>然而，混音师选择通道条时却常常进退两难：基于复古调音台的通道条插件声音虽然惊艳，但其鲜明且局限的声音色彩却让你受到掣肘。模块化的通道条插件虽可以让你在混音时灵活多样地组合，但是不同的处理设备又可能无法像真正的通道条那样高效地协同工作。<br>Scheps Omni Channel是介乎于传统固定通道条与模块化组合通道条间的插件杰作。多年间经手过各类音乐风格，Andrew Scheps对如何组合顺手好用的设备已经形成了完美理念——一部分基于经典的硬件设备，一部分则是完全创新开发的模块，两部分都独具个性，组合在一起就能为你提供一款灵活的整合式通道条插件。<br>Scheps Omni Channel具备五大模块，可供随意调整顺序：</p>
+<p>Pre前级模块提供3种类型的模拟染色，让你添加不同色彩的谐波失真，辅以滤波器和Thump（低频共鸣）控制。<br>Comp压缩模块包含了从快到慢再到平滑的3种不同压缩器，统一的控制面板方便你快速对比不同。干/湿比控制则允许你在模块中进行并联压缩处理。<br>EQ均衡模块是一个4段均衡器，每个频段的乐感表现都特性鲜明。如果需要更为精准的均衡处理，还可以切换出全参数化显示。<br>DS2模块是一个齿音消除器但又不止于此，两个全频段模块和四种滤波类型让它可以“去除一切”——不只是嘶声和呲声，更可去除任何干扰频率。<br>Gate门限模块不仅具备所有门限/扩展的标准化控制（阈值、建立时间和释放时间），更可调整最大噪声衰减量，以保持一个稳定的本底噪声。<br>如果还不满足，Scheps Omni Channel还有Insert插件插槽功能，可以放在处理链的任何位置。你可以在此额外选择加载一个Waves的其他插件，作为Scheps Omni Channel的一个模块使用。</p>
+<p>在现场扩声时，Scheps Omni Channel提供了零延迟和左右立体声通道间完全分离的控制能力。压缩、均衡、滤波的所选控制可以很方便地映射到eMotion LV1现场调音台中，作为控台通道条使用。<br>最后，你还拥有一套为不同处理目的而设计的Focus焦点预设，能直观提示给你当前状态下最应关注的重要控制项。<br>不论你处理何种风格的音乐，Scheps Omni Channel都会帮助你聚精会神于混音工作，通过几下点击就快速试好声音特性，在一个界面中轻松建立起自定义的信号流程，让你对自己完美凝练的声音设计充满自信特点;<br>与荣获格莱美奖的混音师Andrew Scheps合作设计(Scheps曾操刀过Adele、Jay Z、Metallica、Red Hot Chili Peppers的作品)<br>灵活的通道条插件，基于Andrew久经试炼的信号处理组合理念<br>前级、压缩、均衡和门限模块，各有灵活多样的声音处理方式<br>DS2模块：胜于齿音消除器，提供了两个全频段模块和四种滤波类型<br>Insert插槽：可在通道条中任何位置加载Waves其他插件<br>各模块可在通道条中随意拖拽移动，以改变处理链顺序<br>每个模块内置MS/Duo/Stereo路由<br>立体声组件提供各通道间完全独立的控制<br>内部和外部侧链输入灵活转换<br>零延迟<br>Focus预设由Andrew亲自设计，能直观提示出你所需关注的重点控制项<br>包含Tony Visconti、Billy Bush、Ken ‘Pooch’ Van Druten等艺术家</p>
+<h2 id="Waves插件-Scheps-73均衡器"><a href="#Waves插件-Scheps-73均衡器" class="headerlink" title="Waves插件 Scheps 73均衡器"></a>Waves插件 Scheps 73均衡器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=0165d072658b4710ce2ffdc4f3cfc3b2/04002013c8fcc3ce7839e1608545d688d53f20fd.jpg" alt="img"><br>Waves Scheps 73是一款极具色彩的3段均衡器，与世界知名的混音工程师Andrew Scheps (制作过Adele、Red Hot Chili Peppers、Black Sabbath、Lana Del Ray、Metallica和Jay-Z等艺人作品)合作，基于经典的1073调音台的均衡器及话筒前置放大器模块建模而成。<br>基于Waves先进技术的支持，Scheps 73均衡器具有相互交叉重叠的频段，忠于1073调音台的原始参数并精确模拟它的运行状态：固定的12kHz高频段，可选并带有衰减和增益控制的低、中频段以及一个每倍频程18dB衰减的高通滤波器。另外，在原始1073设计图中发现的只在稀少的1078通道条上可操作的10kHz频点，也有史以来第一次被建模并融合到插件之中。最重要的是，Waves MS矩阵的加入让你可以对立体声中的纵向和侧向内容应用不同的均衡设置。<br>Waves采用创新程序对著名的Marinair变压器进行了建模，精心捕捉到1073调音台中包括其谐波失真在内的所有声音特性。为了达到完美效果，Andrew Scheps亲自对这些泛音进行了调校，从而得到动听而真实的染色。<br>无论是用于录音、混音还是母带制作，Scheps 73都可让你在电脑音乐制作中享受到这一传奇硬件的温暖音色！<br>特点：<br>与荣获格莱美奖的混音师Andrew Scheps合作设计(Scheps曾操刀过Adele、Jay Z、Metallica、Red Hot Chili Peppers的作品)<br>灵活的通道条插件，基于Andrew久经试炼的信号处理组合理念<br>前级、压缩、均衡和门限模块，各有灵活多样的声音处理方式<br>DS2模块：胜于齿音消除器，提供了两个全频段模块和四种滤波类型<br>Insert插槽：可在通道条中任何位置加载Waves其他插件<br>各模块可在通道条中随意拖拽移动，以改变处理链顺序<br>每个模块内置MS/Duo/Stereo路由<br>立体声组件提供各通道间完全独立的控制<br>内部和外部侧链输入灵活转换<br>零延迟<br>Focus预设由Andrew亲自设计，能直观提示出你所需关注的重点控制项<br>包含Tony Visconti、Billy Bush、Ken ‘Pooch’ Van Druten等艺术家提供的预设</p>
+<h2 id="Waves11-Renaissance-Reverb混响插件"><a href="#Waves11-Renaissance-Reverb混响插件" class="headerlink" title="Waves11 Renaissance Reverb混响插件"></a>Waves11 Renaissance Reverb混响插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=cfddad1ddd8065387beaa41ba7dca115/262895d6912397ddfd8ab0574e82b2b7d1a28787.jpg" alt="img"><br>具有丰富尾混响、12种混响类型和先进的早期反射系统的经典混响插件，是无数制作人和音频工程师的首选。Renaissance Reverb将丰富的功能与易用的界面相结合，提供无与伦比的声音以及非凡的混响密度和质感。<br>Renaissance Reverb可让你从12种混响类型中进行选择，包括大厅、房间、室内、教堂、板式、反向、门限、非线性、回声混响（EchoVerb）和共鸣混响（ResoVerb）。<br>借助双频段均衡器、阻尼控制和更新的直观界面，Renaissance Reverb可为你提供混响效果所需的灵活性。在世界一流制作人、音乐家和音频工程师之间名声大噪的混响插件，也是你的声音所需。</p>
+<p>特点：<br>具有丰富尾混响、12种混响类型和先进的早期反射系统的经典混响插件，是无数制作人和音频工程师的首选。Renaissance Reverb将丰富的功能与易用的界面相结合，提供无与伦比的声音以及非凡的混响密度和质感。<br>Renaissance Reverb可让你从12种混响类型中进行选择，包括大厅、房间、室内、教堂、板式、反向、门限、非线性、回声混响（EchoVerb）和共鸣混响（ResoVerb）。<br>借助双频段均衡器、阻尼控制和更新的直观界面，Renaissance Reverb可为你提供混响效果所需的灵活性。在世界一流制作人、音乐家和音频工程师之间名声大噪的混响插件，也是你的声音所需。</p>
+<h2 id="Waves插件-R360-Surround-Reverb混响插件"><a href="#Waves插件-R360-Surround-Reverb混响插件" class="headerlink" title="Waves插件 R360 Surround Reverb混响插件"></a>Waves插件 R360 Surround Reverb混响插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=7e0cefb0402c11dfded1bf2b53266255/52cf30ed8a1363277e05ea60868fa0ec09fac78e.jpg" alt="img"><br>当下，环绕声环境提供了更高层次的深度和表现。R360°又提升了技术高度，以前所未有的实时控制为你提供无与伦比的逼真感。利用我们屡获殊荣的Renaissance Reverb中最先进的尾混响生成技术（Tail Genaeration Technology），R360°为5.1混音环境提供了六个声道的丰富流畅的声学建模。</p>
+<p>特点：</p>
+<p>环绕声的混响插件<br>直观的图形显示<br>对S360 Surround Imager环绕成像仪进行补充</p>
+<h2 id="Waves11-PRS-SuperModels建模插件"><a href="#Waves11-PRS-SuperModels建模插件" class="headerlink" title="Waves11 PRS SuperModels建模插件"></a>Waves11 PRS SuperModels建模插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=d3d4d45e67cf3bc7e800cde4e101babd/78d7063cf8dcd1000e7cd072658b4710b8122f96.jpg" alt="img"><br>Waves PRS SuperModels与Paul Reed Smith合作开发，呈献三款高端PRS吉他放大器的精彩建模插件——令人梦寐以求的PRS Archon、传奇的PRS Dallas以及超罕见的PRS Blue Sierra/V9。<br>简单易用，音色出众，插件忠实地复制三台精妙箱头放大器的每个组件。从电子管到电路，每一细节都使用Waves的精密模拟组件（Precision Analog Component）技术精心建模而成，Paul Reed Smith本人更为Waves提供了原始的放大器硬件和完整的设计原理图。<br>PRS Archon提供闪亮的干琴音色或咄咄逼人的过载，你还能更进一步，得到华丽的失真。凭借其丰富的增益，Archon非常适合主音吉他或铿锵节奏，同时它的干琴通道也会令所有风格的吉他手都能心满意足。<br>PRS Blue Sierra/V9：这款超稀有音箱是PRSJ-MOD 100的早期原始版本，从未以硬件设备形式发布过。发扬美式吉他音箱的传统，它非常适用于干琴清音和中等增益过载音色。无论如何设置，你都能非常容易地获得巨大的3D吉他音效，绝无失手可能。<br>PRS Dallas提供了经典美国混响音箱之声。全电子管式设计可以产生开放式的经典音色，用于制造大声响的干琴清音，或者带有自然混响的多样化过载。这款高度音乐性的箱头放大器最初由PRS首席音箱制造师Doug Sewell设计，提供了甜美的高频、坚实的低频和华丽的中频。<br>不同的扬声器和箱体会产生不同的声音。PRS SuperModels可让你从8个不同的扬声器箱体IR（扬声器箱体的脉冲响应音频采样）中进行选择，均是由Paul Reed Smith本人在他个人家庭录音室中使用其信赖的麦克风和话放设备捕获拾取的。锦上添花的是，你还可以添加任何自己喜爱的第三方IR——最多可同时添加两个IR。<br>这套插件创新性的相位修复（Phase Fix）和时间修复（Time Fix）控制可以自动矫正不同IR之间的任何相位或延迟问题。使用两个箱体时，智能混合（Smart Mix）控制将平衡IR的感知音量。IR浏览器则可以自动加载和切换IR，让你自由发挥。<br>每个放大器还都包含原始硬件放大器中不曾配备的三种有用功能：音色塑形激励功能，提供你通常需要音量激励踏板才能获得的额外推力；适用于标准和音程扩展型吉他的数字校音器；一个智能噪声门在输入端，并于输出端控制输出门限。<br>有了PRS SuperModels三款经典放大器可供选择，无数音色你都触手可得。无论你是摇滚、爵士、乡村、金属、蓝调还是其他乐风的吉<br>特点：</p>
+<p>3款顶级PRS箱头放大器的卓越建模：Archon、Dallas和Blue Sierra/V9<br>与Paul Reed Smith合作开发<br>由Devin Townsend、Megadeth制作人Chris Rakestraw等艺术家制作的预设<br>自动IR浏览器带有8款扬声器箱体脉冲响应采样<br>可添加任何第三方扬声器箱体IR（同时最多两个）<br>智能混合（Smart Mix）、相位修复（Phase Fix）和时间修复（Time Fix）控制用于完美匹配任何两个箱体<br>卓越的集成噪声门可滤除放大器的噪音和嘶声<br>自动增益控制可实现最高性能<br>独特的音色塑形增强功能，超越原版硬件放大器<br>数字校音器反应灵敏，兼顾标准吉他和音程扩展型吉他<br>在DAW中作为插件使用或作为独立应用程序使用<br>专为录音棚、家庭工作室和现场演出而设计（配合笔记本电脑和音频接口）<br>支持SoundGrid，超低延迟.</p>
+<h2 id="Waves插件-Primary-Source-Expander降噪声音"><a href="#Waves插件-Primary-Source-Expander降噪声音" class="headerlink" title="Waves插件 Primary Source Expander降噪声音"></a>Waves插件 Primary Source Expander降噪声音</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=295c27926bd98d1076d40c39113eb807/ce0098e83901213fbf8fffb243e736d12f2e9535.jpg" alt="img"><br>PSE能够帮助你减少舞台上的声音串扰，降低啸叫的敏感度，当话筒在演出中处于空闲状态时——比如两个乐句之间的空隙，PSE会自动降低话筒的电平。这个功能在现场扩声和对现场录音进行混音时非常适用。<br>Primary Source Expander（PSE）插件的核心是一个精确的扩展器，为旋律性的音源，如人声、吉他、弦乐器、铜管乐器、木管乐器等量身定做。PSE的工作方式像是一个自动化的推子，当输入信号的电平低于一个你设置的阈值时，这个推子就会平滑地衰减这个通道的电平。开始衰减的阈值和衰减量都可以由用户来自行设定。<br>在话筒空闲时减少舞台噪声的泄漏能够帮助你完成一个条理更加清晰、聚焦重点更加明确、乐句间的关联更加紧密的全局混音。<br>在处理复杂的现场情景时，PSE也提供了诸如侧链和闪避等高级功能，以达到更连贯、更精确的声音效果。无论是在演出现场的主扩、返听的调音，还是现场实况录音，PSE都能确保你的话筒采集到足够大且最干净的声音，同时保留音源的原始音色和所处环境声场的自然氛围。<br>特点：</p>
+<p>在话筒处于空闲状态时减少舞台上的声音串扰，降低啸叫的敏感度<br>当输入信号低于你设置的阈值时平滑地衰减电平<br>友好的图形用户界面便于快速上手，设置简单<br>带有高通/低通滤波器的内置和外置侧链<br>闪避模式给复杂的现场情景带来额外的精确度<br>带有释放时间预置参数</p>
+<h2 id="Waves混音-OneKnob-Filter滤波器"><a href="#Waves混音-OneKnob-Filter滤波器" class="headerlink" title="Waves混音 OneKnob Filter滤波器"></a>Waves混音 OneKnob Filter滤波器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=19dab2a06e310a55c424defc87444387/49452a18ebc4b745ad459f45d8fc1e178b8215a5.jpg" alt="img"><br>从混音室到DJ台，Filter是一个强大的扫频滤波器，可切换共振模式，完美适用于整体混音、循环片段，以及模拟合成器等等<br>特点：<br>易用的电子音乐滤波插件<br>可切换共振模式的扫频滤波器<br>完美适用于整体混音、循环片段、模拟合成器等等</p>
+<h2 id="Waves11-MV360动态处理器"><a href="#Waves11-MV360动态处理器" class="headerlink" title="Waves11 MV360动态处理器"></a>Waves11 MV360动态处理器</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=4dfcaebd8b82d158bb8259b9b00b19d5/924855be6c81800a852da15da63533fa838b47ae.jpg" alt="img"><br>MV360°是针对5.0和5.1环绕声应用的终极双功能动态处理器。具有6个通道的高电平与低电平压缩，9种便捷的Link模式，MV360°提供最简单、最灵活的环绕声动态控制方法。<br>特点：</p>
+<p>特别设计应用于环绕声<br>9种便捷的Link模式<br>将高电平和低电平压缩结合在一个插件里</p>
+<h2 id="Waves11-MultiMod-Rack失真插件"><a href="#Waves11-MultiMod-Rack失真插件" class="headerlink" title="Waves11 MultiMod Rack失真插件"></a>Waves11 MultiMod Rack失真插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=35e86e9395025aafd3327ec3cbecab8d/19bf3d0e4bfbfbed4f9f1e2c6ff0f736aec31fb4.jpg" alt="img"><br>强大的多段调制机架，让Waves最新失真插件迈向新境界。创建出最狂野的调制失真效果，精准实现多频段失真。<br>混音需要精准，正确的失真出现在正确的地方。当你制作音乐时，则需要一种能够不断带来惊喜的工具，通过音乐上的回应来开拓制作思路，让乐曲感觉焕然一新。<br>MultiMod两者兼顾。<br>业界最多用途的失真和饱和套件<br>MultiMod Rack是一款有三个插槽的插件机架，可以挂载Waves最新的失真和饱和插件。每个插槽都可以加载Abbey Road Saturator的模拟温暖，Berzerk失真插件的未来派波形声音以及MDMX 的Screamer、Overdrive和Fuzz模块的老式经典音色。多种失真色彩的独特组合，并肩作战，使MultiMod 成为迄今功能最丰富的失真和饱和套件。<br>实现精准的多段失真控制<br>MultiMod的三个插槽通过可调分频控制将信号分为三个频段——低频、中频和高频。想要在低频上得到Berzerk的疯狂，在中频上采用MDMX的失真过载，并在高频上施加模拟Abbey Road的饱和效果？简单。将不同的插件分配给不同的频段，分别控制每个插件的失真效果即可。<br>只需在频段间给所选插件重新排序，即可显着改变声音，实现音色的多样性。每个频段还都提供电平、立体声声像和谐波控制，以精确控制每个频率区域的失真。<br>无限的调制失真激发创意<br>调制是开启创造力的大门，能使一切听起来更富音乐性。MultiMod的5种功能强大的调制器使你能够调制Abbey Road Saturator、MDMX和Berzerk插件的几乎每个参数，实现最大的创意灵活性。疯狂的LFO低频振荡器、音序器和振幅调制选项，将带你进入声音设计的领域。如果这还不够的话，还有一个后置均衡模块可以让调制调无止境。<br>开始你的创意失真之旅吧！<br>特点：.<br>3个插槽机架，可调制多频段失真<br>加载Abbey Road Saturator、Berzerk和MDMX失真插件<br>用途最广泛的失真和饱和套件：无论是模拟建模的饱和，还是未来派波形失真，集于一体<br>智能易用的多频段失真和可调分频点<br>5个调制器可调制各个插件的参数<br>LFO、音序器和振幅调制选项<br>每个插槽/频段独立的电平、声相和谐波控制<br>可调节的4段均衡器<br>内置效果器：混响、延时和合唱<br>数百种分类出厂预设帮你轻松上手<br>来自Joe Barresi、Jacquire King、Michael Brauer、Devin Townsend、Juno Reactor等制作人/混音师的艺术家预设</p>
+<h2 id="Waves效果器-Maserati-VX1人声增强器效果插件"><a href="#Waves效果器-Maserati-VX1人声增强器效果插件" class="headerlink" title="Waves效果器 Maserati VX1人声增强器效果插件"></a>Waves效果器 Maserati VX1人声增强器效果插件</h2><p><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=178cd774683e6709be0045f70bc79fb8/2419503c70cf3bc72f37e6bfc600baa1cd112abb.jpg" alt="img"><br>VX1人声增强器插件构思者Tony Maserati说：“VX1是一个集所有人声控制于一体的集成插件，无论你是想让人声展现出最细节最感人的一面，还是让人声在大型音乐场景中保持最合适的地位，这个插件都能满足你的需求。</p>
+<p>Contour 1会给你一个录音棚或小型演出场所的感觉；Contour 2是一个更大的厅堂，带有房间反射的预延迟感觉，这种感觉最适合慢速的抒情曲；Contour 3是为快节奏歌曲而设计的，所以房间的听感非常小，与其相匹配的预延迟也很小。”<br>特点：</p>
+<p>为人声设计的多合一多效果插件<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音棚中！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>36楼2020-07-10 17:43</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves效果器 Maserati HMX乐器效果器插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=53c68f4080dda144da096cba82b7d009/e25434355982b2b78fb3129726adcbef76099b42.jpg" alt="img"><br>HMX谐波发生器插件构思者Tony Maserati这样介绍自己的签名产品：“在‘Modal’模式下，HMX会让你的钢琴声场变宽，通过增加适量的合唱效果，让它在以人声为主的音乐中鲜活起来；或者也可以神奇地增强你Wurlitzer电钢琴的临场感，让它听起来灵动纤巧。‘Bounce’模式则会增加一些混响和延迟，为感人的抒情歌创造一些声音能量和流动感，或给放克乐队的混音增加一些现场感。”<br>特点：</p>
+<p>多合一的综合效果插件<br>增加合唱、混响和延迟等效果，增强声场宽度<br>是电钢琴、键盘等乐器的完美选择<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音室中！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>37楼2020-07-10 17:44</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 Maserati GTi吉他效果器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=96e29ce8b11ea8d38a22740ca70a30cf/ebc3641e4134970a95563b7c82cad1c8a7865d49.jpg" alt="img"><br>GTi吉他处理器插件构思者Tony Maserati介绍说：“GTi插件的创造过程，少不了那些我仰慕的吉他演奏家的支持。我尝试过找出一些设置，能够作为模仿他们演奏风格的起点，比如说从像Elliott Smith那种非常贴脸的‘Clean’感觉，到Police的Andy Summers使用‘Clean Chorus’营造的那种带宽阔合唱效果的分离感。在‘Heavy’设置上，调节一下电平和EQ，可以让你的失真吉他声音在所有的配器中脱颖而出。‘Thick Rhythm’让你可以轻微地或大刀阔斧地将节奏吉他变得更加有活力；对于Wurlis和圆号来说，它也是非常实用的。‘Soft Flange’设置就和它的名字一样，给长音连奏或持续的电吉他延音增加有趣细致的声音滤波。我的想法是，让这些效果器可以在多种情况下被使用。那些狂野的周边效果，如果你想要的话，就来试试GTi吧！”</p>
+<p>特点：</p>
+<p>为吉他设计的多合一多效果插件<br>可供选择的插入和发送模式<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音棚中！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>38楼2020-07-10 17:45</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>waves插件 Maserati B72混音插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=e72024902d87e9504217f3642038531b/aa40ac2bc65c10380263e591a5119313b07e8951.jpg" alt="img"><br>B72贝斯增强器插件构思者Tony Maserati说：“实际上，B72有两个不同的起始点。我经手过很多风格不同的艺人和音乐类型，以我的工作经验来说，从来没有一次定型或者只有一个预置的经历。在你的电贝斯或原声贝斯轨道上试试‘DI’设置，你会听到贝斯的声音是如何变得丰满圆润，与此同时又能在整个音乐中突出存在感的。‘Synth’设置则打开了另一扇门：它可以增强声音厚度、拓展立体声维度和谐波色彩。Maserati B72会像一台老式Prophet合成器一样，完全填满你的扬声器。”</p>
+<p>特点：</p>
+<p>为贝斯设计的多合一多效果插件<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音棚中！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>39楼2020-07-10 17:46</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 Maserati ACG 总合效果插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=6e277341584a20a4311e3ccfa0539847/63b4df2209f79052b5136c6d1bf3d7ca7bcbd562.jpg" alt="img"><br>ACG原声吉他处理插件的构思者Tony Maserati说：“ACG是一款非常全能的工具，能够帮助很多不同类型的原声吉他获取最棒的控制和能量增强。‘ACG 1’设置能够让你将电平进行最大化处理，塑造声音的高音和低频。‘ACG 2’设置则有更多的内置压缩器，突出现场演出中的细节。这两个设置都分别搭配了恰当的房间环境以供各种电平下使用。”</p>
+<p>特点：</p>
+<p>为原声吉他设计的多合一综合效果插件<br>与知名混音工程师Tony Maserati共同打造<br>把Maserati屡获殊荣的白金唱片音质带到你的录音室中</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>40楼2020-07-10 17:48</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 M360 Surround Manager Mixdown<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=88239670742762d0803ea4b790ed0849/21c06e02918fa0ec29354d5e319759ee3c6ddb80.jpg" alt="img"></p>
+<p>在做环绕声设计或是环绕声混音时，你需要符合行业标准的环绕声监听系统，包括精确的卫星音箱和超低音箱。对于5.1混音室的监听校准和低频管理来说，M360° Surround Manager和M360° Surround Mixdown都是必不可少的工具，它们能帮助你获得准确的音箱摆位和声音平衡。<br>特点：</p>
+<p>角度信号发送功能，能够与其它声像控制器联合使用（如S360）<br>TU标准混音输出矩阵模式<br>10种输出格式<br>从环绕声中导出四声道、左中右声道（LC R）、立体声和单声道</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>41楼2020-07-10 17:49</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 LoAir效果器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=ce7547e1a5b7d0a27bc90495fbee760d/93b295f531adcbef15485555bbaf2edda3cc9f72.jpg" alt="img"><br>LoAir次谐波发生器插件最初为声音设计与后期制作而设计，但同时也被录音室与现场混音工程师们所青睐，它拥有两个可调节的低频处理器来塑造你的超低频。这款独特的LoAir插件让你能够处理复音内容，以最自然最具音乐性的方式来改善低频。</p>
+<p>LoAir同时也设计用于环绕声的混音和母带制作，让你能够简单且快速地在单声道、立体声或是5.0声道的基础上生成5.1声道中的低频效果通道（LFE）。</p>
+<p>无论是用来增强现有5.1混音或声效中激动人心的低频，营造怪物的脚步声、大规模爆炸声，还是用来为音乐中的低音合成器、贝斯或是底鼓增添震撼的低频，LoAir都能带给你音轨中所需的所有低频效果<br>特点：<br>增强改善现有的次谐波低频<br>带有独特的低通滤波器<br>在5.0声道混音的基础上创建5.1声道混音<br>增加现有5.1混音和声效中的低频<br>在音乐混音中，为低音合成器、贝斯和底鼓添加超低频<br>在现声扩声时，让你能够充分发挥扩声系统的低频单元，为现场混音添加富有能量的低频<br>增添作品的分量、情感与深度<br>处理原始复音材料</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>42楼2020-07-10 17:50</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves混音 Linear Phase EQ均衡器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=3b7012b4862397ddd679980c6983b216/d4cd3845ad345982ecffcec11bf431adcbef8479.jpg" alt="img"><br>专为母带处理而设计研发，Linear Phase EQ是一款具有线性相位的均衡器，在保证原始音乐的平衡同时，以绝对零相位偏移对谐波频谱提供精准的控制。<br>特点：<br>母带均衡器插件<br>五个用户自定义频段，具有线性相位分频器<br>低频段组件与全频段组件<br>最适用于原声乐器、立体声素材、高瞬态音频轨道以及母带制作<br>九种线性相位滤波器类型</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>43楼2020-07-10 17:51</p>
+<ul>
+<li><a href="https://www.baidu.com/baidu.php?url=000000a25U966rnsnYgvmgzHG1ih65eMc6n47V1KdwmwBTPkXFgI5_M0POXu6ZYbCZa0L1WTNmEHm7ukePtw8LkrWQa3s97pJ_t8GRHf0hPxG9G4BeG_kVK34gJFODiUEXp8-qnitiar-O5UO_YNnhz4clW21mdLFNQIbE33Mw2rEJ2aqeQjQCKU4kGQUyz1QS9knov-itgQsDNH8BOGmicJ2s2y.DY_NR2Ar5Od66ux4g_3_ac2ampCPUn2XqauhZVm9kOSoQqpRLxOS_XEOdksOOS_X5OdEukmntzmJQvmClMLEHMOPt5OOoZ6OqIj_Zw6uB1qjtL_sxOSCgOSEOOoV35Oy8z1GeQn-BknxNYvji_nYQZHkePOmC0.U1Yz0ZDqVElY1_QS8lY0IjL5VTv18piSLsKGUHYdnH00u1Y0Iybq0ZKGujYzr0KWpyfqnWcv0AwGujYdnH0knjT0UgfqnHmdnHR0mhnqnfKEIhsqn10snj0kQHc0TZ0qn1nYP1mknHn3nfKYIgnqPHD1P1n4rj01P1Dzrjm4PHmLP0Kzug7Y5HDvnHRdnWTkrj0znjf0Tv-b5Hm3rH-Wrj-BrH64PHuBm1T0TA3qnfKET1YY0AdYXgK-5HD40A7bIZ-suHYkrjT0mgwspyfqn0KWTA-b5HDsnjD0TAkGujYsnj0z0APCpyfq0A7sTZu85fKYmg6q0AdYT1YkPWRkPfKEmLKW5HDWnansc10Wnansc1cYPinWc1D8nj0sc1D8nj0scznWnansc1D8nj0Wcznsc1DWnansg10Wnansc10Wn1Rsc10Wnansc1D8nj0Wni3snj0Wni3snj0Wna3snj0Wna3snj0Wna3snj0Wni3snansc10Wnansc1D8nj0sg1Kxni3snjKxni3snj0Wnansc10Wc10Wn7tkQW0sn7tsg108nj0sg1D8nj0sg1Kxn7tsc10Wnansg1Kxn7tsg1Kxn7tsQW0snj0sn7tsg1D8nj0snj0sc1Kxn7tsQW0snj0sn7tsg1Kxn0KlpM6qn0KlpMbqni3snj00XhGl5HD8nj0s0ZGJIjYkQW0sn0KGmLfqnHmknH0YnHnvr0KhmMcqni3snj00IZcz5HRknjf0uhkk5H00mvFY5H00mMPY5HKxn7tsg1Kxn7tsg1Kxna3sn7tsQW0s0APBT1YkPWDknjfsnjmsg1wxn7tsg1fzP1mLPHmvnfKBTvcqn0KEIWYV0ZKY5Hn1PHn40ZKETv-Ypyq85H00TAq1pgwGUv4xmv99UhI-gLF-mgPEUWYs0AqzpNqVIjYkPWRkPfKVI7qsIjYs0A7WmLfq0AwWmvfq0AwWTM0q0Aw-IMws5fK1UWY0TZFEujY0UvPsmdq_myFxTLw9IZN15H00UvPsmdqWUA-Wp1Ysc10Wnansc10WnankQW0snankQW0sn0KhIZ-suHYs0A7bTv4xT1Ys0A7bTv4xpgnq0AFVUjYs0Ad9m1Rq0Aq95fK9uAPo5H00UZfqn0K1m1Ys0ZuGuANEpyfq0AF-Tvsqn0KGTvw_5H00UvkbUjYs0ZKzUvI9uZmqn0K9TLbqn0K9uZKL5HDkPj00mywspjYvPj00pgPs5yIlm6KCTvkM5H00nHYs0jcq0jnq0jfq0jRqn00v5H00P1Ys0j6qn0045fKsThqMgLw15HcsP1bYrj0YPHbYP16vn1DYnjD0TZFEudqsT1Y4nW0dPHDLPjR4Pjnzn1RzrH6L0ZKzUvIxIAbqn0KsThqMgLKG5fKsmvbqn0KWpybqnWD4PWnvrH0Ln16s0ZPJpjYzPHR0TMF15H00mMNYmyTqn0KBmL0qn0K8ugfqn0KzIADqn0KWThnqPjbdPj0" target="_blank" rel="noopener"><img src="https://feed-image.baidu.com/0/pic/4073701928c5e49dac5ac7c4475ef8cf.jpg" alt="img"></a></li>
+<li><a href="https://www.baidu.com/baidu.php?url=000000a25U966rnsnYgvmgzHG1ih65eMc6n47V1KdwmwBTPkXFgI5_M0POXu6ZYbCZa0L1WTNmEHm7ukePtw8LkrWQa3s97pJ_t8GRHf0hPxG9G4BeG_kVK34gJFODiUEXp8-qnitiar-O5UO_YNnhz4clW21mdLFNQIbE33Mw2rEJ2aqeQjQCKU4kGQUyz1QS9knov-itgQsDNH8BOGmicJ2s2y.DY_NR2Ar5Od66ux4g_3_ac2ampCPUn2XqauhZVm9kOSoQqpRLxOS_XEOdksOOS_X5OdEukmntzmJQvmClMLEHMOPt5OOoZ6OqIj_Zw6uB1qjtL_sxOSCgOSEOOoV35Oy8z1GeQn-BknxNYvji_nYQZHkePOmC0.U1Yz0ZDqVElY1_QS8lY0IjL5VTv18piSLsKGUHYdnH00u1Y0Iybq0ZKGujYzr0KWpyfqnWcv0AwGujYdnH0knjT0UgfqnHmdnHR0mhnqnfKEIhsqn10snj0kQHc0TZ0qn1nYP1mknHn3nfKYIgnqPHD1P1n4rj01P1Dzrjm4PHmLP0Kzug7Y5HDvnHRdnWTkrj0znjf0Tv-b5Hm3rH-Wrj-BrH64PHuBm1T0TA3qnfKET1YY0AdYXgK-5HD40A7bIZ-suHYkrjT0mgwspyfqn0KWTA-b5HDsnjD0TAkGujYsnj0z0APCpyfq0A7sTZu85fKYmg6q0AdYT1YkPWRkPfKEmLKW5HDWnansc10Wnansc1cYPinWc1D8nj0sc1D8nj0scznWnansc1D8nj0Wcznsc1DWnansg10Wnansc10Wn1Rsc10Wnansc1D8nj0Wni3snj0Wni3snj0Wna3snj0Wna3snj0Wna3snj0Wni3snansc10Wnansc1D8nj0sg1Kxni3snjKxni3snj0Wnansc10Wc10Wn7tkQW0sn7tsg108nj0sg1D8nj0sg1Kxn7tsc10Wnansg1Kxn7tsg1Kxn7tsQW0snj0sn7tsg1D8nj0snj0sc1Kxn7tsQW0snj0sn7tsg1Kxn0KlpM6qn0KlpMbqni3snj00XhGl5HD8nj0s0ZGJIjYkQW0sn0KGmLfqnHmknH0YnHnvr0KhmMcqni3snj00IZcz5HRknjf0uhkk5H00mvFY5H00mMPY5HKxn7tsg1Kxn7tsg1Kxna3sn7tsQW0s0APBT1YkPWDknjfsnjmsg1wxn7tsg1fzP1mLPHmvnfKBTvcqn0KEIWYV0ZKY5Hn1PHn40ZKETv-Ypyq85H00TAq1pgwGUv4xmv99UhI-gLF-mgPEUWYs0AqzpNqVIjYkPWRkPfKVI7qsIjYs0A7WmLfq0AwWmvfq0AwWTM0q0Aw-IMws5fK1UWY0TZFEujY0UvPsmdq_myFxTLw9IZN15H00UvPsmdqWUA-Wp1Ysc10Wnansc10WnankQW0snankQW0sn0KhIZ-suHYs0A7bTv4xT1Ys0A7bTv4xpgnq0AFVUjYs0Ad9m1Rq0Aq95fK9uAPo5H00UZfqn0K1m1Ys0ZuGuANEpyfq0AF-Tvsqn0KGTvw_5H00UvkbUjYs0ZKzUvI9uZmqn0K9TLbqn0K9uZKL5HDkPj00mywspjYvPj00pgPs5yIlm6KCTvkM5H00nHYs0jcq0jnq0jfq0jRqn00v5H00P1Ys0j6qn0045fKsThqMgLw15HcsP1bYrj0YPHbYP16vn1DYnjD0TZFEudqsT1Y4nW0dPHDLPjR4Pjnzn1RzrH6L0ZKzUvIxIAbqn0KsThqMgLKG5fKsmvbqn0KWpybqnWD4PWnvrH0Ln16s0ZPJpjYzPHR0TMF15H00mMNYmyTqn0KBmL0qn0K8ugfqn0KzIADqn0KWThnqPjbdPj0" target="_blank" rel="noopener">百度AI开放平台</a></li>
+</ul>
+<p><a href="https://www.baidu.com/baidu.php?url=000000a25U966rnsnYgvmgzHG1ih65eMc6n47V1KdwmwBTPkXFgI5_M0POXu6ZYbCZa0L1WTNmEHm7ukePtw8LkrWQa3s97pJ_t8GRHf0hPxG9G4BeG_kVK34gJFODiUEXp8-qnitiar-O5UO_YNnhz4clW21mdLFNQIbE33Mw2rEJ2aqeQjQCKU4kGQUyz1QS9knov-itgQsDNH8BOGmicJ2s2y.DY_NR2Ar5Od66ux4g_3_ac2ampCPUn2XqauhZVm9kOSoQqpRLxOS_XEOdksOOS_X5OdEukmntzmJQvmClMLEHMOPt5OOoZ6OqIj_Zw6uB1qjtL_sxOSCgOSEOOoV35Oy8z1GeQn-BknxNYvji_nYQZHkePOmC0.U1Yz0ZDqVElY1_QS8lY0IjL5VTv18piSLsKGUHYdnH00u1Y0Iybq0ZKGujYzr0KWpyfqnWcv0AwGujYdnH0knjT0UgfqnHmdnHR0mhnqnfKEIhsqn10snj0kQHc0TZ0qn1nYP1mknHn3nfKYIgnqPHD1P1n4rj01P1Dzrjm4PHmLP0Kzug7Y5HDvnHRdnWTkrj0znjf0Tv-b5Hm3rH-Wrj-BrH64PHuBm1T0TA3qnfKET1YY0AdYXgK-5HD40A7bIZ-suHYkrjT0mgwspyfqn0KWTA-b5HDsnjD0TAkGujYsnj0z0APCpyfq0A7sTZu85fKYmg6q0AdYT1YkPWRkPfKEmLKW5HDWnansc10Wnansc1cYPinWc1D8nj0sc1D8nj0scznWnansc1D8nj0Wcznsc1DWnansg10Wnansc10Wn1Rsc10Wnansc1D8nj0Wni3snj0Wni3snj0Wna3snj0Wna3snj0Wna3snj0Wni3snansc10Wnansc1D8nj0sg1Kxni3snjKxni3snj0Wnansc10Wc10Wn7tkQW0sn7tsg108nj0sg1D8nj0sg1Kxn7tsc10Wnansg1Kxn7tsg1Kxn7tsQW0snj0sn7tsg1D8nj0snj0sc1Kxn7tsQW0snj0sn7tsg1Kxn0KlpM6qn0KlpMbqni3snj00XhGl5HD8nj0s0ZGJIjYkQW0sn0KGmLfqnHmknH0YnHnvr0KhmMcqni3snj00IZcz5HRknjf0uhkk5H00mvFY5H00mMPY5HKxn7tsg1Kxn7tsg1Kxna3sn7tsQW0s0APBT1YkPWDknjfsnjmsg1wxn7tsg1fzP1mLPHmvnfKBTvcqn0KEIWYV0ZKY5Hn1PHn40ZKETv-Ypyq85H00TAq1pgwGUv4xmv99UhI-gLF-mgPEUWYs0AqzpNqVIjYkPWRkPfKVI7qsIjYs0A7WmLfq0AwWmvfq0AwWTM0q0Aw-IMws5fK1UWY0TZFEujY0UvPsmdq_myFxTLw9IZN15H00UvPsmdqWUA-Wp1Ysc10Wnansc10WnankQW0snankQW0sn0KhIZ-suHYs0A7bTv4xT1Ys0A7bTv4xpgnq0AFVUjYs0Ad9m1Rq0Aq95fK9uAPo5H00UZfqn0K1m1Ys0ZuGuANEpyfq0AF-Tvsqn0KGTvw_5H00UvkbUjYs0ZKzUvI9uZmqn0K9TLbqn0K9uZKL5HDkPj00mywspjYvPj00pgPs5yIlm6KCTvkM5H00nHYs0jcq0jnq0jfq0jRqn00v5H00P1Ys0j6qn0045fKsThqMgLw15HcsP1bYrj0YPHbYP16vn1DYnjD0TZFEudqsT1Y4nW0dPHDLPjR4Pjnzn1RzrH6L0ZKzUvIxIAbqn0KsThqMgLKG5fKsmvbqn0KWpybqnWD4PWnvrH0Ln16s0ZPJpjYzPHR0TMF15H00mMNYmyTqn0KBmL0qn0K8ugfqn0KzIADqn0KWThnqPjbdPj0" target="_blank" rel="noopener">免费！百度AI人脸识别，人脸对比/人脸搜索/活体检测，申请试用！</a></p>
+<p><a href="https://www.baidu.com/baidu.php?url=000000a25U966rnsnYgvmgzHG1ih65eMc6n47V1KdwmwBTPkXFgI5_M0POXu6ZYbCZa0L1WTNmEHm7ukePtw8LkrWQa3s97pJ_t8GRHf0hPxG9G4BeG_kVK34gJFODiUEXp8-qnitiar-O5UO_YNnhz4clW21mdLFNQIbE33Mw2rEJ2aqeQjQCKU4kGQUyz1QS9knov-itgQsDNH8BOGmicJ2s2y.DY_NR2Ar5Od66ux4g_3_ac2ampCPUn2XqauhZVm9kOSoQqpRLxOS_XEOdksOOS_X5OdEukmntzmJQvmClMLEHMOPt5OOoZ6OqIj_Zw6uB1qjtL_sxOSCgOSEOOoV35Oy8z1GeQn-BknxNYvji_nYQZHkePOmC0.U1Yz0ZDqVElY1_QS8lY0IjL5VTv18piSLsKGUHYdnH00u1Y0Iybq0ZKGujYzr0KWpyfqnWcv0AwGujYdnH0knjT0UgfqnHmdnHR0mhnqnfKEIhsqn10snj0kQHc0TZ0qn1nYP1mknHn3nfKYIgnqPHD1P1n4rj01P1Dzrjm4PHmLP0Kzug7Y5HDvnHRdnWTkrj0znjf0Tv-b5Hm3rH-Wrj-BrH64PHuBm1T0TA3qnfKET1YY0AdYXgK-5HD40A7bIZ-suHYkrjT0mgwspyfqn0KWTA-b5HDsnjD0TAkGujYsnj0z0APCpyfq0A7sTZu85fKYmg6q0AdYT1YkPWRkPfKEmLKW5HDWnansc10Wnansc1cYPinWc1D8nj0sc1D8nj0scznWnansc1D8nj0Wcznsc1DWnansg10Wnansc10Wn1Rsc10Wnansc1D8nj0Wni3snj0Wni3snj0Wna3snj0Wna3snj0Wna3snj0Wni3snansc10Wnansc1D8nj0sg1Kxni3snjKxni3snj0Wnansc10Wc10Wn7tkQW0sn7tsg108nj0sg1D8nj0sg1Kxn7tsc10Wnansg1Kxn7tsg1Kxn7tsQW0snj0sn7tsg1D8nj0snj0sc1Kxn7tsQW0snj0sn7tsg1Kxn0KlpM6qn0KlpMbqni3snj00XhGl5HD8nj0s0ZGJIjYkQW0sn0KGmLfqnHmknH0YnHnvr0KhmMcqni3snj00IZcz5HRknjf0uhkk5H00mvFY5H00mMPY5HKxn7tsg1Kxn7tsg1Kxna3sn7tsQW0s0APBT1YkPWDknjfsnjmsg1wxn7tsg1fzP1mLPHmvnfKBTvcqn0KEIWYV0ZKY5Hn1PHn40ZKETv-Ypyq85H00TAq1pgwGUv4xmv99UhI-gLF-mgPEUWYs0AqzpNqVIjYkPWRkPfKVI7qsIjYs0A7WmLfq0AwWmvfq0AwWTM0q0Aw-IMws5fK1UWY0TZFEujY0UvPsmdq_myFxTLw9IZN15H00UvPsmdqWUA-Wp1Ysc10Wnansc10WnankQW0snankQW0sn0KhIZ-suHYs0A7bTv4xT1Ys0A7bTv4xpgnq0AFVUjYs0Ad9m1Rq0Aq95fK9uAPo5H00UZfqn0K1m1Ys0ZuGuANEpyfq0AF-Tvsqn0KGTvw_5H00UvkbUjYs0ZKzUvI9uZmqn0K9TLbqn0K9uZKL5HDkPj00mywspjYvPj00pgPs5yIlm6KCTvkM5H00nHYs0jcq0jnq0jfq0jRqn00v5H00P1Ys0j6qn0045fKsThqMgLw15HcsP1bYrj0YPHbYP16vn1DYnjD0TZFEudqsT1Y4nW0dPHDLPjR4Pjnzn1RzrH6L0ZKzUvIxIAbqn0KsThqMgLKG5fKsmvbqn0KWpybqnWD4PWnvrH0Ln16s0ZPJpjYzPHR0TMF15H00mMNYmyTqn0KBmL0qn0K8ugfqn0KzIADqn0KWThnqPjbdPj0" target="_blank" rel="noopener"><img src="https://aod-image.baidu.com/5/pic/e49b173f4f765829e251b905696dc386.jpg" alt="img"></a></p>
+<p>2021-03-12 13:33 广告</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 Linear Phase Multiband Compressor压缩插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=aad6b7625b086e066aa83f4332097b5a/2d1684940a7b020869bb14b275d9f2d3572cc800.jpg" alt="img"><br>搭载独家技术，如自适应阈值（Adaptive Thresholds）、自动音量补偿（Automatic Makeup Gain）和无极反应滤波器（Finite Response Filters），Linear Phase Multiband多段压缩插件为无相位失真多频段压缩提供了五个用户自定义频段，同时这些频段都具有线性相位分频器。<br>特点：</p>
+<p>用于母带制做的多段压缩器插件<br>五个可用户自定义的频段，拥有线性相位分频器<br>最适用于母带制作与其它高精准应用</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>44楼2020-07-10 17:52</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves效果器 LFE360 Low-Pass Filter滤波插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=cf188c3bc609b3deebbfe460fcbe6cd3/f0ce0583d158ccbff5d79e690ed8bc3eb135410f.jpg" alt="img"><br>专为环绕声和5.1混音应用而设计研发，LFE360°提供细微精准的控制，能够让你分离出LFE声道并对其进行增强。准备好，地动山摇的低频将震撼你的环绕声世界！<br>特点：</p>
+<p>环绕声低通滤波插件<br>每倍频程60dB滚降的大斜率滤波器<br>对LFE音频进行试听，或直接加载到总线输出</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>45楼2020-07-10 17:53</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 L3-LL Multimaximizer混音<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=a30c8641650e0cf3a0f74ef33a47f23d/4fe34ecb7bcb0a46c141a06a7c63f6246b60af17.jpg" alt="img"><br>L3-LL是首款多段式峰值限制器，让你能够提升混音电平，在保证整体的同时也兼顾每一个乐器的细节。丰富多样的预设参数使得L3成为全世界混音师的挚爱，而L3-LL使得L系列功能实现了突破性的扩展。L3-LL搭载了Waves PLMixer&#8482; （Peak Limiting Mixer）专利技术，能够在音量最大化的同时，完美保持声音原本的精确与细节。带有相位补偿的5频段交叉滤波器能使高频更加甜美，低频更具冲击。如果你需要以最低的插件延迟和丰富的参数控制来获得最大化的声音，让声音响亮而清晰，L3-LL将是一个明智的选择。<br>特点：<br>多段峰值限制/电平最大化插件，拥有极低的插件延迟<br>带相位补偿的5频段交叉滤波器<br>IDR&#8482;技术，通过双倍bit精度的重新量化，以及具有9阶噪声塑形滤波器的抖动技术，提高数字分辨率<br>完整的通用L3预制参数，可存储并分享<br>ARC&#8482;自动释放控制技术</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>46楼2020-07-10 17:54</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves混音 L360 Surround Limiter噪声塑形滤波器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=4f5e30109cd4b31cf03c94b3b7d7276f/f00c1e00a18b87d622cc804c100828381e30fdec.jpg" alt="img"><br>基于Waves 传奇的L1和L2 Ultramaxmizer，L360°能够提供多通道的砖墙峰值限制以及数字抖动与噪音塑形的功能，可实现让听众惊叹至极的环绕声体验。<br>特点：</p>
+<p>环绕声峰值限制/电平最大化插件<br>ARC&#8482;自动释放控制技术<br>IDR&#8482;技术，通过双倍bit精度的重新量化，以及具有9阶噪声塑形滤波器的抖动技术，提高数字分辨率<br>灵活的通道配对、编组以及参数链接<br>通过负启动时间实现预测阈值，提前开启限制器<br>用于音量补偿的阈值、峰值以及限制器的全局控制</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>47楼2020-07-10 18:05</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 L3-16 Multimaximizer插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=6314637dc51b0ef46ce89856edc551a1/4de482d4ad6eddc4960c9fa82edbb6fd5366338f.jpg" alt="img"><br>L3-16 Multimaximizer是Waves L系列插件中最为强大先进的一员。它拥有16个频段的峰值限制器，以前所未有的精确控制提供了无与伦比的响度表现。基于Waves PLMixer&#8482; （Peak Limiting Mixer）专利技术，L3-16能够在声音最大化的同时，完美保持声音原本的精确与细节。它的适用范围非常广泛，从温暖的模拟声到冰冷的数字声，无论什么风格，无论什么声音，你都能让这些声音脱颖而出，通透而响亮<br>特点;</p>
+<p>6段峰值控制/电平最大化插件<br>内置线性相位均衡器<br>ARC&#8482;自动释放控制技术<br>IDR&#8482;技术，通过双倍bit精度的重新量化，以及具有9阶噪声塑形滤波器的抖动技术，提高数字分辨率<br>线性相位滤波器可得到最大电平输出且无相位失真<br>包含了L3 Multimaximizer、L3 Ultramaximizer、L3-LL Multimaximizer和L3-LL Ultramaximizer</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>48楼2020-07-10 18:12</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 L3 Multimaximizer音频处理插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=08b5cf6aa4de9c82a665f9875c8080d2/df924859ccbf6c811ae707bbab3eb13532fa40a6.jpg" alt="img"><br>当顶级母带工程师坐在混音台前进行音频处理时，常常需要在优化频率响应、使电平最大化的同时保持素材声音的保真度。L3是业界首个实现Summing自动化的多段限制器，可满足一体式母带制作流程。<br>特点：</p>
+<p>多段峰值限制/电平最大化插件<br>线性相位均衡器，能使高频更加甜美，低频更具冲击<br>IDR&#8482;技术，通过双倍bit精度的重新量化，以及具有9阶噪声塑形滤波器的抖动技术，提高数字分辨率<br>在总线和分轨上均配有ARC&#8482;自动释放控制技术<br>包含了L3 Ultramaximizer、L3 Multimaximizer、L3-LL Multimaximizer和L3-LL Ultramaximizer</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>49楼2020-07-10 18:13</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 JJP Vocals JJP Vocals人声处理插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=cd2693d2dc1349547e1ee86c664f92dd/0a449022dd54564e01a1cf6aa4de9c82d0584faa.jpg" alt="img"><br>Jack Joseph Puig这样评价JJP Vocals插件：“在给一个人声混音时，我的方法就是利用直觉和本能，而并非技术。我的思路不是‘选哪个延时’、‘怎么做EQ’，或者‘压缩多一些’这种。我关心的是人声会给你什么样的感受。而且每一位歌手都是独一无二的，每首歌也是独一无二的，也就没有一个单一的方式来做处理。声音听着是要有个性，还是要有私密感，或是说很大声很激进呢？这就会让我想方设法把人声打开，恰当地融入混音当中。而且最要紧的是，能对歌曲传达信息带来帮助。JJP Vocals就能帮助你达到这个目的。”<br>特点：<br>多效合一的综合人声处理插件<br>Waves与制作人/混音师Jack Joseph Puig合作出品<br>即刻拥有JJP那格莱美奖级的声音！</p>
+<p>收起回复</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>50楼2020-07-10 18:15</p>
+<p><img src="https://tb2.bdstatic.com/tb/static-pb/img/loading_69032b0.gif" alt="img"></p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 JJP Strings &amp; Keys效果器插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=3d0b2f2d321f95caa6f592bef9177fc5/d6da48c9a786c917d53f786ade3d70cf3bc757b2.jpg" alt="img"><br>Jack Joseph Puig对于JJP Strings &amp; Keys插件是这样介绍的：“当我在处理弦乐和键盘声部的时候，总体来说，我希望它们能够在声场中漂亮地铺展开来。我希望根据音乐的需要来塑造音色，这样当声音从扬声器中播放出来时，就能完全达到另一个更高的层次。JJP Strings &amp; Keys插件提供的默认设置，能够让你遵从自己的创作直觉，来突出展现键盘与管弦声部的复杂织体。你可能还需要一些延时器的帮助来拓宽声场，或者增加一些高频的空气感来获得更好的环境氛围感。还有些时候，你或许希望听到很‘干’很‘贴脸’的声音，全都没问题。不过，无论我如何处理，最终目的都是为了歌曲服务的。”</p>
+<p>特点:</p>
+<p>多合一的综合效果器插件，特别针对键盘以及弦乐器<br>联合著名制作人/混音师Jack Joseph Puig共同研发<br>即刻拥有JJP那格莱美奖级的声音</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>51楼2020-07-10 18:16</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 JJP Guitars多效合一的吉他插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=0255fa3f073853438ccf8729a312b01f/105362f3b21193138701f6e372380cd791238d30.jpg" alt="img"><br>Jack Joseph Puig如是评价JJP吉他插件：“在处理吉他音色时，我更像是一个音色设计师，尝试用整个‘声音调色盘’去创造它：或亮或暗，或抑或扬，或收或放，总之——彰显态度就是了！JJP吉他插件就能帮助你迅速进入音色创作的空间。当然，这个插件更适用于摇滚乐；但对我来说，它的强大之处在于提供了我的一切所需，让我沉浸在这个空间里。”</p>
+<p>特点：</p>
+<p>多效合一的吉他插件<br>Waves与制作人/混音师Jack Joseph Puig合作出品<br>即刻拥有JJP那格莱美奖级的声音！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>52楼2020-07-11 16:52</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 JJP DrumsJJP Drums鼓组插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=2fe908cb49df8db1bc2e7c6c3922dddb/cea1521249540923aedd6a2d8558d109b3de493a.jpg" alt="img"><br>Jack Joseph Puig如是评价JJP Drums插件：“混鼓的时候，有些事情我们往往过于想当然。当然，军鼓肯定要有力，但有时你或许需要更多木制腔体的声音。底鼓肯定低频要好。但除此之外呢？要让你的曲子变得鲜活，你还需要考虑另一些层面的东西。比如，你可能想要强调鼓组的某种调性，或者考虑一下鼓和歌曲其他部分如何建立联系。这些想法要如何实现呢？重点来了，JJP Drums鼓组插件就可以实现你所有的需求。”<br>特点：<br>多效合一的鼓组插件<br>Waves与制作人/混音师Jack Joseph Puig合作出品<br>即刻拥有JJP那格莱美奖级的声音！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>53楼2020-07-11 16:53</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 JJP Cymbals &amp; Percussion<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=0a01ed20ba4bd11304cdb73a6aaea488/9203eaf182025aaf669b7798ecedab64024f1acd.jpg" alt="img"><br>ack Joseph Puig如是评价JJP Cymbals &amp; Percussion插件：“这个插件可以在镲片与打击乐上完成太多美妙的事情了。你能加一些Lo-fi效果，让沙锤音色更丰满；或者拿掉一些小手鼓的中频，让它的音色更为明亮；或者加一些失真，让声音更粗砺一些。当然你也可以提升高频，以增强镲片的明亮感；或者加大压缩，引出音色的其他质感。总而言之，JJP这款用于镲片和打击乐的插件可以让你即刻获得我喜欢的各种声音色彩。按你所需，尽享其用，大胆创造吧！”<br>特点：</p>
+<p>多效合一的镲片&amp;打击乐插件<br>Waves与制作人/混音师Jack Joseph Puig合作出品<br>即刻拥有JJP那格莱美奖级的声音！</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>54楼2020-07-11 16:55</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 IR-Live Convolution Reverb混响<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=39968d5624fa828bd1239debcd1e41cd/c19b3f1fa8d3fd1fc49cab69274e251f94ca5fd9.jpg" alt="img"><br>Waves的IR-Live是一款基于脉冲响应原理的卷积混响器。它旨在为现场扩声工程师设计，但毫无疑问也适用于录音棚中。IR-Live可以通过对关键参数的控制，简单快捷地达到效果，并收录了业界一线扩声工程师汇聚多年专业经验而得到的效果预设。同时，IR-Live与Waves IR1的脉冲响应素材库完全兼容，将世界闻名的声学场馆与硬件效果设备悉数展现在你的面前，同时具备实时、低延时的强大性能。</p>
+<p>特点：</p>
+<p>为现场扩声设计的卷积混响<br>为现场扩声优化的脉冲响应采样<br>实时、低延时的强大性能<br>兼容MultiRack Native和SoundGrid</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>55楼2020-07-11 16:57</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 JJP Bass 多效合一的贝斯插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=dfff0949d15c1038247ececa8210931c/5328ca42fbf2b211a5bc8c1ddd8065380dd78ee0.jpg" alt="img"><br>Jack Joseph Puig如是评价JJP Bass插件：“每一条音轨都各有不同，而每一条贝斯轨道也都存在差异。有些时候你可能想要庞大的低音铺底，有些时候你或许需要混音的中频更丰富。你可能还想为贝斯加一点失真，赋予其锋芒。再或者，你可能想做些钟形均衡、压缩还有门限处理，让贝斯贴紧底鼓。我甚至还见过有人把这个插件作为超低音增强器（Sub enhancer）用在嘻哈音乐的鼓组音轨上来增强个性。总而言之，JJP Bass是一个万用插件。”<br>特点：<br>多效合一的贝斯插件<br>Waves与制作人/混音师Jack Joseph Puig合作出品<br>即刻拥有JJP那格莱美奖级的声音</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>56楼2020-07-11 16:58</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 IR360 Convolution Reverb混响插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=fbadc199b851f3dec3b2b96ca4eff0ec/b0ce2d8e8c5494ee96a4064a3af5e0fe98257ef4.jpg" alt="img"><br>5.1环绕影音效果的电影大片需要100%可信的空间仿真度，而只有极致精准与完全可控的卷积混响才能做到这一点。这也是顶尖声音工程师们选择Waves IR360的原因。这款非同凡响的效果器采用了先进的脉冲响应技术，能够展现出的史诗般震撼的环绕声场。它对声场的还原甚至超越听觉，逼真到使人身临其境。<br>特点：</p>
+<p>环绕声的卷积混响插件<br>提供世界知名场馆的声学样本<br>包含逾百种声学空间及硬件设备的脉冲响应信号<br>可以捕捉并创建你自己的卷积混响<br>可控的早期反射<br>为保留更自然的包络与频率，RT60混响时间能够比原始采样延长4倍.</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>57楼2020-07-11 17:00</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 IR1 Convolution Reverb混响效果插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=5ffd4cac2cc79f3d8fe1e4388aa0cdbc/dc2d61ddd100baa15bd14ee85010b912c9fc2ef1.jpg" alt="img"><br>从温布利体育场（Wembley Arena）到乡村大剧院（Grand Ole Opry）或悉尼歌剧院（Sydney Opera House），甚至是纽约的CBGB摇滚俱乐部和Birdland爵士俱乐部——如果你梦想在这些世界闻名的场地录音的话，现在这个愿望可以实现了。IR1精心捕捉了众多知名场馆的声音并送到你的手中。通过这款插件，你可以捕捉自己喜爱的空间或硬件混响器的声学特性，并对其精确调整。每个人都希望能够在著名大场馆中演绎音乐，只要有了IR1，你也可以。<br>特点：<br>卷积混响效果插件<br>提供世界知名场馆的声音采样<br>包含逾百种声学空间与设备的脉冲响应信号<br>可以捕捉并创建你自己的卷积混响<br>可控的早期反射</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>58楼2020-07-11 17:00</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 InPhase LT 相移滤波器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=e791a88de71f3a295ac8d5c6a924bce3/7939b4f4e0fe9925d7f4600323a85edf8cb171fe.jpg" alt="img"><br>InPhase LT是InPhase的一个特别版本，既可以作为一个独立插件获得，也包含在一些特定插件包中。通过简单的控制、直观的界面和强大的相移滤波器，InPhase LT是一款一站式的创作工具，可以帮助你强化、调整或突出你的音轨。<br>特点：<br>提供纯延时控制，以补偿时间差<br>相移曲线窗口显示在频率线上的相位偏移曲线<br>提供单声道、立体声以及独立的现场组件<br>另有完整版的InPhase提供</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>59楼2020-07-11 17:01</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves插件 InPhase相位矫正插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=9564be45d8fc1e17fdbf8c397a91f67c/5d071383b9014a9020ce4feebe773912b21bee87.jpg" alt="img"><br>作为一款相位矫正插件，InPhase可完成相位移动、相位对齐和复杂相位处理工作，是能够处理所有相位问题的终极工具。<br>特点：<br>根据处理进程实时更新的双波形显示<br>可以沿时间线手动移动波形<br>通过外部侧链输入来对齐音轨<br>能够单纯以延时控制补偿时间差<br>能够在相移曲线窗口上显示基于频率的相位偏移曲线<br>相关性计量仪（Correlation Meter）显示音轨在相位上的出入量<br>提供单声道、立体声以及独立的现场组件</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>60楼2020-07-11 17:02</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves混音 Infected Mushroom Pusher多段声音增强器和限制器/削波器<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=a591d79b0d4c510faec4e21250582528/121f40f8d72a605907f8e8493f34349b023bba8e.jpg" alt="img"><br>与著名的电子音乐组合Infected Mushroom共同开发的Pusher，是一个创新的多段声音增强器和限制器/削波器，能够为你的混音带来Infected Mushroom的“独门秘方”。Pusher将高端处理技术与Infected Mushroom数十年的混音经验结合在一起，无论是提升频率、优化声音还是母带处理，都能为你的混音带来更多可能性。当你准备发行音乐作品，或是要在俱乐部里演奏时，你都可以用Pusher为你的鼓组增添颗粒感，为你的乐器增加明亮度，或者在几秒钟内把你的整体混音推到最大电平。同时，Pusher具有极低的延迟，所以无论是在录音棚还是现场舞台，你都可以随意地使用。Pusher适用于单独的声音、母线/编组，或者母带处理：<br>Low - 增强低频，根据音符或频率选择处理的起始位置，获得底鼓和贝斯乐器的完美混合<br>Body, High –增强中频和高频<br>Magic –一次性激励和提升所有频率的动态，适用于鼓组或整体混音<br>Stereo Image –高频的立体声扩展<br>Push –推动你的混音到达削波或者限幅最大值，完美的母带处理工具</p>
+<p>来自Infected Mushroom的推荐：“我们想要把我们运用了20年的混音和母带技巧结合到一个插件里，Pusher几乎可以在几秒钟内使任何声音变得更好。”特点：<br>与著名电子音乐组合Infected Mushroom共同开发<br>独立插件中包含Infected Mushroom的“独门秘方”<br>集成多段声音增强功能<br>包括削波/限制器<br>完美适用于乐器、母线和整体混音处理，还可为现场音乐做准备<br>适用于所有风格的混音和母带处理</p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2#" target="_blank" rel="noopener">回复</a></p>
+<p><a href="https://tieba.baidu.com/p/6803558523?see_lz=1&pn=2###" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/jubao_button_4ee5c4f.png" alt="img"></a>61楼2020-07-11 17:03</p>
+<ul>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener"><img src="https://tb2.bdstatic.com/tb/static-pb/img/head_80.jpg" alt="img"></a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/home/main?un=xuediaudio&ie=utf-8&id=tb.1.6ecd21d2.bAeNVnq9XnAmcq6sdAH7jw?t=1589859058&fr=pb" target="_blank" rel="noopener">xuediaudio</a></li>
+<li></li>
+<li><a href="https://tieba.baidu.com/tb/zt/bawudengji/index.html" target="_blank" rel="noopener">吧主8</a></li>
+</ul>
+<p>Waves11 IDR360 Bit Re-Quantizer环绕声音频信量化插件<br><img src="http://tiebapic.baidu.com/forum/w%3D580/sign=12a69128c61373f0f53f6f97940e4b8b/30e01b035aafa40f881ec78ebc64034f79f0199e.jpg" alt="img"></p>
+<p>IDR360&#730;采用专利的心理声学抖动处理技术和噪声塑形技术，能在降低多通道和5.1环绕声音频采样精度的同时，依然保持无与伦比的清晰度和分辨率。</p>
+<p>特点：</p>
+<p>环绕声音频重新量化插件<br>5种可选的目标比特率<br>专利的心理声学技术<br>IDR&#8482;增强型数字分辨率抖动处理</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2021/03/12/waves%E6%8F%92%E4%BB%B6%E8%AF%B4%E6%98%8E%E4%B9%A6/" title="waves插件说明书">http://kanatsux.github.io/2021/03/12/waves%E6%8F%92%E4%BB%B6%E8%AF%B4%E6%98%8E%E4%B9%A6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/02/23/Goods%20Organizing%20Google%E2%80%99s%20Datasets%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/" rel="next" title="Goods Organizing Google’s Datasets（翻译）">
+                <i class="fa fa-chevron-left"></i> Goods Organizing Google’s Datasets（翻译）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/22/MySQL%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" rel="prev" title="MySQL网络协议分析">
+                MySQL网络协议分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://fakecola.gitee.io/" title="邪恶的产品万图" target="_blank">邪恶的产品万图</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Waves-11-全套插件说明书"><span class="nav-number">1.</span> <span class="nav-text">Waves 11 全套插件说明书</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves混音-DTS-Neural-Surround-UpMix"><span class="nav-number">1.1.</span> <span class="nav-text">Waves混音 DTS Neural Surround UpMix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-M360-Surround-Manager-Mixdown"><span class="nav-number">1.2.</span> <span class="nav-text">Waves11 M360 Surround Manager Mixdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-dbx-160-Compressor-Limiter-压缩器"><span class="nav-number">1.3.</span> <span class="nav-text">Waves11 dbx 160 Compressor/Limiter 压缩器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves效果器-Power-Pack混响插件套装"><span class="nav-number">1.4.</span> <span class="nav-text">Waves效果器 Power Pack混响插件套装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-DTS-Neural-Surround-DownMix"><span class="nav-number">1.5.</span> <span class="nav-text">Waves11 DTS Neural Surround DownMix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-DTS-Neural-Surround-UpMix混音插件"><span class="nav-number">1.6.</span> <span class="nav-text">Waves11 DTS Neural Surround UpMix混音插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Dugan-Automixer-Dugan-Automixer自动混音控制器"><span class="nav-number">1.7.</span> <span class="nav-text">Waves11 Dugan Automixer Dugan Automixer自动混音控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves-混音Dugan-Automixer-Dugan-Speech自动混音插件"><span class="nav-number">1.8.</span> <span class="nav-text">Waves 混音Dugan Automixer + Dugan Speech自动混音插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Dugan-Speech自动调音台"><span class="nav-number">1.9.</span> <span class="nav-text">Waves11 Dugan Speech自动调音台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves混音-S360-Surround-Imager-amp-Panner"><span class="nav-number">1.10.</span> <span class="nav-text">Waves混音 S360 Surround Imager &amp; Panner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-M360-Surround-Manager-环绕声监听"><span class="nav-number">1.11.</span> <span class="nav-text">Waves11 M360 Surround Manager 环绕声监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves插件Nx-–-Virtual-Mix-Room-over-Headphones虚拟监听插件"><span class="nav-number">1.12.</span> <span class="nav-text">Waves插件Nx – Virtual Mix Room over Headphones虚拟监听插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAVES11-CLA-MixDown混音插件"><span class="nav-number">1.13.</span> <span class="nav-text">WAVES11 CLA MixDown混音插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAVES-混音Maserati-GRP效果插件"><span class="nav-number">1.14.</span> <span class="nav-text">WAVES 混音Maserati GRP效果插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Flow-Motion-FM合成器"><span class="nav-number">1.15.</span> <span class="nav-text">Waves11 Flow Motion FM合成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-X-FDBK-现场音响工程师现场表演者的必备工具"><span class="nav-number">1.16.</span> <span class="nav-text">Waves11 X-FDBK 现场音响工程师现场表演者的必备工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves-插件WNS-Noise-Suppressor实时降噪插件"><span class="nav-number">1.17.</span> <span class="nav-text">Waves 插件WNS Noise Suppressor实时降噪插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Waves-Tune-Real-Time-实时自动修正人声音高"><span class="nav-number">1.18.</span> <span class="nav-text">Waves11 Waves Tune Real-Time 实时自动修正人声音高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-W43-Noise-Reduction-Plugin插件"><span class="nav-number">1.19.</span> <span class="nav-text">Waves11 W43 Noise Reduction Plugin插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves插件-Torque鼓音调转换器"><span class="nav-number">1.20.</span> <span class="nav-text">Waves插件 Torque鼓音调转换器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-混音Submarine效果器"><span class="nav-number">1.21.</span> <span class="nav-text">Waves11 混音Submarine效果器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAVES11-Sub-Align插件"><span class="nav-number">1.22.</span> <span class="nav-text">WAVES11 Sub Align插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Scheps-Parallel-Particles混音均衡器"><span class="nav-number">1.23.</span> <span class="nav-text">Waves11 Scheps Parallel Particles混音均衡器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Scheps-Omni-Channel混音插件"><span class="nav-number">1.24.</span> <span class="nav-text">Waves11 Scheps Omni Channel混音插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves插件-Scheps-73均衡器"><span class="nav-number">1.25.</span> <span class="nav-text">Waves插件 Scheps 73均衡器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-Renaissance-Reverb混响插件"><span class="nav-number">1.26.</span> <span class="nav-text">Waves11 Renaissance Reverb混响插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves插件-R360-Surround-Reverb混响插件"><span class="nav-number">1.27.</span> <span class="nav-text">Waves插件 R360 Surround Reverb混响插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-PRS-SuperModels建模插件"><span class="nav-number">1.28.</span> <span class="nav-text">Waves11 PRS SuperModels建模插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves插件-Primary-Source-Expander降噪声音"><span class="nav-number">1.29.</span> <span class="nav-text">Waves插件 Primary Source Expander降噪声音</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves混音-OneKnob-Filter滤波器"><span class="nav-number">1.30.</span> <span class="nav-text">Waves混音 OneKnob Filter滤波器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-MV360动态处理器"><span class="nav-number">1.31.</span> <span class="nav-text">Waves11 MV360动态处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves11-MultiMod-Rack失真插件"><span class="nav-number">1.32.</span> <span class="nav-text">Waves11 MultiMod Rack失真插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Waves效果器-Maserati-VX1人声增强器效果插件"><span class="nav-number">1.33.</span> <span class="nav-text">Waves效果器 Maserati VX1人声增强器效果插件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">490.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
