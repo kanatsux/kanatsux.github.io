@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="转载自：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;44012764 智能合约开发入门智能合约也称为”自执行和约“，或者叫“代码化的合约”。这个小节里面我们不聊智能合约的社会意义，而是假设你是一位开发者，准备上手智能合约的开发，那么动手之前都有哪些基础知识是必备的呢？本文为你呈现。 智能合约和区块链智能合约的概念于 1994 年由 Nick Szabo 首次提出。广义上来讲，任何的能">
+<meta name="keywords" content="新手村">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能合约开发入门">
+<meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2021&#x2F;06&#x2F;24&#x2F;%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8&#x2F;index.html">
+<meta property="og:site_name" content="打怪升级的司图">
+<meta property="og:description" content="转载自：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;44012764 智能合约开发入门智能合约也称为”自执行和约“，或者叫“代码化的合约”。这个小节里面我们不聊智能合约的社会意义，而是假设你是一位开发者，准备上手智能合约的开发，那么动手之前都有哪些基础知识是必备的呢？本文为你呈现。 智能合约和区块链智能合约的概念于 1994 年由 Nick Szabo 首次提出。广义上来讲，任何的能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;v2-9e059b180582aa13412a14ce4f67710a_1440w.jpg">
+<meta property="og:updated_time" content="2021-06-24T06:53:10.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kanatsux-imgs.oss-cn-chengdu.aliyuncs.com&#x2F;v2-9e059b180582aa13412a14ce4f67710a_1440w.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kanatsux.github.io/2021/06/24/智能合约开发入门/"/>
+
+
+
+
+
+  <title>智能合约开发入门 | 打怪升级的司图</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">打怪升级的司图</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">咸鱼夏夏的进阶之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kanatsux.github.io/2021/06/24/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="司图">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="打怪升级的司图">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">智能合约开发入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-24T14:52:58+08:00">
+                2021-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载自：<a href="https://zhuanlan.zhihu.com/p/44012764" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/44012764</a></p>
+<h1 id="智能合约开发入门"><a href="#智能合约开发入门" class="headerlink" title="智能合约开发入门"></a>智能合约开发入门</h1><p>智能合约也称为”自执行和约“，或者叫“代码化的合约”。这个小节里面我们不聊智能合约的社会意义，而是假设你是一位开发者，准备上手智能合约的开发，那么动手之前都有哪些基础知识是必备的呢？本文为你呈现。</p>
+<h2 id="智能合约和区块链"><a href="#智能合约和区块链" class="headerlink" title="智能合约和区块链"></a>智能合约和区块链</h2><p>智能合约的概念于 1994 年由 Nick Szabo 首次提出。广义上来讲，任何的能自动完成的合同就是一个智能合约，例如我去自动售货机买一瓶饮料，或者扫码使用一辆共享单车。但是当前讨论的智能合约，其实是跟区块链密不可分的。所以我们这里讨论的智能合约的精确的定义是，一个运行在区块链上的程序。注意这个程序甚至不一定需要去模拟一个商业合约，任何的一段程序只要是部署到了区块链上，我们都叫它一个智能合约，即使程序中只是完成了打印 Hello World ，或者计数器加一的操作。</p>
+<p>为何智能合约和区块链结合如此紧密呢？Szabo 提出智能合约的概念之后很长时间内，智能合约根本无法落地，主要原因是合约各方无法去达成信任。于是，区块链作为所谓的信任机器，就刚好成为了智能合约的技术基础。智能合约和传统计算机程序最大的区别在于其执行结果的认可度，传统计算机程序的执行结果没有建立在共识机制上。而达成共识的前提是，合约的执行过程应该是公开的，合约产生的各项数据应该是不可篡改的。</p>
+<p>比特币作为区块链之母，没有真正成为智能合约的运行平台。原因就是比特币脚本是图灵不完备的。不完备意味着什么呢？就是比特币脚本上根本就不能执行循环，一个不能执行循环的环境肯定不能实现丰富的逻辑，所以直接在比特币上运行复杂的智能合约是不现实的。最终，是以太坊的出现带来了智能合约的爆发。</p>
+<h2 id="用-Solidity-编写智能合约"><a href="#用-Solidity-编写智能合约" class="headerlink" title="用 Solidity 编写智能合约"></a>用 Solidity 编写智能合约</h2><p>虽然，以太坊之后的各个区块链项目大都支持智能合约了，包括比特币也在第二层有了 RSK 方案去支持智能合约。但是以太坊技术在智能合约方面的很多开创性的成果，目前已经被大家都默认为是行业标准了。</p>
+<p>以太坊之所以能带来智能合约的革命，原因就是它在区块链之上成功运行起了图灵完毕的语言，使得描述复杂的业务逻辑成为了可能。Solidity 是诞生在以太坊社区的专门用来写智能合约的新型编程语言。虽然理论上智能合约能用各种语言进行编写，但是目前 Solidity 是编写智能合约的最流行的语言，不仅仅可以在以太坊上可以使用，其他跟以太坊竞争的区块链项目上，例如 Nervos ，也可以使用 Solidity 进行智能合约的开发。</p>
+<p>比特币因为功能少，所以可以基本上看做一个运行在区块链上的数据库，因为主要的功能就是存交易数据。而以太坊不一样，可以认为是一个运行在区块链上的虚拟机。以太坊区块链上的虚拟机叫做 EVM ，EVM 就是 Solidity 语言的运行环境。以太坊号称世界计算机，所有的部署到以太坊之上的合约代码，网络上所有的计算机都会各自运算一遍，这样就保证了计算过程是公开可信的。</p>
+<p>但是退一步思考一下，为何比特币脚本不设计成图灵完备的呢？是中本聪没有考虑智能合约吗？不是的。中本聪的考虑是这样的，因为区块链是一个公有的环境，如果允许用户写循环语句，那么攻击者写一个死循环，就可以让整个网络瘫痪。而这个担忧显然也适用于以太坊，那以太坊是如何避免这个问题的呢？以太坊之上，每次执行代码是要花费少量的代币的，这种代币不是以太币，而是叫 Gas ，也就是汽油的意思。这个意义很明确，就是你想让以太坊这辆车跑得快，就要给他加汽油，如果你写一个死循环，那么很快你账户上的汽油就用光了，那么代码也就停止运行，避免了网络的瘫痪。</p>
+<p>总之，学习任何平台上的智能合约开发，都避免不了要学习一下以太坊的各种思想和标准，其中比较重要的就是 Solidity 语言，以及消耗 Gas 来租用系统资源的这种思路。</p>
+<h2 id="编译和执行"><a href="#编译和执行" class="headerlink" title="编译和执行"></a>编译和执行</h2><p>那咱们用 Solidity 实现了智能合约之后，如何编译和执行呢？</p>
+<p><img src="https://kanatsux-imgs.oss-cn-chengdu.aliyuncs.com/v2-9e059b180582aa13412a14ce4f67710a_1440w.jpg" alt="img"></p>
+<p>代码写好之后，需要先编译，然后部署到区块链网络上运行一下。各大区块链项目，基本上都有自己的测试网，测试网上部署和执行代码都不用真的花钱，只需要申请一些测试网代币就可以了。而测试网的运行效果是跟主网没有太大区别的。这里需要注意的是，代码部署到区块链上之后，我们就可以和智能合约进行交互了。但是能够访问的接口不再是我们熟悉的 HTTP API 了，而是叫 ABI ，也就是“应用二进制接口”，所以交互方式也有一定区别。好在这个咱们开发者完全不用担心，各个平台都发布了相应的库来支持交互。比如我们用来跟智能合约交互的前端是一个 Web App ，这样就可以导入对应的 JS 版本的库来实现交互了，以太坊下有 Web3.js ，Nervos 下有 nervos.js 都是为这个目的而生的。如果用 Androd 原生应用来做前端，也有对应的 Java 版本的库可以用。</p>
+<p>所以整个的画面是这样的，智能合约的编译后，部署到区块链上，成为运行在链上的实例。然后就可以通过前端 App 来通过 Web3.js 或者 nervos.js 这样的库，来调用合约的各项功能，进行各种读写操作了。合约加上前端 App ，就构成了一个 DApp 。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节是为开发者而写的入门智能合约开发的一些基础知识。我们聊了，区块链因为能够保证代码执行和数据的不可篡改，成为了智能合约必备的技术基础。以太坊因为能够运行图灵完毕的 Solidity 语言，于是带来了智能合约的真正的爆发。最后聊了一下，合约部署到区块链上之后，可以通过 Web3.js 这样的库，来完成前端 App 和后端的合约之间的交互。当然，关于智能合约还有很多其他重要的知识点，但是这些知识，在结合实际平台的动手操作中去学习效果更好，所以我们这里就不展开了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    司图
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://kanatsux.github.io/2021/06/24/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/" title="智能合约开发入门">http://kanatsux.github.io/2021/06/24/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/27/%E7%94%A8%E9%9F%B3%E6%95%88%E5%BA%93%E5%81%9A%E9%A2%84%E5%91%8A%E7%89%87%E9%85%8D%E4%B9%90/" rel="next" title="用音效库做预告片配乐">
+                <i class="fa fa-chevron-left"></i> 用音效库做预告片配乐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/22/ArcBlock%20Decentralized%20Identifier%20%E8%A7%A3%E6%9E%90/" rel="prev" title="ArcBlock Decentralized Identifier 解析">
+                ArcBlock Decentralized Identifier 解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="司图" />
+            
+              <p class="site-author-name" itemprop="name">司图</p>
+              <p class="site-description motion-element" itemprop="description">既然进来了，就喝杯茶吧！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+                
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kanatsux" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wowoohi@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://lauyuenn.gitee.io/lauyuenn_blog/" title="傻朝夕" target="_blank">傻朝夕</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://fakecola.gitee.io/" title="邪恶的产品万图" target="_blank">邪恶的产品万图</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#智能合约开发入门"><span class="nav-number">1.</span> <span class="nav-text">智能合约开发入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#智能合约和区块链"><span class="nav-number">1.1.</span> <span class="nav-text">智能合约和区块链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-Solidity-编写智能合约"><span class="nav-number">1.2.</span> <span class="nav-text">用 Solidity 编写智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译和执行"><span class="nav-number">1.3.</span> <span class="nav-text">编译和执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">司图</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">496.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
